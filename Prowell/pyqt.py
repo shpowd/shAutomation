@@ -1,10 +1,14 @@
 import sys
 import random
 import time
-from PyQt5.QtCore import QTimer, Qt
-from PyQt5.QtWidgets import (
-    QApplication, QMainWindow, QVBoxLayout, QHBoxLayout, QGroupBox, QLabel, QWidget
-)
+# from PyQt5.QtCore import QTimer, Qt
+# from PyQt5.QtWidgets import (
+#     QApplication, QMainWindow, QVBoxLayout, QHBoxLayout, QGroupBox, QLabel, QWidget, QDesktopWidget, QCheckBox
+# )
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+
 import pyqtgraph as pg
 
 
@@ -15,14 +19,23 @@ class MainWindow(QMainWindow):
         # 기본 UI 설정
         self.setWindowTitle("통합 그래프 및 데이터 모니터링")
         self.setGeometry(100, 100, 1400, 800)
+        self.center()
 
         # 중앙 위젯
         central_widget = QWidget(self)
         self.setCentralWidget(central_widget)
 
-        # 레이아웃 설정
+        # 윈도우 레이아웃 설정
+        window_layout = QHBoxLayout()
+        central_widget.setLayout(window_layout)
+
+        #좌측 컨트롤 영역
+        control_layout = QVBoxLayout()
+        window_layout.addLayout(control_layout)
+
+        # 메인 레이아웃 설정
         main_layout = QVBoxLayout()
-        central_widget.setLayout(main_layout)
+        window_layout.addLayout(main_layout)
 
         # 상단 그래프 영역
         graph_layout = QHBoxLayout()
@@ -38,31 +51,62 @@ class MainWindow(QMainWindow):
         # 데이터 표시 초기화
         self.init_data_indicators(data_layout)
 
+        # 컨트롤 영역 초기화
+        self.init_control(control_layout)
+
         # 타이머 설정
         self.timer = QTimer()
         self.timer.setInterval(1000)  # 1초 간격으로 갱신
         self.timer.timeout.connect(self.update_data)
         self.timer.start()
 
+        # 데이터를 저장하는 딕셔너리 초기화
+        self.graph_data = {key: {"x": [], "y": []} for key in self.graphs.keys()}
+        self.max_length = 100  # 최대 데이터 길이
+
+    def center(self):
+        qr = self.frameGeometry()
+        cp = QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
+
     def init_graphs(self, layout):
         """그래프 위젯 초기화 및 설정"""
         self.graphs = {}
 
-        # Power 그래프
-        self.graphs["Power"] = self.create_graph("Generating Power", "Power (W)")
-        layout.addWidget(self.graphs["Power"])
+        graph_layOut1 = QHBoxLayout()
+        # Voltage1 그래프
+        self.graphs["Voltage1"] = self.create_graph("Voltage1", "Power (W)")
+        graph_layOut1.addWidget(self.graphs["Voltage1"])
+        # Current1 그래프
+        self.graphs["Current1"] = self.create_graph("Current1", "Energy (Wh)")
+        graph_layOut1.addWidget(self.graphs["Current1"])
+        # Power1 그래프
+        self.graphs["Power1"] = self.create_graph("Power1", "Voltage (V)")
+        graph_layOut1.addWidget(self.graphs["Power1"])
 
-        # Energy 그래프
-        self.graphs["Energy"] = self.create_graph("Generating Energy", "Energy (Wh)")
-        layout.addWidget(self.graphs["Energy"])
+        graph_layOut2 = QHBoxLayout()
+        # Voltage2 그래프
+        self.graphs["Voltage2"] = self.create_graph("Voltage2", "Temperature (℃)")
+        graph_layOut2.addWidget(self.graphs["Voltage2"])
+        # Current2 그래프
+        self.graphs["Current2"] = self.create_graph("Current2", "Temperature (℃)")
+        graph_layOut2.addWidget(self.graphs["Current2"])
+        # Power2 그래프
+        self.graphs["Power2"] = self.create_graph("Power2", "Temperature (℃)")
+        graph_layOut2.addWidget(self.graphs["Power2"])
 
-        # Voltage 그래프
-        self.graphs["Voltage"] = self.create_graph("Generating Voltage", "Voltage (V)")
-        layout.addWidget(self.graphs["Voltage"])
+        graph_total_layout = QVBoxLayout()
+        graph_total_layout.addLayout(graph_layOut1)
+        graph_total_layout.addLayout(graph_layOut2)
+        
+        
+        # 그래프 레이아웃을 포함할 위젯 생성
+        graph_widget = QWidget()
+        graph_widget.setLayout(graph_total_layout)
 
-        # Temperature 그래프
-        self.graphs["Temperature"] = self.create_graph("Inverter Temperature", "Temperature (℃)")
-        layout.addWidget(self.graphs["Temperature"])
+        # 메인 레이아웃에 그래프 위젯 추가
+        layout.addWidget(graph_widget)
 
     def create_graph(self, title, ylabel):
         """단일 그래프 생성"""
@@ -81,15 +125,14 @@ class MainWindow(QMainWindow):
 
         # 그룹 박스 및 레이블 생성
         indicators = [
-            ("Solar Voltage", "0 V"),
-            ("Solar Current", "0 A"),
-            ("Solar Power", "0 W"),
-            ("Line Voltage", "0 V"),
-            ("Line Current", "0 A"),
-            ("Line Power", "0 W"),
+            ("Voltage1", "0 V"),
+            ("Current1", "0 A"),
+            ("Power1", "0 W"),
+            ("Voltage2", "0 V"),
+            ("Current2", "0 A"),
+            ("Power2", "0 W"),
             ("Temperature", "0 ℃"),
-            ("Energy Today", "0 Wh"),
-            ("Lifetime Energy", "0 kWh"),
+            ("Operating Time", "0 h"),
             ("Inverter Status", "Ready"),
         ]
 
@@ -113,30 +156,61 @@ class MainWindow(QMainWindow):
 
             self.data_labels[name] = label
 
+    def init_control(self, layout):
+        """데이터 표시 위젯 초기화 및 설정"""
+        check_box1 = QCheckBox("test1")
+        check_box2 = QCheckBox("test2")
+        push_button1 = QPushButton("PLC 연결", self)
+        push_button1.setMaximumHeight(200)
+        push_button1.setMaximumWidth(200)
+        push_button1.setGeometry(200, 150, 100, 40)
+        push_button1.setFont(QFont("", 15))
+        # push_button1.clicked.connect()
+
+        push_button2 = QPushButton("연결 종료", self)
+        push_button2.setMaximumHeight(200)
+        push_button2.setMaximumWidth(200)
+        push_button2.setGeometry(200, 150, 100, 40)
+        push_button2.setFont(QFont("", 15))
+        # push_button2.clicked.connect()
+        
+        leftInnerLayOut = QVBoxLayout()
+        leftInnerLayOut.addWidget(check_box1)
+        leftInnerLayOut.addWidget(check_box2)
+        leftInnerLayOut.addWidget(push_button1)
+        leftInnerLayOut.addWidget(push_button2)
+
+        group_box_layout = QVBoxLayout()
+        group_box_layout.addLayout(leftInnerLayOut)
+
+        group_box = QGroupBox("Control")
+        group_box.setLayout(group_box_layout)
+        group_box.setFixedWidth(200)
+        layout.addWidget(group_box)
+
     def update_data(self):
         """실시간 데이터 갱신"""
         # 랜덤 데이터 생성
-        solar_voltage = random.uniform(10, 100)
-        solar_current = random.uniform(1, 10)
-        solar_power = solar_voltage * solar_current
-        line_voltage = random.uniform(100, 240)
-        line_current = random.uniform(5, 20)
-        line_power = line_voltage * line_current
-        temperature = random.uniform(20, 80)
-        energy_today = random.uniform(0, 1000)
-        lifetime_energy = random.uniform(1000, 5000)
-        status = "Inverter RUN" if random.random() > 0.5 else "Inverter STOP"
+        Voltage1 = random.uniform(10, 100)
+        Current1 = random.uniform(10, 100)
+        Power1 = random.uniform(10, 100)
+        Voltage2 = random.uniform(100, 240)
+        Current2 = random.uniform(5, 20)
+        Power2 = random.uniform(10, 100)
+        Temperature = random.uniform(10, 100)
+        Operating_Time = random.uniform(10, 100)
+        Inverter_Status = random.uniform(10, 100)
+        status = "Inverter RUN" if Inverter_Status > 50 else "Inverter STOP"
 
         # 데이터 표시 레이블 갱신
-        self.data_labels["Solar Voltage"].setText(f"{solar_voltage:.1f} V")
-        self.data_labels["Solar Current"].setText(f"{solar_current:.1f} A")
-        self.data_labels["Solar Power"].setText(f"{solar_power:.1f} W")
-        self.data_labels["Line Voltage"].setText(f"{line_voltage:.1f} V")
-        self.data_labels["Line Current"].setText(f"{line_current:.1f} A")
-        self.data_labels["Line Power"].setText(f"{line_power:.1f} W")
-        self.data_labels["Temperature"].setText(f"{temperature:.1f} ℃")
-        self.data_labels["Energy Today"].setText(f"{energy_today:.1f} Wh")
-        self.data_labels["Lifetime Energy"].setText(f"{lifetime_energy:.1f} kWh")
+        self.data_labels["Voltage1"].setText(f"{Voltage1:.1f} V")
+        self.data_labels["Current1"].setText(f"{Current1:.1f} A")
+        self.data_labels["Power1"].setText(f"{Power1:.1f} W")
+        self.data_labels["Voltage2"].setText(f"{Voltage2:.1f} V")
+        self.data_labels["Current2"].setText(f"{Current2:.1f} A")
+        self.data_labels["Power2"].setText(f"{Power2:.1f} W")
+        self.data_labels["Temperature"].setText(f"{Temperature:.1f} ℃")
+        self.data_labels["Operating Time"].setText(f"{Operating_Time:.1f} Wh")
         self.data_labels["Inverter Status"].setText(status)
 
         # 상태에 따른 색상 변경
@@ -146,10 +220,39 @@ class MainWindow(QMainWindow):
             self.data_labels["Inverter Status"].setStyleSheet("color:rgb(44, 106, 180);")
 
         # 그래프 업데이트
-        current_time = time.strftime("%H:%M:%S", time.localtime())
-        for key, graph in self.graphs.items():
-            graph.plot([current_time], [random.uniform(0, 100)], pen=None, symbol="o", clear=False)
+        # current_time = time.strftime("%H:%M:%S", time.localtime())
+        current_time = time.time()
+        self.pen = pg.mkPen(color=(255, 0, 0), width=2, style=Qt.SolidLine)  # 빨간색, 두께 2, 실선
 
+        for key, label in self.data_labels.items():
+            # 데이터를 업데이트 (label은 [x, y] 형태라고 가정)
+            if key not in self.graph_data:
+                self.graph_data[key] = {"x": [], "y": []}
+
+            # 새 데이터 추가
+            self.graph_data[key]["x"].append(current_time)
+            self.graph_data[key]["y"].append(random.uniform(0, 100))
+
+            # 최대 데이터 길이 제한 (예: 100)
+            max_length = 100
+            if len(self.graph_data[key]["x"]) > max_length:
+                self.graph_data[key]["x"].pop(0)
+                self.graph_data[key]["y"].pop(0)
+
+            # 그래프 업데이트
+            graph = self.graphs[key]
+            graph.plot(
+                self.graph_data[key]["x"], 
+                self.graph_data[key]["y"], 
+                pen="b",  # 선 색상
+                symbol="o",  # 점 모양
+                symbolBrush="b",  # 점 색상
+                symbolSize=5,  # 점 크기
+                clear=True  # 기존 데이터를 지우고 다시 그림
+            )
+        if len(self.graph_data[key]["x"]) > self.max_length:
+            self.graph_data[key]["x"].pop(0)
+            self.graph_data[key]["y"].pop(0)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
