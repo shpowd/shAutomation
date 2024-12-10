@@ -116,7 +116,7 @@ class MainWindow(QMainWindow):
         graph.setLabel("left", ylabel, color="#828282", size="10pt")
         graph.setLabel("bottom", "Time", color="#828282", size="10pt")
         graph.showGrid(x=True, y=True)
-        graph.setYRange(0, 100)  # Y축 범위 설정
+        # graph.setYRange(0, 100)  # Y축 범위 설정
         return graph
 
     def init_data_indicators(self, layout):
@@ -191,27 +191,30 @@ class MainWindow(QMainWindow):
     def update_data(self):
         """실시간 데이터 갱신"""
         # 랜덤 데이터 생성
-        Voltage1 = random.uniform(10, 100)
-        Current1 = random.uniform(10, 100)
-        Power1 = random.uniform(10, 100)
-        Voltage2 = random.uniform(100, 240)
-        Current2 = random.uniform(5, 20)
-        Power2 = random.uniform(10, 100)
-        Temperature = random.uniform(10, 100)
-        Operating_Time = random.uniform(10, 100)
-        Inverter_Status = random.uniform(10, 100)
-        status = "Inverter RUN" if Inverter_Status > 50 else "Inverter STOP"
+        raw_data = {
+            "Voltage1": random.uniform(10, 100),
+            "Current1": random.uniform(10, 100),
+            "Power1": random.uniform(10, 100),
+            "Voltage2": random.uniform(100, 24000),
+            "Current2": random.uniform(5, 20),
+            "Power2": random.uniform(10, 100),
+            "Temperature": random.uniform(10, 100),
+            "Operating Time": random.uniform(10, 100),
+            "Inverter Status": random.uniform(10, 100)
+        }
+
+        status = "Inverter RUN" if raw_data["Inverter Status"] > 50 else "Inverter STOP"
 
         # 데이터 표시 레이블 갱신
-        self.data_labels["Voltage1"].setText(f"{Voltage1:.1f} V")
-        self.data_labels["Current1"].setText(f"{Current1:.1f} A")
-        self.data_labels["Power1"].setText(f"{Power1:.1f} W")
-        self.data_labels["Voltage2"].setText(f"{Voltage2:.1f} V")
-        self.data_labels["Current2"].setText(f"{Current2:.1f} A")
-        self.data_labels["Power2"].setText(f"{Power2:.1f} W")
-        self.data_labels["Temperature"].setText(f"{Temperature:.1f} ℃")
-        self.data_labels["Operating Time"].setText(f"{Operating_Time:.1f} Wh")
-        self.data_labels["Inverter Status"].setText(status)
+        self.data_labels["Voltage1"].setText(f"{raw_data["Voltage1"]:.1f} V")
+        self.data_labels["Current1"].setText(f"{raw_data["Current1"]:.1f} A")
+        self.data_labels["Power1"].setText(f"{raw_data["Power1"]:.1f} W")
+        self.data_labels["Voltage2"].setText(f"{raw_data["Voltage2"]:.1f} V")
+        self.data_labels["Current2"].setText(f"{raw_data["Current2"]:.1f} A")
+        self.data_labels["Power2"].setText(f"{raw_data["Power2"]:.1f} W")
+        self.data_labels["Temperature"].setText(f"{raw_data["Temperature"]:.1f} ℃")
+        self.data_labels["Operating Time"].setText(f"{raw_data["Operating Time"]:.1f} Wh")
+        # self.data_labels["Inverter Status"].setText(status)
 
         # 상태에 따른 색상 변경
         if status == "Inverter STOP":
@@ -231,10 +234,10 @@ class MainWindow(QMainWindow):
 
             # 새 데이터 추가
             self.graph_data[key]["x"].append(current_time)
-            self.graph_data[key]["y"].append(random.uniform(0, 100))
+            self.graph_data[key]["y"].append(raw_data[key])
 
             # 최대 데이터 길이 제한 (예: 100)
-            max_length = 100
+            max_length = 5
             if len(self.graph_data[key]["x"]) > max_length:
                 self.graph_data[key]["x"].pop(0)
                 self.graph_data[key]["y"].pop(0)
