@@ -2,6 +2,7 @@
 # 디스플레이 설정
 import sys
 import os
+import random
 import time
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *

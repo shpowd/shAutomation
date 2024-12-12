@@ -1,4 +1,6 @@
 import socket
+import struct
+import random
 import time
 
 # 서버 설정
@@ -13,7 +15,14 @@ server_socket.listen(1)  # 한 번에 하나의 클라이언트만 처리
 
 print(f"Modbus 서버 실행 중... ({HOST}:{PORT})")
 
-test_val = 0
+# 46개의 레지스터 값 초기화
+register_values = [i + 100 for i in range(46)]  # 기본 값: 100 ~ 145
+random_indices = [4, 11, 18, 25, 32, 39]  # 0 기반 인덱스 (5번째, 12번째, ...)
+
+def update_random_registers():
+    """랜덤 값을 특정 레지스터에 업데이트"""
+    for idx in random_indices:
+        register_values[idx] = random.randint(0, 65535)  # 0~65535 범위의 랜덤 값
 
 try:
     while True:
@@ -24,11 +33,8 @@ try:
 
             try:
                 while True:
-                    #test값 생성
-                    if test_val < 254:
-                        test_val += 1
-                    else:
-                        test_val = 0
+                    # 특정 레지스터 값 업데이트
+                    update_random_registers()
 
                     # 요청 메시지 수신
                     request = client_socket.recv(1024)
@@ -38,8 +44,22 @@ try:
 
                     print(f"요청 메시지: {request.hex()}")
 
-                    # 간단한 Modbus 응답 생성 (예: Holding Register 값 0x1234 반환)
-                    response = b'\x00\x00\x00\x00\x00\x11\xFF\x04\x0E\x00\x9F\x00\xD2\x00\xDD\x01\xB0\x02\x01\x00\xC8\x00'+bytes([test_val])
+                    # Modbus 응답 생성
+                    # Modbus TCP 헤더: Transaction ID(2) + Protocol ID(2) + Length(2) + Unit ID(1)
+                    transaction_id = request[:2]
+                    protocol_id = request[2:4]
+                    length = struct.pack('>H', 3 + len(register_values) * 2)
+                    unit_id = request[6:7]
+
+                    # Modbus PDU: Function Code(1) + Byte Count(1) + Data(N)
+                    function_code = b'\x04'  # Read Holding Registers
+                    byte_count = struct.pack('B', len(register_values) * 2)
+                    data = b''.join(struct.pack('>H', value) for value in register_values)
+
+                    # 전체 응답 메시지 조립
+                    response = transaction_id + protocol_id + length + unit_id + function_code + byte_count + data
+
+                    # 응답 메시지 전송
                     client_socket.sendall(response)
                     print(f"응답 메시지 전송: {response.hex()}")
 
@@ -49,7 +69,7 @@ try:
                 client_socket.close()
                 print("클라이언트 소켓 닫힘")
         except socket.timeout:
-            # 타임아웃 발생 시 아무 작업도 하지 않고 다시 대기
+            # 타임아웃 발생 시 다시 대기
             continue
 except KeyboardInterrupt:
     print("\n서버 종료")
