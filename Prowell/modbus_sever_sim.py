@@ -22,7 +22,7 @@ random_indices = [4, 11, 18, 25, 32, 39]  # 0 기반 인덱스 (5번째, 12번�
 def update_random_registers():
     """랜덤 값을 특정 레지스터에 업데이트"""
     for idx in random_indices:
-        register_values[idx] = random.randint(0, 65535)  # 0~65535 범위의 랜덤 값
+        register_values[idx] = random.randint(0, 50)  # 0~65535 범위의 랜덤 값
 
 try:
     while True:
