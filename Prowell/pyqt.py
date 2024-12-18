@@ -6,8 +6,8 @@ import time
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
-from pyqtgraph import AxisItem
 import pyqtgraph as pg
+from pyqtgraph import AxisItem
 
 #region
 import socket
@@ -229,7 +229,7 @@ class MainWindow(QMainWindow):
             group_box = QGroupBox(f"Pump{i}")
             group_layout = QVBoxLayout()
 
-            self.graphs[f"Pump{i}"] = self.create_graph(f"", "Current(A)")
+            self.graphs[f"Pump{i}"] = self.create_graph(f"","")
             group_layout.addWidget(self.graphs[f"Pump{i}"])
 
             group_box.setLayout(group_layout)
@@ -241,23 +241,25 @@ class MainWindow(QMainWindow):
             group_box = QGroupBox(f"Pump{i}")
             group_layout = QVBoxLayout()
 
-            self.graphs[f"Pump{i}"] = self.create_graph(f"", "Current(A)")
+            self.graphs[f"Pump{i}"] = self.create_graph(f"", "")
             group_layout.addWidget(self.graphs[f"Pump{i}"])
 
             group_box.setLayout(group_layout)
             graph_layOut2.addWidget(group_box)
 
         # 전체 그래프 레이아웃 설정
+        graph_total_box = QGroupBox()
         graph_total_layout = QVBoxLayout()
         graph_total_layout.addLayout(graph_layOut1)
         graph_total_layout.addLayout(graph_layOut2)
+        graph_total_box.setLayout(graph_total_layout)
 
         # 그래프 레이아웃을 포함할 위젯 생성
-        graph_widget = QWidget()
-        graph_widget.setLayout(graph_total_layout)
-
+        # graph_widget = QWidget()
+        # graph_widget.setLayout(graph_total_layout)
+        
         # 메인 레이아웃에 그래프 위젯 추가
-        layout.addWidget(graph_widget)
+        layout.addWidget(graph_total_box)
 
     def create_graph(self, title, ylabel):
         """단일 그래프 생성"""
@@ -324,13 +326,14 @@ class MainWindow(QMainWindow):
 
     def init_control(self, layout):
         """데이터 표시 위젯 초기화 및 설정"""
+        #로고 추가
         image_label = QLabel(self)
         image_label.setPixmap(QPixmap(current_dir+"\\prowell (2).png"))  # 이미지 경로 설정
         image_label.setAlignment(Qt.AlignCenter)
         image_label.setScaledContents(True)  # 이미지 크기를 QLabel에 맞춤
-        image_label.setFixedHeight(80)  # 이미지 높이 설정
+        image_label.setMaximumHeight(80)  # 이미지 높이 설정
 
-        #로고 추가
+        #동작 시간 추가
         status_label = QLabel("Initializing")
         status_label.setAlignment(Qt.AlignCenter)
         status_label.setStyleSheet(
@@ -341,25 +344,25 @@ class MainWindow(QMainWindow):
         font.setPointSize(12)
         font.setBold(True)
         status_label.setFont(font)
-        status_label.setFixedHeight(50)  # 높이를 50 픽셀로 고정
+        status_label.setMaximumHeight(50)  # 높이 설정
         self.status_label = status_label
 
         # 설정 버튼 추가
         settings_button = QPushButton("설정", self)
-        settings_button.setMaximumHeight(50)
+        settings_button.setMaximumHeight(80)
         settings_button.setFont(QFont("", 12))
         settings_button.clicked.connect(self.open_settings_window)
 
         push_button1 = QPushButton("PLC 연결", self)
         push_button1.setMaximumHeight(200)
-        push_button1.setMaximumWidth(200)
+        # push_button1.setMaximumWidth(200)
         push_button1.setGeometry(200, 150, 100, 40)
         push_button1.setFont(QFont("", 15))
         push_button1.clicked.connect(self.push_button1_fn)
 
         push_button2 = QPushButton("연결 종료", self)
         push_button2.setMaximumHeight(200)
-        push_button2.setMaximumWidth(200)
+        # push_button2.setMaximumWidth(200)
         push_button2.setGeometry(200, 150, 100, 40)
         push_button2.setFont(QFont("", 15))
         push_button2.clicked.connect(self.push_button2_fn)
