@@ -1,0 +1,7 @@
+﻿   Qt/MSBuild: 3.3.1.1
+  Reading Qt configuration (C:/Qt/6.8.1/msvc2022_64/bin/qmake)
+   Qt: 6.8.1
+  dynamicsplinewidget.cpp
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_graph\dynamicsplinewidget.h(7,10): error C1083: Cannot open include file: 'contentwidget.h': No such file or directory
+  (compiling source file 'dynamicsplinewidget.cpp')
+  

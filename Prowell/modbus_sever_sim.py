@@ -16,9 +16,9 @@ server_socket.listen(1)  # 한 번에 하나의 클라이언트만 처리
 print(f"Modbus 서버 실행 중... ({HOST}:{PORT})")
 
 # 46개의 레지스터 값 초기화
-register_values = [i + 100 for i in range(46)]  # 기본 값: 100 ~ 145
+# register_values = [i + 100 for i in range(46)]  # 기본 값: 100 ~ 145
 random_indices = [4, 11, 18, 25, 32, 39]  # 0 기반 인덱스 (5번째, 12번째, ...)
-# register_values = [1, 2, 22]
+register_values = [1, 23]
 
 def update_random_registers():
     """랜덤 값을 특정 레지스터에 업데이트"""
@@ -35,7 +35,7 @@ try:
             try:
                 while True:
                     # 특정 레지스터 값 업데이트
-                    update_random_registers()
+                    # update_random_registers()
 
                     # 요청 메시지 수신
                     request = client_socket.recv(1024)

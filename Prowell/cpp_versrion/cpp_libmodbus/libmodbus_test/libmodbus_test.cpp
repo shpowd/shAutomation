@@ -3,12 +3,12 @@
 #include <chrono>
 #include <thread>
 
-const int NUM_REGISTERS = 46;  // 읽을 레지스터 개수
+const int NUM_REGISTERS = 2;  // 읽을 레지스터 개수
 
 int main() {
     // Modbus TCP 서버 설정
-    const char* ip_address = "127.0.0.1";  // 서버 IP 주소
-    int port = 5020;  // Modbus TCP 포트
+    const char* ip_address = "192.168.0.100";  // 서버 IP 주소
+    int port = 502;  // Modbus TCP 포트
 
     // Modbus TCP 클라이언트 초기화
     modbus_t* mb;
