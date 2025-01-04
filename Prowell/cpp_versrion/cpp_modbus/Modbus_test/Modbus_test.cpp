@@ -16,7 +16,7 @@ struct ModbusTCPFrame {
     uint16_t length;         // 길이
     uint8_t unitId;          // 장치 ID
     uint8_t functionCode;    // 함수 코드
-    uint8_t data[4];       // 데이터 영역
+    uint8_t data[256];       // 데이터 영역
 };
 
 int main() {
