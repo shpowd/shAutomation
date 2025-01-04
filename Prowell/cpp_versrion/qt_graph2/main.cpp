@@ -1,8 +1,8 @@
-#include <QtWidgets/QApplication>
+﻿#include <QtWidgets/QApplication>
 #include <QListView>
 #include <QStringListModel>
-
 #include "mainwidget.h"
+
 
 int main(int argc, char* argv[])
 {

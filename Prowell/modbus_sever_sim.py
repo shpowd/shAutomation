@@ -18,10 +18,7 @@ print(f"Modbus 서버 실행 중... ({HOST}:{PORT})")
 # 46개의 레지스터 값 초기화
 # register_values = [i + 100 for i in range(46)]  # 기본 값: 100 ~ 145
 random_indices = [4, 11, 18, 25, 32, 39]  # 0 기반 인덱스 (5번째, 12번째, ...)
-<<<<<<< HEAD
 register_values = [1, 23]
-=======
->>>>>>> parent of 1b35032 (250103)
 
 def update_random_registers():
     """랜덤 값을 특정 레지스터에 업데이트"""
