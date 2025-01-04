@@ -1,4 +1,4 @@
-// Copyright (C) 2023 The Qt Company Ltd.
+ï»¿// Copyright (C) 2023 The Qt Company Ltd.
 // SPDX-License-Identifier: LicenseRef-Qt-Commercial OR BSD-3-Clause
 
 #include "dynamiclinewidget.h"
@@ -19,66 +19,66 @@ DynamicLineWidget::DynamicLineWidget(QWidget* parent)
     chart->legend()->hide();
     chart->setAnimationOptions(QChart::AllAnimations);
 
-    // xÃà°ú yÃà °´Ã¼ ÃÊ±âÈ­
+    // xì¶•ê³¼ yì¶• ê°ì²´ ì´ˆê¸°í™”
     m_axisX = new QDateTimeAxis;
     m_axisY = new QValueAxis;
 
-    // Å¸ÀÌ¸Ó ¿¬°á
+    // íƒ€ì´ë¨¸ ì—°ê²°
     QObject::connect(&m_timer, &QTimer::timeout, this, &DynamicLineWidget::handleTimeout);
     m_timer.setInterval(1000);
 
-    // QLineSeries »ı¼º
+    // QLineSeries ìƒì„±
     m_series = new QLineSeries;
     QPen green(Qt::red);
     green.setWidth(3);
     m_series->setPen(green);
 
-    // ÃÊ±â µ¥ÀÌÅÍ Æ÷ÀÎÆ® Ãß°¡ (QDateTimeÀ» ¹Ğ¸®ÃÊ ´ÜÀ§·Î º¯È¯)
-    m_x = QDateTime::currentDateTime();  // m_x¸¦ ÇöÀç ½Ã°£À¸·Î ÃÊ±âÈ­
-    m_y = QRandomGenerator::global()->bounded(5) - 2.5;  // ¹«ÀÛÀ§·Î m_y °ª »ı¼º
-    m_series->append(m_x.toMSecsSinceEpoch(), m_y);  // m_x¸¦ ¹Ğ¸®ÃÊ ´ÜÀ§·Î º¯È¯ÇÏ¿© Ãß°¡
+    // ì´ˆê¸° ë°ì´í„° í¬ì¸íŠ¸ ì¶”ê°€ (QDateTimeì„ ë°€ë¦¬ì´ˆ ë‹¨ìœ„ë¡œ ë³€í™˜)
+    m_x = QDateTime::currentDateTime();  // m_xë¥¼ í˜„ì¬ ì‹œê°„ìœ¼ë¡œ ì´ˆê¸°í™”
+    m_y = QRandomGenerator::global()->bounded(5) - 2.5;  // ë¬´ì‘ìœ„ë¡œ m_y ê°’ ìƒì„±
+    m_series->append(m_x.toMSecsSinceEpoch(), m_y);  // m_xë¥¼ ë°€ë¦¬ì´ˆ ë‹¨ìœ„ë¡œ ë³€í™˜í•˜ì—¬ ì¶”ê°€
 
     chart->addSeries(m_series);
 
-    // XÃà°ú YÃà ¼³Á¤
+    // Xì¶•ê³¼ Yì¶• ì„¤ì •
     chart->addAxis(m_axisX, Qt::AlignBottom);
     chart->addAxis(m_axisY, Qt::AlignLeft);
     m_series->attachAxis(m_axisX);
     m_series->attachAxis(m_axisY);
 
-    // XÃà ¹üÀ§ ¹× ´«±İ ¼³Á¤
+    // Xì¶• ë²”ìœ„ ë° ëˆˆê¸ˆ ì„¤ì •
     m_axisX->setTickCount(11);
-    m_axisX->setRange(QDateTime::currentDateTime().addSecs(-9), QDateTime::currentDateTime().addSecs(1));  // ÇöÀç ½Ã°£À» ±âÁØÀ¸·Î 10ÃÊ ¹üÀ§ ¼³Á¤
-    m_axisX->setFormat("hh:mm:ss");  // MM/dd/ss Çü½ÄÀ¸·Î º¯°æ
+    m_axisX->setRange(QDateTime::currentDateTime().addSecs(-9), QDateTime::currentDateTime().addSecs(1));  // í˜„ì¬ ì‹œê°„ì„ ê¸°ì¤€ìœ¼ë¡œ 10ì´ˆ ë²”ìœ„ ì„¤ì •
+    m_axisX->setFormat("hh:mm:ss");  // MM/dd/ss í˜•ì‹ìœ¼ë¡œ ë³€ê²½
     m_axisX->setTitleText("Time");
 
-    // YÃà ¹üÀ§ ¼³Á¤
+    // Yì¶• ë²”ìœ„ ì„¤ì •
     m_axisY->setRange(-5, 10);
     m_axisY->setTitleText("Y Value");
 
-    // Â÷Æ® ºä »ı¼º
+    // ì°¨íŠ¸ ë·° ìƒì„±
     createDefaultChartView(chart);
 
-    // Å¸ÀÌ¸Ó ½ÃÀÛ
+    // íƒ€ì´ë¨¸ ì‹œì‘
     m_timer.start();
 }
 
 void DynamicLineWidget::handleTimeout()
 {
-    qreal scroll_step = defaultChartView()->chart()->plotArea().width() / (m_axisX->tickCount() - 1);  // Â÷Æ® ½ºÅ©·Ñ °Å¸®
-    qreal x_delta = (m_axisX->max().toSecsSinceEpoch() - m_axisX->min().toSecsSinceEpoch()) / (m_axisX->tickCount() - 1);  // XÃàÀÇ ´«±İ °£ °£°İ (ÃÊ ´ÜÀ§)
+    qreal scroll_step = defaultChartView()->chart()->plotArea().width() / (m_axisX->tickCount() - 1);  // ì°¨íŠ¸ ìŠ¤í¬ë¡¤ ê±°ë¦¬
+    qreal x_delta = (m_axisX->max().toSecsSinceEpoch() - m_axisX->min().toSecsSinceEpoch()) / (m_axisX->tickCount() - 1);  // Xì¶•ì˜ ëˆˆê¸ˆ ê°„ ê°„ê²© (ì´ˆ ë‹¨ìœ„)
 
-    // m_x °ªÀ» ½Ã°£ ±âÁØÀ¸·Î Áõ°¡½ÃÅ´ (ÃÊ ´ÜÀ§·Î Áõ°¡)
-    m_x = m_x.addSecs(x_delta);  // m_x °ªÀ» ÇöÀç ½Ã°£À¸·Î Áõ°¡
+    // m_x ê°’ì„ ì‹œê°„ ê¸°ì¤€ìœ¼ë¡œ ì¦ê°€ì‹œí‚´ (ì´ˆ ë‹¨ìœ„ë¡œ ì¦ê°€)
+    m_x = m_x.addSecs(x_delta);  // m_x ê°’ì„ í˜„ì¬ ì‹œê°„ìœ¼ë¡œ ì¦ê°€
 
     //////////////////////////////////////////////////////////////////////////
-    m_y = QRandomGenerator::global()->bounded(5) - 2.5;  // ¹«ÀÛÀ§·Î m_y °ª »ı¼º
+    m_y = QRandomGenerator::global()->bounded(5) - 2.5;  // ë¬´ì‘ìœ„ë¡œ m_y ê°’ ìƒì„±
 
-    // QDateTimeÀ» ¹Ğ¸®ÃÊ ´ÜÀ§·Î º¯È¯ÇÏ¿© µ¥ÀÌÅÍ¸¦ Ãß°¡
-    m_series->append(m_x.toMSecsSinceEpoch(), m_y);  // »õ·Î¿î µ¥ÀÌÅÍ Æ÷ÀÎÆ® Ãß°¡
+    // QDateTimeì„ ë°€ë¦¬ì´ˆ ë‹¨ìœ„ë¡œ ë³€í™˜í•˜ì—¬ ë°ì´í„°ë¥¼ ì¶”ê°€
+    m_series->append(m_x.toMSecsSinceEpoch(), m_y);  // ìƒˆë¡œìš´ ë°ì´í„° í¬ì¸íŠ¸ ì¶”ê°€
 
-    // µ¥ÀÌÅÍ°¡ `tickCount()`¸¸Å­ Ãß°¡µÇ¸é Â÷Æ®¸¦ ¼öÆòÀ¸·Î ½ºÅ©·Ñ
+    // ë°ì´í„°ê°€ `tickCount()`ë§Œí¼ ì¶”ê°€ë˜ë©´ ì°¨íŠ¸ë¥¼ ìˆ˜í‰ìœ¼ë¡œ ìŠ¤í¬ë¡¤
     if (m_x >= m_axisX->min().addSecs((m_axisX->tickCount()-2) * x_delta)) {
-        defaultChartView()->chart()->scroll(scroll_step, 0);  // Â÷Æ® ¿À¸¥ÂÊÀ¸·Î scroll_step ¸¸Å­ ½ºÅ©·Ñ
+        defaultChartView()->chart()->scroll(scroll_step, 0);  // ì°¨íŠ¸ ì˜¤ë¥¸ìª½ìœ¼ë¡œ scroll_step ë§Œí¼ ìŠ¤í¬ë¡¤
     }
 }
