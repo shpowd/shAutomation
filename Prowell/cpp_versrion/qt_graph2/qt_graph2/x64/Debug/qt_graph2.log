@@ -1,6 +1,12 @@
 ﻿   Qt/MSBuild: 3.3.1.1
    Qt: 6.8.1
+  contentwidget.cpp
+  dynamiclinewidget.cpp
   mainwidget.cpp
-  qt_graph2.vcxproj -> C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_graph2\x64\Debug\qt_graph2.exe
-  'pwsh.exe'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
-  배치 파일이 아닙니다.
+  main.cpp
+  qrc_qt_graph2.cpp
+  moc_dynamiclinewidget.cpp
+  moc_contentwidget.cpp
+  moc_mainwidget.cpp
+  LINK : C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_graph2\x64\Debug\qt_graph2.exe not found or not built by the last incremental link; performing full link
+  qt_graph2.vcxproj -> C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_graph2\x64\Debug\qt_graph2.exe
