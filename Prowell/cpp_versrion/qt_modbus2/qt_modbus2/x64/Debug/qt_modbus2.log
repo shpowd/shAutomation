@@ -1,6 +1,15 @@
 ﻿   Qt/MSBuild: 3.3.1.1
+  Reading Qt configuration (C:/Qt/6.8.1/msvc2022_64/bin/qmake)
    Qt: 6.8.1
+  uic qt_modbus2.ui
+  rcc qt_modbus2.qrc
+  moc qt_modbus2.h
+  moc settingwidget.h
+   RCC: Warning: No resources in 'C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\qt_modbus2.qrc'.
+  settingwidget.cpp
   qt_modbus2.cpp
-  qt_modbus2.vcxproj -> C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\x64\Debug\qt_modbus2.exe
-  'pwsh.exe'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
-  배치 파일이 아닙니다.
+  main.cpp
+  qrc_qt_modbus2.cpp
+  moc_qt_modbus2.cpp
+  moc_settingwidget.cpp
+  qt_modbus2.vcxproj -> C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\x64\Debug\qt_modbus2.exe

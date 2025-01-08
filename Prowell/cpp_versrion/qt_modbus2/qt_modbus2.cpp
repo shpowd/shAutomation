@@ -255,10 +255,10 @@ void qt_modbus2::connectModbus() {
 
     // 데이터 맵 초기화
     QModbusDataUnitMap reg;
-    reg.insert(QModbusDataUnit::Coils, { QModbusDataUnit::Coils, 0, 10 });
+    reg.insert(QModbusDataUnit::Coils, { QModbusDataUnit::Coils, 0, 30 });
     reg.insert(QModbusDataUnit::DiscreteInputs, { QModbusDataUnit::DiscreteInputs, 0, 10 });
     reg.insert(QModbusDataUnit::InputRegisters, { QModbusDataUnit::InputRegisters, 0, 10 });
-    reg.insert(QModbusDataUnit::HoldingRegisters, { QModbusDataUnit::HoldingRegisters, 0, 10 });
+    reg.insert(QModbusDataUnit::HoldingRegisters, { QModbusDataUnit::HoldingRegisters, 0, 100 });
 
     modbusDevice->setMap(reg);
 
@@ -286,7 +286,6 @@ void qt_modbus2::connectModbus() {
 
 
 void qt_modbus2::disconnectModbus() {
-    qDebug() << "dc";
     if (modbusDevice) {
         modbusDevice->disconnectDevice();
         delete modbusDevice;
