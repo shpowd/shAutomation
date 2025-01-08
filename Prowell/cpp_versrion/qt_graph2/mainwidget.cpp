@@ -20,20 +20,22 @@
 MainWidget::MainWidget(QWidget *parent): QWidget(parent)
     , m_contentArea(new QWidget(this)){
 
+    //키와, 그래프 종류 리스트 맵핑
     for (int i = 0; i < 9; ++i) {
-        m_exampleMap.insert(tr("graph %1").arg(i + 1), DynamicLineChart);
+        m_chartListMap.insert(tr("graph %1").arg(i + 1), DynamicLineChart);
     }
 
-    QStringList examples = m_exampleMap.keys();
-    std::sort(examples.begin(), examples.end());
+    //키로 정렬
+    m_charts = m_chartListMap.keys();
+    std::sort(m_charts.begin(), m_charts.end());
    
     m_contentArea->installEventFilter(this);
 
     setMinimumSize(800, 500);
     resize(1024, 768);
 
-
-    setActiveExample(m_exampleMap[examples[0]]);
+    //차트 0번 시작
+    setActiveChart(m_chartListMap[ m_charts[0] ]);
 
     setMouseTracking(true);
 
@@ -56,7 +58,7 @@ bool MainWidget::eventFilter(QObject *object, QEvent *event)
     return QObject::eventFilter(object, event);
 }
 
-void MainWidget::setActiveExample(Example example){
+void MainWidget::setActiveChart(chartlist chart){
     // We only keep one example alive at the time to save resources.
     // This also allows resetting the example by switching to another example and back.
     if (m_activeWidget) {
@@ -64,7 +66,7 @@ void MainWidget::setActiveExample(Example example){
         m_activeWidget->deleteLater();
     }
 
-    switch (example) {
+    switch ( chart ) {
     case DynamicLineChart:
         m_activeWidget = new DynamicLineWidget(m_contentArea);
         break;
@@ -82,8 +84,8 @@ void MainWidget::relayout(bool horizontal){
     QBoxLayout *layout;
 
     // m_exampleMap의 키를 examples로 담기
-    QStringList examples = m_exampleMap.keys();
-    std::sort(examples.begin(), examples.end());  // 키 순서대로 정렬
+    //m_charts = m_chartListMap.keys();
+    //std::sort(m_charts.begin(), charts.end());  // 키 순서대로 정렬
 
     // 9개의 버튼 추가
     QHBoxLayout* buttonLayout = new QHBoxLayout;    
@@ -114,9 +116,9 @@ void MainWidget::relayout(bool horizontal){
         button->setMinimumWidth(80);
 
         // 각 버튼 클릭 시 그래프를 변경하는 동작 연결
-        connect(button, &QPushButton::clicked, this, [this, i, examples]() {
-            QString key = examples[i];  // i번째 예제에 해당하는 key 가져오기
-            setActiveExample(m_exampleMap[key]);  // 해당하는 그래프 객체 설정
+        connect(button, &QPushButton::clicked, this, [this, i]() {
+            QString key = m_charts[i];  // i번째 예제에 해당하는 key 가져오기
+            setActiveChart(m_chartListMap[ m_charts[ i ] ] );  // 해당하는 그래프 객체 설정
             });
     }
 
@@ -170,6 +172,18 @@ void MainWidget::relayout(bool horizontal){
 
     setLayout(layout);
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 void MainWidget::openSettingWindow() {
     QDialog* settingDialog = new QDialog(this);

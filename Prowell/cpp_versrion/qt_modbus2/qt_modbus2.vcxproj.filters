@@ -40,12 +40,12 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="settingwidget.cpp">
+    <ClCompile Include="graph_widget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="settingwidget.h">
+    <QtMoc Include="graph_widget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

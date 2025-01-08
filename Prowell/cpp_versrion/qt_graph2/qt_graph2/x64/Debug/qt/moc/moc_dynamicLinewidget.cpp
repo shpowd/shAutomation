@@ -38,7 +38,7 @@ struct qt_meta_tag_ZN17DynamicLineWidgetE_t {};
 #ifdef QT_MOC_HAS_STRINGDATA
 static constexpr auto qt_meta_stringdata_ZN17DynamicLineWidgetE = QtMocHelpers::stringData(
     "DynamicLineWidget",
-    "handleTimeout",
+    "addNewData",
     ""
 );
 #else  // !QT_MOC_HAS_STRINGDATA
@@ -76,7 +76,7 @@ Q_CONSTINIT const QMetaObject DynamicLineWidget::staticMetaObject = { {
     qt_incomplete_metaTypeArray<qt_meta_tag_ZN17DynamicLineWidgetE_t,
         // Q_OBJECT / Q_GADGET
         QtPrivate::TypeAndForceComplete<DynamicLineWidget, std::true_type>,
-        // method 'handleTimeout'
+        // method 'addNewData'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
@@ -87,7 +87,7 @@ void DynamicLineWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
     auto *_t = static_cast<DynamicLineWidget *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: _t->handleTimeout(); break;
+        case 0: _t->addNewData(); break;
         default: ;
         }
     }

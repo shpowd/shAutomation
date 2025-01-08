@@ -20,9 +20,11 @@ public:
     explicit DynamicLineWidget(QWidget *parent = nullptr);
 
 public slots:
-    void handleTimeout();
+    //void handleTimeout();
+    void addNewData(); // 새로운 데이터를 추가하는 슬롯
 
 private:
+
     QLineSeries *m_series = nullptr;
     QDateTimeAxis *m_axisX = nullptr;
     QValueAxis *m_axisY = nullptr;
@@ -31,6 +33,10 @@ private:
     qreal m_step = 0.;
     QDateTime  m_x;
     qreal m_y = 1;
+    QVector<QPointF> m_data;                   // 데이터 저장
+    void updateSeries(qint64 timestamp);                       // QLineSeries를 업데이트
+    void initializeData();         // 초기 데이터 생성
+
 };
 
 #endif

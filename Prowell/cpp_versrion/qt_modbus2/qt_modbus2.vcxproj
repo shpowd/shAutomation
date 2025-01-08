@@ -92,7 +92,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="settingwidget.cpp" />
+    <ClCompile Include="graph_widget.cpp" />
     <QtRcc Include="qt_modbus2.qrc" />
     <QtUic Include="qt_modbus2.ui" />
     <QtMoc Include="qt_modbus2.h" />
@@ -100,7 +100,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="settingwidget.h" />
+    <QtMoc Include="graph_widget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

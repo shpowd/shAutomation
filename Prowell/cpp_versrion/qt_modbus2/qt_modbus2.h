@@ -1,11 +1,14 @@
 ﻿#ifndef QTMODBUS2_H
 #define QTMODBUS2_H
 
-#include "settingwidget.h"
+#include "graph_widget.h"
 
 #include <QMainWindow>
 #include <QWidget>
 #include <QModbusServer>
+#include <QFile>
+#include <QDir>
+#include <QTimer>
 
 #include <QButtonGroup>
 #include <QVBoxLayout>
@@ -19,6 +22,7 @@ QT_BEGIN_NAMESPACE
 class QLineEdit;
 QT_END_NAMESPACE
 
+
 class qt_modbus2 : public QMainWindow
 {
     Q_OBJECT
@@ -28,15 +32,23 @@ public:
     ~qt_modbus2();
 
 private slots:
-    void openSettingWidget(); // 버튼 클릭 시 호출될 슬롯
+    void openGraphWidget(); // 버튼 클릭 시 호출될 슬롯
+
+signals:
+    void dataSavedToCSV(const QString& filePath);
 
 private:
     void initUI();
     void connectModbus();
     void disconnectModbus();
+    void updateModbus(QModbusDataUnit::RegisterType table, int address, int size);
     void handleDeviceError(QModbusDevice::Error newError);
     void onStateChanged(int state);
-    void updateWidgets(QModbusDataUnit::RegisterType table, int address, int size);
+    void savingInput(QModbusDataUnit::RegisterType table, int address, const QVector<quint16>& values);
+    void saveDataToCSV();
+    void saveDataOnTimer();
+
+    const int saveCSVtime = 3000; // CSV로 저장하기 위한 시간ms
 
     QTextEdit* protocolSettings; // Modbus ID 입력 필드
     QTextEdit* addressSettings; // IP 주소 입력 필드
@@ -46,12 +58,17 @@ private:
     QVBoxLayout* textLayout; // 텍스트 관련 위젯 레이아웃
     QVBoxLayout* buttonLayout; // 버튼 레이아웃
     QHBoxLayout* mainLayout; // 메인 레이아웃
+    GraphWidget* graphWidget = nullptr; // 새로운 위젯
 
-    SettingWidget* settingWidget = nullptr; // 새로운 위젯
     QModbusServer* modbusDevice = nullptr;
     QButtonGroup coilButtons;
     QButtonGroup discreteButtons;
     QHash<QString, QLineEdit*> registers;
+    QVector<QList<quint16>> saveBuffer; // modbus save csv 버퍼
+
+    QDateTime connectionStartTime; // 연결 시작 시간을 추적
+    QTimer saveTimer;              // 1분마다 저장을 처리할 타이머
+
 };
 
 #endif

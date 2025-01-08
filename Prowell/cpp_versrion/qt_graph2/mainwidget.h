@@ -23,18 +23,19 @@ protected:
     bool eventFilter(QObject *object, QEvent *event) override;
 
 private:
-    enum Example {
+    enum chartlist {
         DynamicLineChart
     };
 
-    void setActiveExample(Example example);
+    void setActiveChart(chartlist chart);
     void relayout(bool horizontal);
     void openSettingWindow();
 
 
     QWidget *m_contentArea = nullptr;
     ContentWidget *m_activeWidget = nullptr;
-    QHash<QString, Example> m_exampleMap;
+    QHash<QString, chartlist> m_chartListMap;
+    QStringList m_charts;
     bool m_isHorizontal = false;
 };
 
