@@ -255,10 +255,10 @@ void qt_modbus2::connectModbus() {
 
     // 데이터 맵 초기화
     QModbusDataUnitMap reg;
-    reg.insert(QModbusDataUnit::Coils, { QModbusDataUnit::Coils, 0, 30 });
+    reg.insert(QModbusDataUnit::Coils, { QModbusDataUnit::Coils, 0, 20 });
     reg.insert(QModbusDataUnit::DiscreteInputs, { QModbusDataUnit::DiscreteInputs, 0, 10 });
     reg.insert(QModbusDataUnit::InputRegisters, { QModbusDataUnit::InputRegisters, 0, 10 });
-    reg.insert(QModbusDataUnit::HoldingRegisters, { QModbusDataUnit::HoldingRegisters, 0, 100 });
+    reg.insert(QModbusDataUnit::HoldingRegisters, { QModbusDataUnit::HoldingRegisters, 0, 160 });
 
     modbusDevice->setMap(reg);
 
@@ -369,7 +369,7 @@ void qt_modbus2::handleDeviceError(QModbusDevice::Error newError) {
 
 
 
-// 세팅창 생성
+// 그래프 창 생성
 void qt_modbus2::openSettingWidget() {
     if (!settingWidget) {
         settingWidget = new SettingWidget(this);
