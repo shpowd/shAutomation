@@ -62,7 +62,14 @@ void qt_modbus2::initUI(){
         else {
             bottomButtonLayout->addWidget(button);
         }
+
+        // 버튼 클릭 시 그래프 위젯 생성
+        connect(button, &QPushButton::clicked, this, [this, i]() {
+            openGraphWidget(i); // 그래프 생성 및 표시
+            });
+
     }
+
     buttonLayout->addLayout(topButtonLayout);
     buttonLayout->addLayout(bottomButtonLayout);
 
@@ -326,7 +333,12 @@ void qt_modbus2::updateModbus(QModbusDataUnit::RegisterType table, int address, 
 
     if (!values.isEmpty()) {
         savingInput(table, address, values);
-    }   
+        updateGraphData(values);
+    }
+    else{
+        qDebug() << "No values provided to updateGraphData.";
+        return;
+    }
 
 }
 
@@ -364,6 +376,7 @@ void qt_modbus2::onStateChanged(int state) {
     qDebug() << "State message updated to:" << stateMessage;
 }
 
+
 void qt_modbus2::handleDeviceError(QModbusDevice::Error newError) {
     if (newError == QModbusDevice::NoError || !modbusDevice)
         return;
@@ -386,7 +399,6 @@ void qt_modbus2::savingInput(QModbusDataUnit::RegisterType table, int address, c
     newData.append(static_cast<quint16>(table)); // 첫 번째 열에 table 값 추가
     newData.append(values);                     // 이후 열에 레지스터 값 추가
     saveBuffer.append(newData);
-
 
 }
 
@@ -450,14 +462,47 @@ void qt_modbus2::saveDataToCSV() {
 
 
 // 그래프 창 생성
-void qt_modbus2::openGraphWidget() {
-    if (!graphWidget) {
-        graphWidget = new GraphWidget(this);
-        graphWidget->setAttribute(Qt::WA_DeleteOnClose);
-        connect(graphWidget, &QObject::destroyed, this, [this]() {
-            graphWidget = nullptr; // 포인터 초기화
-         });
+void qt_modbus2::openGraphWidget(int graphIndex) {
+    if (!graphWidgets.contains(graphIndex)) {
+        // 그래프가 생성되지 않은 경우 생성
+        GraphWidget* newGraphWidget = new GraphWidget(this);
+        newGraphWidget->setWindowTitle(tr("그래프 %1").arg(graphIndex + 1)); // 그래프 제목 설정
+        newGraphWidget->setAttribute(Qt::WA_DeleteOnClose);
+        connect(newGraphWidget, &QObject::destroyed, this, [this, graphIndex]() {
+            graphWidgets.remove(graphIndex); // 삭제된 그래프 제거
+            });
+
+        graphWidgets.insert(graphIndex, newGraphWidget);
     }
 
-    graphWidget->show();
+    graphWidgets[graphIndex]->show(); // 그래프 표시
+}
+
+// 그래프 데이터 추가
+void qt_modbus2::updateGraphData(const QVector<quint16>& values) {
+
+    // 첫 번째 값에 따라 그래프 데이터를 전달
+    int graphIndex = values.first() - 1; // 첫 번째 값에서 1을 뺌 (0부터 시작하는 인덱스)
+    if (graphIndex >= 0 && graphIndex < 8) { // 유효한 그래프 인덱스인지 확인
+        if (!graphWidgets.contains(graphIndex)) { // 해당 인덱스에 그래프가 없을 경우
+            qDebug() << "GraphWidget for index" << graphIndex + 1 << "does not exist.";
+            return;
+        }
+
+        GraphWidget* graph = graphWidgets.value(graphIndex, nullptr); // 그래프 가져오기
+        if (graph) {
+            QDateTime now = QDateTime::currentDateTime();
+            qint64 timestamp = now.toMSecsSinceEpoch();
+            for (int i = 0; i < values.size(); ++i) {
+                double yValue = static_cast<double>(values[i]);
+                graph->addDataPoint(timestamp, yValue); // 그래프에 데이터 추가
+            }
+        }
+        else {
+            qDebug() << "GraphWidget for index" << graphIndex + 1 << "is nullptr.";
+        }
+    }
+    else {
+        qDebug() << "Invalid graph index:" << graphIndex + 1;
+    }
 }

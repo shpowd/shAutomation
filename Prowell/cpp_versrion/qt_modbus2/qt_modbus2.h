@@ -32,21 +32,23 @@ public:
     ~qt_modbus2();
 
 private slots:
-    void openGraphWidget(); // 버튼 클릭 시 호출될 슬롯
+    void connectModbus();
+    void disconnectModbus();
+    void updateModbus(QModbusDataUnit::RegisterType table, int address, int size);
+    void handleDeviceError(QModbusDevice::Error newError);
+    void onStateChanged(int state);
+    void saveDataOnTimer();
+
+    void openGraphWidget(int graphIndex); // 특정 인덱스의 그래프를 열기
+    void updateGraphData(const QVector<quint16>& values); // 그래프 데이터 업데이트
 
 signals:
     void dataSavedToCSV(const QString& filePath);
 
 private:
     void initUI();
-    void connectModbus();
-    void disconnectModbus();
-    void updateModbus(QModbusDataUnit::RegisterType table, int address, int size);
-    void handleDeviceError(QModbusDevice::Error newError);
-    void onStateChanged(int state);
     void savingInput(QModbusDataUnit::RegisterType table, int address, const QVector<quint16>& values);
     void saveDataToCSV();
-    void saveDataOnTimer();
 
     const int saveCSVtime = 3000; // CSV로 저장하기 위한 시간ms
 
@@ -68,6 +70,8 @@ private:
 
     QDateTime connectionStartTime; // 연결 시작 시간을 추적
     QTimer saveTimer;              // 1분마다 저장을 처리할 타이머
+
+    QMap<int, GraphWidget*> graphWidgets; // 그래프 위젯들을 관리하는 맵
 
 };
 

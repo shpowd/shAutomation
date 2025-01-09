@@ -8,6 +8,7 @@
 
 #include "../../../../../qt_modbus2.h"
 #include <QtCore/qmetatype.h>
+#include <QtCore/QList>
 
 #include <QtCore/qtmochelpers.h>
 
@@ -41,7 +42,24 @@ static constexpr auto qt_meta_stringdata_ZN10qt_modbus2E = QtMocHelpers::stringD
     "dataSavedToCSV",
     "",
     "filePath",
-    "openGraphWidget"
+    "connectModbus",
+    "disconnectModbus",
+    "updateModbus",
+    "QModbusDataUnit::RegisterType",
+    "table",
+    "address",
+    "size",
+    "handleDeviceError",
+    "QModbusDevice::Error",
+    "newError",
+    "onStateChanged",
+    "state",
+    "saveDataOnTimer",
+    "openGraphWidget",
+    "graphIndex",
+    "updateGraphData",
+    "QList<quint16>",
+    "values"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -53,7 +71,7 @@ Q_CONSTINIT static const uint qt_meta_data_ZN10qt_modbus2E[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -61,16 +79,30 @@ Q_CONSTINIT static const uint qt_meta_data_ZN10qt_modbus2E[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,   26,    2, 0x06,    1 /* Public */,
+       1,    1,   68,    2, 0x06,    1 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       4,    0,   29,    2, 0x08,    3 /* Private */,
+       4,    0,   71,    2, 0x08,    3 /* Private */,
+       5,    0,   72,    2, 0x08,    4 /* Private */,
+       6,    3,   73,    2, 0x08,    5 /* Private */,
+      11,    1,   80,    2, 0x08,    9 /* Private */,
+      14,    1,   83,    2, 0x08,   11 /* Private */,
+      16,    0,   86,    2, 0x08,   13 /* Private */,
+      17,    1,   87,    2, 0x08,   14 /* Private */,
+      19,    1,   90,    2, 0x08,   16 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString,    3,
 
  // slots: parameters
     QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 7, QMetaType::Int, QMetaType::Int,    8,    9,   10,
+    QMetaType::Void, 0x80000000 | 12,   13,
+    QMetaType::Void, QMetaType::Int,   15,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   18,
+    QMetaType::Void, 0x80000000 | 20,   21,
 
        0        // eod
 };
@@ -87,8 +119,29 @@ Q_CONSTINIT const QMetaObject qt_modbus2::staticMetaObject = { {
         // method 'dataSavedToCSV'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
+        // method 'connectModbus'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'disconnectModbus'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'updateModbus'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QModbusDataUnit::RegisterType, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        // method 'handleDeviceError'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QModbusDevice::Error, std::false_type>,
+        // method 'onStateChanged'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        // method 'saveDataOnTimer'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'openGraphWidget'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        // method 'updateGraphData'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QVector<quint16> &, std::false_type>
     >,
     nullptr
 } };
@@ -99,8 +152,27 @@ void qt_modbus2::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: _t->dataSavedToCSV((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 1: _t->openGraphWidget(); break;
+        case 1: _t->connectModbus(); break;
+        case 2: _t->disconnectModbus(); break;
+        case 3: _t->updateModbus((*reinterpret_cast< std::add_pointer_t<QModbusDataUnit::RegisterType>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3]))); break;
+        case 4: _t->handleDeviceError((*reinterpret_cast< std::add_pointer_t<QModbusDevice::Error>>(_a[1]))); break;
+        case 5: _t->onStateChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 6: _t->saveDataOnTimer(); break;
+        case 7: _t->openGraphWidget((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 8: _t->updateGraphData((*reinterpret_cast< std::add_pointer_t<QList<quint16>>>(_a[1]))); break;
         default: ;
+        }
+    }
+    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        switch (_id) {
+        default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+        case 8:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+            case 0:
+                *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< QList<quint16> >(); break;
+            }
+            break;
         }
     }
     if (_c == QMetaObject::IndexOfMethod) {
@@ -134,14 +206,14 @@ int qt_modbus2::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 9;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
-            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 2;
+        if (_id < 9)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 9;
     }
     return _id;
 }
