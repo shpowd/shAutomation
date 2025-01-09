@@ -340,6 +340,22 @@ void qt_modbus2::updateModbus(QModbusDataUnit::RegisterType table, int address, 
         return;
     }
 
+    // Holding Register 초기화
+    if (table == QModbusDataUnit::HoldingRegisters) {
+        QModbusDataUnit unit(QModbusDataUnit::HoldingRegisters, address, size);
+        // 모든 값을 0으로 설정
+        QVector<quint16> resetValues(size, 0); // 크기가 size인 벡터를 생성하고 모든 값을 0으로 초기화
+        for (int i = 0; i < size; ++i) {
+            unit.setValue(i, resetValues[i]);
+        }
+        if (!modbusDevice->setData(unit)) {
+            qDebug() << "Failed to reset holding registers in range:" << address << "to" << address + size - 1;
+        }
+        else {
+            qDebug() << "Holding registers in range" << address << "to" << address + size - 1 << "reset to 0.";
+        }
+    }
+
 }
 
 
@@ -466,8 +482,9 @@ void qt_modbus2::openGraphWidget(int graphIndex) {
     if (!graphWidgets.contains(graphIndex)) {
         // 그래프가 생성되지 않은 경우 생성
         GraphWidget* newGraphWidget = new GraphWidget(this);
-        newGraphWidget->setWindowTitle(tr("그래프 %1").arg(graphIndex + 1)); // 그래프 제목 설정
         newGraphWidget->setAttribute(Qt::WA_DeleteOnClose);
+        newGraphWidget->setWindowTitle(tr("그래프 %1").arg(graphIndex + 1)); // 그래프 제목 설정
+        newGraphWidget->setChartTitle(tr("그래프 %1").arg(graphIndex + 1)); // 차트 레이블 설정
         connect(newGraphWidget, &QObject::destroyed, this, [this, graphIndex]() {
             graphWidgets.remove(graphIndex); // 삭제된 그래프 제거
             });
@@ -480,8 +497,7 @@ void qt_modbus2::openGraphWidget(int graphIndex) {
 
 // 그래프 데이터 추가
 void qt_modbus2::updateGraphData(const QVector<quint16>& values) {
-
-    // 첫 번째 값에 따라 그래프 데이터를 전달
+    //인덱스에 따라 그래프 데이터 전달
     int graphIndex = values.first() - 1; // 첫 번째 값에서 1을 뺌 (0부터 시작하는 인덱스)
     if (graphIndex >= 0 && graphIndex < 8) { // 유효한 그래프 인덱스인지 확인
         if (!graphWidgets.contains(graphIndex)) { // 해당 인덱스에 그래프가 없을 경우
@@ -493,10 +509,7 @@ void qt_modbus2::updateGraphData(const QVector<quint16>& values) {
         if (graph) {
             QDateTime now = QDateTime::currentDateTime();
             qint64 timestamp = now.toMSecsSinceEpoch();
-            for (int i = 0; i < values.size(); ++i) {
-                double yValue = static_cast<double>(values[i]);
-                graph->addDataPoint(timestamp, yValue); // 그래프에 데이터 추가
-            }
+            graph->addDataPoints(timestamp, values); // 데이터를 한 번에 추가
         }
         else {
             qDebug() << "GraphWidget for index" << graphIndex + 1 << "is nullptr.";
