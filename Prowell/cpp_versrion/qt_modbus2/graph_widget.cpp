@@ -55,6 +55,7 @@ void GraphWidget::initSettingUI() {
     chart->addAxis(axisY, Qt::AlignLeft);
     series->attachAxis(axisY);
 
+
     // ChartView 설정
     chartView = new QChartView(chart, this);
     chartView->setRenderHint(QPainter::Antialiasing);

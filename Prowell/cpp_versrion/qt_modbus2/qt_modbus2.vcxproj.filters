@@ -43,9 +43,15 @@
     <ClCompile Include="graph_widget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="modbus_server.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="graph_widget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="modbus_server.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

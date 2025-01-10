@@ -1,3 +1,11 @@
 ﻿   Qt/MSBuild: 3.3.1.1
    Qt: 6.8.1
+  moc modbus_server.h
+  main.cpp
+  modbus_server.cpp
+  qt_modbus2.cpp
+  moc_modbus_server.cpp
+  moc_qt_modbus2.cpp
   qt_modbus2.vcxproj -> C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\x64\Debug\qt_modbus2.exe
+  'pwsh.exe'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
+  배치 파일이 아닙니다.

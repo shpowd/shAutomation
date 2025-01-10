@@ -1,7 +1,8 @@
-﻿#ifndef QTMODBUS2_H
-#define QTMODBUS2_H
+﻿#ifndef QT_MODBUS2_H
+#define QT_MODBUS2_H
 
 #include "graph_widget.h"
+#include "modbus_server.h"
 
 #include <QMainWindow>
 #include <QWidget>
@@ -9,6 +10,7 @@
 #include <QFile>
 #include <QDir>
 #include <QTimer>
+#include <QModbusPdu>
 
 #include <QButtonGroup>
 #include <QVBoxLayout>
@@ -23,8 +25,7 @@ class QLineEdit;
 QT_END_NAMESPACE
 
 
-class qt_modbus2 : public QMainWindow
-{
+class qt_modbus2 : public QMainWindow{
     Q_OBJECT
 
 public:
@@ -62,7 +63,8 @@ private:
     QHBoxLayout* mainLayout; // 메인 레이아웃
     GraphWidget* graphWidget = nullptr; // 새로운 위젯
 
-    QModbusServer* modbusDevice = nullptr;
+
+    qt_modbus_server *modbusDevice = nullptr;
     QButtonGroup coilButtons;
     QButtonGroup discreteButtons;
     QHash<QString, QLineEdit*> registers;

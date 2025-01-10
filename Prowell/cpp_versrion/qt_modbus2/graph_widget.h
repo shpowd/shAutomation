@@ -1,5 +1,5 @@
-﻿#ifndef GRAPHWIDGET_H
-#define GRAPHWIDGET_H
+﻿#ifndef GRAPH_WIDGET_H
+#define GRAPH_WIDGET_H
 
 #include <QWidget>
 #include <QtCharts>

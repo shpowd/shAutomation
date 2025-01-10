@@ -3,16 +3,13 @@
 #include <QRegularExpression>
 #include <QRegularExpressionValidator>
 #include <QStatusBar>
-#include <QUrl>
 
 
 qt_modbus2::qt_modbus2(QWidget *parent)
-    : QMainWindow(parent)
-{
+    : QMainWindow(parent) {
     setWindowTitle("메인 윈도우");
     setMinimumSize(50, 40);
     resize(1024, 819);
-
     initUI();
 }
 
@@ -234,10 +231,10 @@ void qt_modbus2::initUI(){
 
 void qt_modbus2::connectModbus() {
     // UI에서 Modbus ID와 IP 주소 가져오기
-    QString modbusID = protocolSettings->toPlainText(); // Modbus ID 가져오기
-    QString ipAddress = addressSettings->toPlainText(); // IP 주소 가져오기
+    QString modbusID = protocolSettings->toPlainText();
+    QString ipAddress = addressSettings->toPlainText();
 
-    // IP 주소 유효성 검사
+    // IP 주소 및 포트 유효성 검사
     QUrl url = QUrl::fromUserInput(ipAddress);
     if (!url.isValid() || url.host().isEmpty() || url.port() <= 0) {
         qDebug() << "Invalid IP address or port:" << ipAddress;
@@ -246,48 +243,31 @@ void qt_modbus2::connectModbus() {
 
     // 기존 Modbus 서버 초기화
     if (modbusDevice) {
-        modbusDevice->disconnectDevice();
-        delete modbusDevice;
-        modbusDevice = nullptr;
+        disconnectModbus();
     }
 
-    // Modbus TCP 서버 생성
-    modbusDevice = new QModbusTcpServer(this);
+    // Modbus 서버 객체 생성
+    modbusDevice = new qt_modbus_server(this);
 
-    // Modbus 서버 설정
-    modbusDevice->setConnectionParameter(QModbusDevice::NetworkAddressParameter, url.host());
-    modbusDevice->setConnectionParameter(QModbusDevice::NetworkPortParameter, url.port());
-    modbusDevice->setServerAddress(modbusID.toInt());
+    // 상태 변경 핸들러 연결
+    connect(modbusDevice, &qt_modbus_server::stateChanged, this, &qt_modbus2::onStateChanged);
+    // 에러 변경 핸들러 연결
+    connect(modbusDevice, &qt_modbus_server::errorOccurred, this, &qt_modbus2::handleDeviceError);
+    
+    // 데이터 변경 핸들러 연결
+    //connect(modbusDevice, &QModbusServer::dataWritten, this, &qt_modbus2::updateModbus);
 
-    // 데이터 맵 초기화
-    QModbusDataUnitMap reg;
-    reg.insert(QModbusDataUnit::Coils, { QModbusDataUnit::Coils, 0, 20 });
-    reg.insert(QModbusDataUnit::DiscreteInputs, { QModbusDataUnit::DiscreteInputs, 0, 10 });
-    reg.insert(QModbusDataUnit::InputRegisters, { QModbusDataUnit::InputRegisters, 0, 10 });
-    reg.insert(QModbusDataUnit::HoldingRegisters, { QModbusDataUnit::HoldingRegisters, 0, 160 });
-
-    modbusDevice->setMap(reg);
-
-    //// 상태 변경 핸들러 연결
-    connect(modbusDevice, &QModbusServer::stateChanged, this, &qt_modbus2::onStateChanged);
-
-    // 에러 핸들러 연결
-    connect(modbusDevice, &QModbusServer::errorOccurred, this, &qt_modbus2::handleDeviceError);
-
-    //// 데이터 변경 핸들러 연결
-    connect(modbusDevice, &QModbusServer::dataWritten, this, &qt_modbus2::updateModbus);
 
     // Modbus 서버 시작
-    if (!modbusDevice->connectDevice()) {
-        qDebug() << "Failed to start Modbus server:" << modbusDevice->errorString();
-        delete modbusDevice;
-        modbusDevice = nullptr;
-        return;
+    if (modbusDevice->startServer(url.host(), url.port(), modbusID)) {
+        qDebug() << "Modbus server successfully started at" << ipAddress << "with ID" << modbusID;
+    }
+    else {
+        qDebug() << "Failed to start Modbus server.";
     }
 
-    connect(&saveTimer, &QTimer::timeout, this, &qt_modbus2::saveDataOnTimer);
+    //connect(&saveTimer, &QTimer::timeout, this, &qt_modbus2::saveDataOnTimer);
 
-    qDebug() << "Modbus server started at" << ipAddress << "with ID" << modbusID;
 
 }
 
@@ -297,9 +277,11 @@ void qt_modbus2::disconnectModbus() {
         modbusDevice->disconnectDevice();
         delete modbusDevice;
         modbusDevice = nullptr;
+        qDebug() << "Modbus server destroyed.";
     }
-
 }
+
+
 
 
 void qt_modbus2::updateModbus(QModbusDataUnit::RegisterType table, int address, int size) {
@@ -340,24 +322,23 @@ void qt_modbus2::updateModbus(QModbusDataUnit::RegisterType table, int address, 
         return;
     }
 
-    // Holding Register 초기화
-    if (table == QModbusDataUnit::HoldingRegisters) {
-        QModbusDataUnit unit(QModbusDataUnit::HoldingRegisters, address, size);
-        // 모든 값을 0으로 설정
-        QVector<quint16> resetValues(size, 0); // 크기가 size인 벡터를 생성하고 모든 값을 0으로 초기화
-        for (int i = 0; i < size; ++i) {
-            unit.setValue(i, resetValues[i]);
-        }
-        if (!modbusDevice->setData(unit)) {
-            qDebug() << "Failed to reset holding registers in range:" << address << "to" << address + size - 1;
-        }
-        else {
-            qDebug() << "Holding registers in range" << address << "to" << address + size - 1 << "reset to 0.";
-        }
-    }
+    //// Holding Register 초기화
+    //if (table == QModbusDataUnit::HoldingRegisters) {
+    //    QModbusDataUnit unit(QModbusDataUnit::HoldingRegisters, address, size);
+    //    // 모든 값을 0으로 설정
+    //    QVector<quint16> resetValues(size, 0); // 크기가 size인 벡터를 생성하고 모든 값을 0으로 초기화
+    //    for (int i = 0; i < size; ++i) {
+    //        unit.setValue(i, resetValues[i]);
+    //    }
+    //    if (!modbusDevice->setData(unit)) {
+    //        qDebug() << "Failed to reset holding registers in range:" << address << "to" << address + size - 1;
+    //    }
+    //    else {
+    //        qDebug() << "Holding registers in range" << address << "to" << address + size - 1 << "reset to 0.";
+    //    }
+    //}
 
 }
-
 
 void qt_modbus2::onStateChanged(int state) {
     QString stateMessage;
@@ -392,7 +373,6 @@ void qt_modbus2::onStateChanged(int state) {
     qDebug() << "State message updated to:" << stateMessage;
 }
 
-
 void qt_modbus2::handleDeviceError(QModbusDevice::Error newError) {
     if (newError == QModbusDevice::NoError || !modbusDevice)
         return;
@@ -409,7 +389,7 @@ void qt_modbus2::handleDeviceError(QModbusDevice::Error newError) {
 }
 
 
-// 모드버스 데이터 셋
+// 모드버스 CSV 데이터 셋
 void qt_modbus2::savingInput(QModbusDataUnit::RegisterType table, int address, const QVector<quint16>& values){
     QList<quint16> newData;
     newData.append(static_cast<quint16>(table)); // 첫 번째 열에 table 값 추가
@@ -418,7 +398,7 @@ void qt_modbus2::savingInput(QModbusDataUnit::RegisterType table, int address, c
 
 }
 
-// 타이머를 통해 데이터를 주기적으로 저장
+// 모드버스 CSV 저장 타이머
 void qt_modbus2::saveDataOnTimer() {
     qDebug() << "Saving data after 1 minute of connection.";
     saveDataToCSV();
