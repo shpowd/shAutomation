@@ -7,7 +7,7 @@
 
 qt_modbus2::qt_modbus2(QWidget *parent)
     : QMainWindow(parent) {
-    setWindowTitle("메인 윈도우");
+    setWindowTitle("Main");
     setMinimumSize(50, 40);
     resize(1024, 819);
     initUI();
@@ -15,7 +15,6 @@ qt_modbus2::qt_modbus2(QWidget *parent)
 
 
 qt_modbus2::~qt_modbus2(){
-    
     if (graphWidget) {
         delete graphWidget;
     }
@@ -37,20 +36,21 @@ void qt_modbus2::initUI(){
     QHBoxLayout* bottomButtonLayout = new QHBoxLayout;
 
     for (int i = 0; i < 8; ++i) {
-        QPushButton* button = new QPushButton(tr("그래프 %1").arg(i + 1), this);
+        QPushButton* button = new QPushButton(tr("%1").arg(i + 1), this);
         button->setMinimumSize(150, 150); // 버튼 크기 설정
         button->setStyleSheet(
             "QPushButton {"
-            "    background-color: #f0f0f0;"
-            "    border-radius: 10px;"
-            "    border: 2px solid #d0d0d0;"
-            "    color: black;"
-            "    padding: 10px;"
-            "    font-size: 14px;"
+            "    background-color: #ADB9CA;"  // 기본 상태: 진한 회색
+            "    color: white;"              // 기본 상태: 흰색 텍스트
+            "    border-radius: 10px;"       // 둥근 모서리
+            "    border: 2px solid #8c8c8c;" // 테두리: 더 어두운 회색
+            "    font-size: 35px;"           // 텍스트 크기
+            "    padding: 10px;"             // 텍스트 여백
             "}"
             "QPushButton:hover {"
-            "    background-color: #e0e0e0;"
-            "    border: 2px solid #b0b0b0;"
+            "    background-color: #2E75B6;" // 호버 상태: 파스텔 블루
+            "    color: white;"              // 호버 상태: 흰색 텍스트
+            "    border: 2px solid #87ceeb;" // 호버 상태: 밝은 블루 테두리
             "}"
         );
         if (i < 4) {
@@ -195,23 +195,43 @@ void qt_modbus2::initUI(){
         "    border-radius: 6px;"          // 둥근 모서리
         "}"
     );
-    connect(saveTimeScrollBar, &QScrollBar::valueChanged, this, [saveTimeScrollBar, saveTimeLabel]() {
+    connect(saveTimeScrollBar, &QScrollBar::valueChanged, this, [this, saveTimeScrollBar]() {
         int value = saveTimeScrollBar->value();
         QString text;
         switch (value) {
-        case 0: text = "DB Save Frequency: 1 Minute"; break;
-        case 1: text = "DB Save Frequency: 1 Hour"; break;
-        case 2: text = "DB Save Frequency: 1 Day"; break;
-        case 3: text = "DB Save Frequency: 1 Week"; break;
+        case 0:
+            text = "DB Save Frequency: 1 Minute";
+            saveIntervalSeconds = 60; // 1분
+            break;
+        case 1:
+            text = "DB Save Frequency: 1 Hour";
+            saveIntervalSeconds = 3600; // 1시간
+            break;
+        case 2:
+            text = "DB Save Frequency: 1 Day";
+            saveIntervalSeconds = 86400; // 1일
+            break;
+        case 3:
+            text = "DB Save Frequency: 1 Week";
+            saveIntervalSeconds = 604800; // 1주
+            break;
         }
-        saveTimeLabel->setText(text);
+        // 타이머 업데이트
+        saveTimer.stop();
+        saveTimer.start(saveIntervalSeconds * 1000);
+        qDebug() << "Updated save interval to" << saveIntervalSeconds << "seconds.";
         });
     textLayout->addWidget(saveTimeScrollBar);
 
     // 저장 버튼
     QPushButton* saveButton = new QPushButton("Save", this);
     saveButton->setFixedHeight(60);
-    connect(saveButton, &QPushButton::clicked, this, &QWidget::close);
+    connect(saveButton, &QPushButton::clicked, this, [this]() {
+        saveTimer.stop(); // 기존 타이머 중지
+        saveTimer.start(saveIntervalSeconds * 1000); // 새로운 주기로 시작
+
+        qDebug() << "Save timer started with interval:" << saveIntervalSeconds << "seconds.";
+        });
     textLayout->addWidget(saveButton);
 
     // 저장 Spacer 추가
@@ -247,7 +267,7 @@ void qt_modbus2::connectModbus() {
     }
 
     // Modbus 서버 객체 생성
-    modbusDevice = new qt_modbus_server(this);
+    modbusDevice = new qt_modbus_server(this, this);
 
     // 상태 변경 핸들러 연결
     connect(modbusDevice, &qt_modbus_server::stateChanged, this, &qt_modbus2::onStateChanged);
@@ -266,8 +286,7 @@ void qt_modbus2::connectModbus() {
         qDebug() << "Failed to start Modbus server.";
     }
 
-    //connect(&saveTimer, &QTimer::timeout, this, &qt_modbus2::saveDataOnTimer);
-
+    connect(&saveTimer, &QTimer::timeout, this, &qt_modbus2::saveDataOnTimer);
 
 }
 
@@ -299,7 +318,7 @@ void qt_modbus2::updateModbus(QModbusDataUnit::RegisterType table, int address, 
             // displayTextWidget에 변경 내용 추가
             QString logMessage = QString("Table %1, Address %2, Value %3")
                 .arg(static_cast<int>(table))
-                .arg(address)
+                .arg(address + i)
                 .arg(value);
             if (debugTextWidget) {
                 if (i == 0) {
@@ -321,22 +340,6 @@ void qt_modbus2::updateModbus(QModbusDataUnit::RegisterType table, int address, 
         qDebug() << "No values provided to updateGraphData.";
         return;
     }
-
-    //// Holding Register 초기화
-    //if (table == QModbusDataUnit::HoldingRegisters) {
-    //    QModbusDataUnit unit(QModbusDataUnit::HoldingRegisters, address, size);
-    //    // 모든 값을 0으로 설정
-    //    QVector<quint16> resetValues(size, 0); // 크기가 size인 벡터를 생성하고 모든 값을 0으로 초기화
-    //    for (int i = 0; i < size; ++i) {
-    //        unit.setValue(i, resetValues[i]);
-    //    }
-    //    if (!modbusDevice->setData(unit)) {
-    //        qDebug() << "Failed to reset holding registers in range:" << address << "to" << address + size - 1;
-    //    }
-    //    else {
-    //        qDebug() << "Holding registers in range" << address << "to" << address + size - 1 << "reset to 0.";
-    //    }
-    //}
 
 }
 
@@ -389,7 +392,7 @@ void qt_modbus2::handleDeviceError(QModbusDevice::Error newError) {
 }
 
 
-// 모드버스 CSV 데이터 셋
+// 모드버스 레지스터 CSV 데이터 셋
 void qt_modbus2::savingInput(QModbusDataUnit::RegisterType table, int address, const QVector<quint16>& values){
     QList<quint16> newData;
     newData.append(static_cast<quint16>(table)); // 첫 번째 열에 table 값 추가
@@ -398,11 +401,30 @@ void qt_modbus2::savingInput(QModbusDataUnit::RegisterType table, int address, c
 
 }
 
+void qt_modbus2::savingCoilInput(int coilIndex, bool state) {
+    // 코일 데이터 버퍼에 추가 (128개의 초기값이 설정된 상태를 유지)
+    if (coilBuffer.isEmpty()) {
+        QVector<bool> initialStates(128, false); // 초기값은 모두 OFF
+        coilBuffer.append(qMakePair(QDateTime(), initialStates)); // 타임스탬프는 빈 값으로 유지
+    }
+
+    // 코일 값 업데이트
+    QVector<bool>& currentCoilState = coilBuffer.last().second;
+    if (coilIndex >= 0 && coilIndex < currentCoilState.size()) {
+        currentCoilState[coilIndex] = state;
+    }
+    else {
+        qWarning() << "Invalid coil index:" << coilIndex;
+    }
+}
+
+
+
 // 모드버스 CSV 저장 타이머
 void qt_modbus2::saveDataOnTimer() {
     qDebug() << "Saving data after 1 minute of connection.";
     saveDataToCSV();
-    saveBuffer.clear(); // 저장 후 버퍼 초기화
+    saveCoilDataToCSV();
 }
 
 // 모드버스 CSV 저장
@@ -456,6 +478,55 @@ void qt_modbus2::saveDataToCSV() {
 
 }
 
+void qt_modbus2::saveCoilDataToCSV() {
+    if (coilBuffer.isEmpty()) {
+        qDebug() << "No coil data to save.";
+        return;
+    }
+
+    // log 폴더가 없다면 생성
+    QDir dir;
+    if (!dir.exists("log")) {
+        if (!dir.mkpath("log")) {
+            qDebug() << "Failed to create log directory.";
+            return;
+        }
+    }
+    QString filePath = QDir::currentPath() + "/log/" + QDateTime::currentDateTime().toString("yyyyMMdd_hhmmss") + "_modbus_coil_data.csv";
+    QFile file(filePath);
+
+    // 파일 열기 (쓰기 모드, 기존 데이터 유지)
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append)) {
+        qWarning() << "Failed to open file for saving coil data:" << filePath;
+        return;
+    }
+
+    QTextStream out(&file);
+
+    // 헤더 작성 (파일이 새로 생성된 경우만)
+    if (file.size() == 0) {
+        QStringList header;
+        for (int i = 0; i < 128; ++i) {
+            header << QString("Coil Address %1").arg(i);
+        }
+        out << header.join(",") << "\n";
+    }
+
+    // 데이터 작성
+    for (const auto& entry : coilBuffer) {
+        QStringList row;
+        for (bool state : entry.second) {
+            row << (state ? "1" : "0");
+        }
+        out << row.join(",") << "\n";
+    }
+
+    file.close();
+    coilBuffer.clear(); // 저장 후 버퍼 초기화
+
+    qDebug() << "Coil data saved to CSV:" << filePath;
+}
+
 
 // 그래프 창 생성
 void qt_modbus2::openGraphWidget(int graphIndex) {
@@ -463,8 +534,7 @@ void qt_modbus2::openGraphWidget(int graphIndex) {
         // 그래프가 생성되지 않은 경우 생성
         GraphWidget* newGraphWidget = new GraphWidget(this);
         newGraphWidget->setAttribute(Qt::WA_DeleteOnClose);
-        newGraphWidget->setWindowTitle(tr("그래프 %1").arg(graphIndex + 1)); // 그래프 제목 설정
-        newGraphWidget->setChartTitle(tr("그래프 %1").arg(graphIndex + 1)); // 차트 레이블 설정
+        newGraphWidget->setWindowTitle(tr("모터 %1").arg(graphIndex + 1)); // 그래프 제목 설정
         connect(newGraphWidget, &QObject::destroyed, this, [this, graphIndex]() {
             graphWidgets.remove(graphIndex); // 삭제된 그래프 제거
             });
@@ -475,21 +545,24 @@ void qt_modbus2::openGraphWidget(int graphIndex) {
     graphWidgets[graphIndex]->show(); // 그래프 표시
 }
 
-// 그래프 데이터 추가
-void qt_modbus2::updateGraphData(const QVector<quint16>& values) {
-    //인덱스에 따라 그래프 데이터 전달
-    int graphIndex = values.first() - 1; // 첫 번째 값에서 1을 뺌 (0부터 시작하는 인덱스)
-    if (graphIndex >= 0 && graphIndex < 8) { // 유효한 그래프 인덱스인지 확인
-        if (!graphWidgets.contains(graphIndex)) { // 해당 인덱스에 그래프가 없을 경우
-            qDebug() << "GraphWidget for index" << graphIndex + 1 << "does not exist.";
-            return;
-        }
 
-        GraphWidget* graph = graphWidgets.value(graphIndex, nullptr); // 그래프 가져오기
+// 그래프 데이터 갱신
+void qt_modbus2::updateGraphData(const QVector<quint16>& values) {
+    if (values.isEmpty()) {
+        qDebug() << "No values provided for graph update.";
+        return;
+    }
+
+    int graphIndex = values[0] - 1; // 0번 값이 그래프 인덱스 (1부터 시작한다고 가정)
+
+    if (graphIndex >= 0 && graphWidgets.contains(graphIndex)) {
+        GraphWidget* graph = graphWidgets.value(graphIndex, nullptr);
         if (graph) {
             QDateTime now = QDateTime::currentDateTime();
             qint64 timestamp = now.toMSecsSinceEpoch();
-            graph->addDataPoints(timestamp, values); // 데이터를 한 번에 추가
+
+            // 그래프 데이터 업데이트 (실제값과 예측값 포함)
+            graph->addDataPoints(timestamp, values);
         }
         else {
             qDebug() << "GraphWidget for index" << graphIndex + 1 << "is nullptr.";
@@ -497,5 +570,54 @@ void qt_modbus2::updateGraphData(const QVector<quint16>& values) {
     }
     else {
         qDebug() << "Invalid graph index:" << graphIndex + 1;
+    }
+}
+
+void qt_modbus2::updateGraphAlarm(int coilIndex, bool state) {
+    // 코일 번호에 따라 그래프 및 알람 인덱스 계산
+    int graphIndex = coilIndex / 16; // 16개씩 나눠 그래프 인덱스 결정
+    int alarmIndex = coilIndex % 16; // 그래프 내 알람 인덱스 결정
+
+    // 그래프 1~8 범위 확인
+    if (graphIndex >= 0 && graphIndex < 8) {
+        GraphWidget* graph = graphWidgets.value(graphIndex, nullptr);
+        if (graph) {
+            // 그래프 내 알람 업데이트
+            QLabel* alarmLabel = graph->findChild<QLabel*>(QString("alarmLabel_%1").arg(alarmIndex + 1));
+            if (alarmLabel) {
+                // 알람 상태에 따른 텍스트 및 스타일 설정
+                if (state) {
+                    alarmLabel->setText("알람 ON");
+                    alarmLabel->setStyleSheet(
+                        "QLabel {"
+                        "    background-color: orange;"  // 배경색: 오렌지색
+                        "    border: 1px solid #d0d0d0;" // 테두리
+                        "    border-radius: 5px;"        // 둥근 모서리
+                        "    color: white;"              // 텍스트 색상
+                        "    font-size: 14px;"           // 글자 크기
+                        "    padding: 5px;"              // 텍스트와 경계 간 간격
+                        "    text-align: center;"        // 중앙 정렬
+                        "}"
+                    );
+                }
+                else {
+                    alarmLabel->setText("알람 OFF");
+                    alarmLabel->setStyleSheet(
+                        "QLabel {"
+                        "    background-color: #f0f0f0;"  // 배경색: 기본 회색
+                        "    border: 1px solid #d0d0d0;"  // 테두리
+                        "    border-radius: 5px;"         // 둥근 모서리
+                        "    color: black;"               // 텍스트 색상
+                        "    font-size: 14px;"            // 글자 크기
+                        "    padding: 5px;"               // 텍스트와 경계 간 간격
+                        "    text-align: center;"         // 중앙 정렬
+                        "}"
+                    );
+                }
+            }
+        }
+    }
+    else {
+        qWarning() << "Invalid graph index:" << graphIndex;
     }
 }

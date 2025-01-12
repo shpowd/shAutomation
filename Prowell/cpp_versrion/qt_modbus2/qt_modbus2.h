@@ -31,11 +31,13 @@ class qt_modbus2 : public QMainWindow{
 public:
     explicit qt_modbus2(QWidget *parent = nullptr);
     ~qt_modbus2();
+    void updateModbus(QModbusDataUnit::RegisterType table, int address, int size);
+    void updateGraphAlarm(int coilIndex, bool state);
+    void savingCoilInput(int coilIndex, bool state);
 
 private slots:
     void connectModbus();
     void disconnectModbus();
-    void updateModbus(QModbusDataUnit::RegisterType table, int address, int size);
     void handleDeviceError(QModbusDevice::Error newError);
     void onStateChanged(int state);
     void saveDataOnTimer();
@@ -50,8 +52,11 @@ private:
     void initUI();
     void savingInput(QModbusDataUnit::RegisterType table, int address, const QVector<quint16>& values);
     void saveDataToCSV();
+    QList<QPair<QDateTime, QVector<bool>>> coilBuffer; // 코일 데이터 버퍼
+    void saveCoilDataToCSV();                // 코일 데이터를 CSV로 저장
 
     const int saveCSVtime = 3000; // CSV로 저장하기 위한 시간ms
+    int selectedTimeRange = 60;     // 그래프 x축 표시 시간 
 
     QTextEdit* protocolSettings; // Modbus ID 입력 필드
     QTextEdit* addressSettings; // IP 주소 입력 필드
@@ -64,14 +69,15 @@ private:
     GraphWidget* graphWidget = nullptr; // 새로운 위젯
 
 
-    qt_modbus_server *modbusDevice = nullptr;
+    qt_modbus_server *modbusDevice;
     QButtonGroup coilButtons;
     QButtonGroup discreteButtons;
     QHash<QString, QLineEdit*> registers;
     QVector<QList<quint16>> saveBuffer; // modbus save csv 버퍼
 
     QDateTime connectionStartTime; // 연결 시작 시간을 추적
-    QTimer saveTimer;              // 1분마다 저장을 처리할 타이머
+    QTimer saveTimer;              // 저장을 처리할 타이머
+    int saveIntervalSeconds = 60; // 기본 저장 주기 (1분)
 
     QMap<int, GraphWidget*> graphWidgets; // 그래프 위젯들을 관리하는 맵
 

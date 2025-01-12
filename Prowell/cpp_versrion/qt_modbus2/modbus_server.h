@@ -9,15 +9,19 @@
 #include <QDebug>
 #include <QUrl>
 
+// 전방 선언
+class qt_modbus2;
+
 class qt_modbus_server : public QModbusTcpServer {
     Q_OBJECT
 public:
-    explicit qt_modbus_server(QObject* parent = nullptr);
+    explicit qt_modbus_server(QObject* parent = nullptr, qt_modbus2* mainWindow = nullptr);
     ~qt_modbus_server();
 
     bool startServer(const QString& ipAddress, int port, const QString& modbusID);
 
 private:
+    qt_modbus2* mainWindow; // qt_modbus2 객체 참조
 
 protected:
     QModbusResponse processRequest(const QModbusPdu& request) override;

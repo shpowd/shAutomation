@@ -29,9 +29,14 @@ void GraphWidget::initSettingUI() {
     chart->legend()->hide();
     chart->setAnimationOptions(QChart::NoAnimation);
 
-    // Series 초기화
-    series = new QLineSeries();
+    // Series 초기화 (실제값, 예측값)
+    series = new QLineSeries(); // 실제값
+    series->setColor(Qt::black); // 예측값은 빨간색으로 표시
+    predictionSeries = new QLineSeries(); // 예측값
+    predictionSeries->setColor(Qt::red); // 예측값은 빨간색으로 표시
+
     chart->addSeries(series);
+    chart->addSeries(predictionSeries);
 
     // X축 설정 (DateTime)
     axisX = new QDateTimeAxis();
@@ -47,6 +52,7 @@ void GraphWidget::initSettingUI() {
     axisX->setRange(minTime, maxTime);
     chart->addAxis(axisX, Qt::AlignBottom);
     series->attachAxis(axisX);
+    predictionSeries->attachAxis(axisX);
 
 
     // Y축 설정 (Value)
@@ -54,6 +60,7 @@ void GraphWidget::initSettingUI() {
     axisY->setTitleText("Value");
     chart->addAxis(axisY, Qt::AlignLeft);
     series->attachAxis(axisY);
+    predictionSeries->attachAxis(axisY);
 
 
     // ChartView 설정
@@ -61,11 +68,37 @@ void GraphWidget::initSettingUI() {
     chartView->setRenderHint(QPainter::Antialiasing);
 
 
+    // 버튼에 표시할 텍스트 목록
+    QStringList buttonTexts = {
+        "전류(R)",
+        "전류(S)",
+        "전류(T)",
+        "베어링\n온도",
+        "권선\n온도(R)",
+        "권선\n온도(S)",
+        "권선\n온도(T)",
+        "진동",
+        "구동\n시간"
+    };
+
+    // 버튼에 표시할 Y축 레이블 목록
+    QStringList yAxisLabels = {
+        "mA",        // 전류(R)
+        "mA",        // 전류(S)
+        "mA",        // 전류(T)
+        "°C",        // 베어링 온도
+        "°C",        // 권선 온도(R)
+        "°C",        // 권선 온도(S)
+        "°C",        // 권선 온도(T)
+        "cm/sec²",   // 진동
+        "operating time" // 구동 시간
+    };
+
     // 9개의 버튼 추가
     QHBoxLayout* buttonLayout = new QHBoxLayout;
     for (int i = 0; i < 9; ++i) {
-        QPushButton* button = new QPushButton(tr("버튼 %1").arg(i + 1), this);
-        button->setMinimumHeight(50);
+        QPushButton* button = new QPushButton(buttonTexts[i], this);
+        button->setMinimumHeight(60);
         button->setMinimumWidth(80);
         // 스타일 시트 적용: Windows 기본 회색 배경과 경계선
         button->setStyleSheet(
@@ -82,15 +115,24 @@ void GraphWidget::initSettingUI() {
             "    border: 2px solid #b0b0b0;"  // 마우스 오버 시 경계선 색 변경
             "}"
             "QPushButton:pressed {"
-            "    background-color: #d0d0d0;"  // 눌렀을 때 배경색 변경
-            "    border: 2px solid #a0a0a0;"  // 눌렀을 때 경계선 색 변경
+            "    background-color: #FFA500;"
+            "    border-radius: 10px;"
+            "    border: 2px solid #FF8C00;"
+            "    color: white;"
+            "    padding: 10px;"
+            "    font-size: 14px;"
             "}"
         );
 
-        connect(button, &QPushButton::clicked, this, [this, i]() {
+        connect(button, &QPushButton::clicked, this, [this, i, buttonTexts, yAxisLabels]() {
             currentChartIndex = i; // 선택된 차트 인덱스 업데이트
             updateButtonStyles(); // 버튼 스타일 업데이트
-            chart->setTitle(tr("차트 %1").arg(i + 1)); // 차트 제목 설정
+            
+            QString chartTitle = buttonTexts[i]; // 줄바꿈(\n)을 공백으로 대체한 텍스트로 차트 타이틀 설정
+            chartTitle.replace("\n", " "); // 줄바꿈을 공백으로 대체
+            chart->setTitle(chartTitle);  // 차트 타이틀 설정
+            chart->axes(Qt::Vertical).first()->setTitleText(yAxisLabels[i]);// Y축 레이블 업데이트
+            updateData(); // 선택된 데이터로 시리즈 업데이트
             });
 
         buttonLayout->addWidget(button);
@@ -103,7 +145,8 @@ void GraphWidget::initSettingUI() {
     textBoxLayout->setSpacing(0);                       // 텍스트 상자 사이 간격을 없앰
     textBoxLayout->setContentsMargins(10, 10, 10, 10);  // 레이아웃의 여백을 없앰
     for (int i = 0; i < 16; ++i) {
-        QLabel* label = new QLabel(tr("알람 %1").arg(i + 1), this);
+        QLabel* label = new QLabel(tr("알람%1 OFF").arg(i + 1), this);
+        label->setObjectName(QString("alarmLabel_%1").arg(i + 1)); // 라벨에 objectName 설정
         label->setStyleSheet(
             "QLabel {"
             "    background-color: #f0f0f0;"  // 배경색
@@ -153,11 +196,6 @@ void GraphWidget::initSettingUI() {
 
 }
 
-void GraphWidget::setChartTitle(const QString& title) {
-    if (chart) {
-        chart->setTitle(title);
-    }
-}
 
 void GraphWidget::updateButtonStyles()
 {
@@ -167,6 +205,14 @@ void GraphWidget::updateButtonStyles()
             // 선택된 버튼 스타일
             button->setStyleSheet(
                 "QPushButton {"
+                "    background-color: #2E75B6;" // 호버 상태: 파스텔 블루
+                "    border: 2px solid #87ceeb;" // 호버 상태: 밝은 블루 테두리
+                "    color: white;"              // 호버 상태: 흰색 텍스트
+                "    border-radius: 10px;"
+                "    padding: 10px;"
+                "    font-size: 14px;"
+                "}"
+                "QPushButton:pressed {"
                 "    background-color: #FFA500;"
                 "    border-radius: 10px;"
                 "    border: 2px solid #FF8C00;"
@@ -180,16 +226,24 @@ void GraphWidget::updateButtonStyles()
             // 기본 버튼 스타일
             button->setStyleSheet(
                 "QPushButton {"
-                "    background-color: #f0f0f0;"
-                "    border-radius: 10px;"
-                "    border: 2px solid #d0d0d0;"
-                "    color: black;"
-                "    padding: 10px;"
-                "    font-size: 14px;"
+                "    background-color: #f0f0f0;"  // Windows 기본 회색 배경
+                "    border-radius: 10px;"         // 모서리 둥글게
+                "    border: 2px solid #d0d0d0;"  // 윈도우 기본 경계선 색 (회색)
+                "    color: black;"                // 글자 색
+                "    padding: 10px;"               // 버튼 내 여백
+                "    font-size: 14px;"             // 글자 크기
                 "}"
                 "QPushButton:hover {"
-                "    background-color: #e0e0e0;"
-                "    border: 2px solid #b0b0b0;"
+                "    background-color: #e0e0e0;"  // 마우스 오버 시 배경색 변경
+                "    border: 2px solid #b0b0b0;"  // 마우스 오버 시 경계선 색 변경
+                "}"
+                "QPushButton:pressed {"
+                "    background-color: #FFA500;"
+                "    border-radius: 10px;"
+                "    border: 2px solid #FF8C00;"
+                "    color: white;"
+                "    padding: 10px;"
+                "    font-size: 14px;"
                 "}"
             );
         }
@@ -198,65 +252,113 @@ void GraphWidget::updateButtonStyles()
 
 
 
-
-
 void GraphWidget::addDataPoints(qint64 timestamp, const QVector<quint16>& values) {
-    // 데이터 추가: timestamp와 values를 함께 저장
-    data.append(qMakePair(timestamp, values));
+    // 실제값 처리
+    data.append(qMakePair(timestamp, values.mid(0, 10))); // 0~9번 어드레스 (실제값)
+
+    // 예측값 처리
+    predictionData.append(qMakePair(timestamp, values.mid(11, 9))); // 11~19번 어드레스 (예측값)
 
     // 오래된 데이터 제거
-    if (data.size() > maxDataSize) {
-        data.removeFirst();
-    }
+    if (data.size() > maxDataSize) data.removeFirst();
+    if (predictionData.size() > maxDataSize) predictionData.removeFirst();
 
-    updateData();
-}
-
-void GraphWidget::updateData() {
-    // 시리즈 업데이트
-    series->clear();
-
-    int valueIndex = currentChartIndex + 1; // 버튼 인덱스가 1이라면 values의 두 번째 값, 2라면 세 번째 값
-    // 유효한 인덱스인지 확인
-    if (valueIndex >= 1) { // values는 최소 1개의 요소가 있어야 함
-        for (const auto& entry : data) {
-            qint64 timestamp = entry.first; // 데이터의 타임스탬프
-            const QVector<quint16>& values = entry.second; // values 배열
-
-            // values 배열에서 valueIndex에 해당하는 값이 있는지 확인
-            if (valueIndex < values.size()) {
-                double yValue = static_cast<double>(values[valueIndex]);
-                series->append(timestamp, yValue); // 시리즈에 데이터 추가
-            }
-        }
+    if (currentChartIndex >= 0 && currentChartIndex < 10) {
+        updateData();
     }
     else {
-        qDebug() << "Invalid chart index or value index:" << currentChartIndex;
+        qDebug() << "Invalid chart index for current data range.";
     }
-
-    // X축 범위 업데이트
-    updateXAxisRange();
-    // Y축 범위 업데이트
-    updateYAxisRange();
 }
 
-void GraphWidget::updateXAxisRange() {
-    // 데이터의 timestamp 범위로 X축 범위 설정
-    if (!data.isEmpty()) {
-        qint64 currentTimestamp = QDateTime::currentDateTime().toMSecsSinceEpoch();
 
-        // -60초와 +60초 범위 설정
-        QDateTime minTime = QDateTime::fromMSecsSinceEpoch(currentTimestamp - 60 * 1000); // 현재 시간 - 60초
-        QDateTime maxTime = QDateTime::fromMSecsSinceEpoch(currentTimestamp + 60 * 1000); // 현재 시간 + 60초
+void GraphWidget::updateData() {
+    series->clear();
+    predictionSeries->clear();
 
-        // X축 범위 설정
-        axisX->setRange(minTime, maxTime);
-
-        qDebug() << "Updated X Axis Range:"
-            << minTime.toString("hh:mm:ss")
-            << "to"
-            << maxTime.toString("hh:mm:ss");
+    // 실제값 시리즈 업데이트
+    for (const auto& entry : data) {
+        qint64 timestamp = entry.first;
+        const QVector<quint16>& values = entry.second;
+        if (currentChartIndex < values.size()) {
+            series->append(timestamp, values[currentChartIndex+1]);
+        }
     }
+
+    // 예측값 시리즈 업데이트
+    for (const auto& entry : predictionData) {
+        qint64 timestamp = entry.first;
+
+        // X축 범위에 따라 예측값의 타임스탬프 계산
+        qint64 adjustedTimestamp = timestamp;
+        switch (rangeType) {
+        case 0: adjustedTimestamp += 60 * 1000; break;       // 1분 뒤
+        case 1: adjustedTimestamp += 3600 * 1000; break;    // 1시간 뒤
+        case 2: adjustedTimestamp += 24 * 3600 * 1000; break; // 1일 뒤
+        case 3: adjustedTimestamp += 30 * 24 * 3600 * 1000; break; // 1달 뒤
+        }
+
+        const QVector<quint16>& values = entry.second;
+        if (currentChartIndex < values.size()) {
+            predictionSeries->append(adjustedTimestamp, values[currentChartIndex]);
+        }
+    }
+
+
+
+    updateXAxisRange();     // X축 범위 업데이트
+    updateYAxisRange();     // Y축 범위 업데이트
+}
+
+
+void GraphWidget::setRangeType(int type) {
+    if (type < 0 || type > 3) {
+        qWarning() << "Invalid range type.";
+        return;
+    }
+    rangeType = type; // 범위 유형 업데이트
+    updateXAxisRange(); // 새로운 범위로 X축 업데이트
+}
+
+
+void GraphWidget::updateXAxisRange() {
+    QDateTime now = QDateTime::currentDateTime();
+    QDateTime minTime, maxTime;
+    QString format;
+
+    switch (rangeType) {
+    case 0: // 1 Minute
+        minTime = now.addSecs(-60); // 현재 시간 - 1분
+        maxTime = now.addSecs(60);  // 현재 시간 + 1분
+        format = "hh:mm:ss"; // 초 단위 시간 표시
+        break;
+    case 1: // 1 Hour
+        minTime = now.addSecs(-3600); // 현재 시간 - 1시간
+        maxTime = now.addSecs(3600);  // 현재 시간 + 1시간
+        format = "hh:mm"; // 시간 및 분 표시
+        break;
+    case 2: // 1 Day
+        minTime = now.addDays(-1);    // 현재 시간 - 1일
+        maxTime = now.addDays(1);     // 현재 시간 + 1일
+        format = "MM-dd hh:mm"; // 날짜와 시간 표시
+        break;
+    case 3: // 1 Month
+        minTime = now.addMonths(-1);  // 현재 시간 - 1달
+        maxTime = now.addMonths(1);   // 현재 시간 + 1달
+        format = "yyyy-MM-dd"; // 연-월-일 표시
+        break;
+    default:
+        qWarning() << "Invalid range type for X-axis update.";
+        return;
+    }
+
+    // X축 범위 및 라벨 포맷 설정
+    axisX->setRange(minTime, maxTime);
+    axisX->setFormat(format);
+
+    qDebug() << "Updated X Axis Range: " << minTime.toString("yyyy-MM-dd hh:mm:ss")
+        << " to " << maxTime.toString("yyyy-MM-dd hh:mm:ss")
+        << ", Label Format: " << format;
 }
 
 void GraphWidget::updateYAxisRange() {
@@ -264,15 +366,31 @@ void GraphWidget::updateYAxisRange() {
     qreal minY = std::numeric_limits<qreal>::max();
     qreal maxY = std::numeric_limits<qreal>::min();
 
+    // 실제값 시리즈의 범위를 계산
     for (const auto& point : series->points()) {
+        minY = std::min(minY, point.y());
+        maxY = std::max(maxY, point.y());
+    }
+
+    // 예측값 시리즈의 범위를 추가 계산
+    for (const auto& point : predictionSeries->points()) {
         minY = std::min(minY, point.y());
         maxY = std::max(maxY, point.y());
     }
 
     // 여유 범위 추가
     qreal margin = (maxY - minY) * 0.1;
-    if (margin == 0) margin = 1;
+    if (margin == 0) margin = 1; // 여유 범위가 0이면 기본값 설정
 
+    // Y축 범위 설정
     axisY->setRange(minY - margin, maxY + margin);
+
+    qDebug() << "Updated Y Axis Range: min =" << minY - margin << ", max =" << maxY + margin;
+}
+
+void GraphWidget::setCurrentChartIndex(int index) {
+    currentChartIndex = index;
+    updateButtonStyles();
+    updateData();
 }
 
