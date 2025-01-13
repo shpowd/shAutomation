@@ -260,8 +260,21 @@ void GraphWidget::addDataPoints(qint64 timestamp, const QVector<quint16>& values
     predictionData.append(qMakePair(timestamp, values.mid(11, 9))); // 11~19번 어드레스 (예측값)
 
     // 오래된 데이터 제거
-    if (data.size() > maxDataSize) data.removeFirst();
-    if (predictionData.size() > maxDataSize) predictionData.removeFirst();
+    //if (data.size() > maxDataSize) data.removeFirst();
+    //if (predictionData.size() > maxDataSize) predictionData.removeFirst();
+    // 오래된 데이터 제거 (X축 범위를 기준으로)
+    QDateTime minTime = axisX->min();
+    data.erase(std::remove_if(data.begin(), data.end(),
+        [&](const QPair<qint64, QVector<quint16>>& entry) {
+            return QDateTime::fromMSecsSinceEpoch(entry.first) < minTime;
+        }),
+        data.end());
+    predictionData.erase(std::remove_if(predictionData.begin(), predictionData.end(),
+        [&](const QPair<qint64, QVector<quint16>>& entry) {
+            return QDateTime::fromMSecsSinceEpoch(entry.first) < minTime;
+        }),
+        predictionData.end());
+
 
     if (currentChartIndex >= 0 && currentChartIndex < 10) {
         updateData();
@@ -288,19 +301,19 @@ void GraphWidget::updateData() {
     // 예측값 시리즈 업데이트
     for (const auto& entry : predictionData) {
         qint64 timestamp = entry.first;
+        QDateTime adjustedTime = QDateTime::fromMSecsSinceEpoch(timestamp);
 
         // X축 범위에 따라 예측값의 타임스탬프 계산
-        qint64 adjustedTimestamp = timestamp;
         switch (rangeType) {
-        case 0: adjustedTimestamp += 60 * 1000; break;       // 1분 뒤
-        case 1: adjustedTimestamp += 3600 * 1000; break;    // 1시간 뒤
-        case 2: adjustedTimestamp += 24 * 3600 * 1000; break; // 1일 뒤
-        case 3: adjustedTimestamp += 30 * 24 * 3600 * 1000; break; // 1달 뒤
+        case 0: adjustedTime = adjustedTime.addSecs(60); break;       // 1분 뒤
+        case 1: adjustedTime = adjustedTime.addSecs(3600); break;    // 1시간 뒤
+        case 2: adjustedTime = adjustedTime.addSecs(24 * 3600); break; // 1일 뒤
+        case 3: adjustedTime = adjustedTime.addMonths(1); break;      // 1달 뒤
         }
 
         const QVector<quint16>& values = entry.second;
         if (currentChartIndex < values.size()) {
-            predictionSeries->append(adjustedTimestamp, values[currentChartIndex]);
+            predictionSeries->append(adjustedTime.toMSecsSinceEpoch(), values[currentChartIndex]); // QDateTime을 다시 밀리초로 변환하여 예측값 추가
         }
     }
 

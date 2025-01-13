@@ -172,7 +172,7 @@ void qt_modbus2::initUI(){
         case 0: text = "Graph Display Time: 1 Minute"; break;
         case 1: text = "Graph Display Time: 1 Hour"; break;
         case 2: text = "Graph Display Time: 1 Day"; break;
-        case 3: text = "Graph Display Time: 1 Week"; break;
+        case 3: text = "Graph Display Time: 1 Month"; break;
         }
         graphTimeLabel->setText(text);
         });
@@ -195,7 +195,7 @@ void qt_modbus2::initUI(){
         "    border-radius: 6px;"          // 둥근 모서리
         "}"
     );
-    connect(saveTimeScrollBar, &QScrollBar::valueChanged, this, [this, saveTimeScrollBar]() {
+    connect(saveTimeScrollBar, &QScrollBar::valueChanged, this, [this, saveTimeScrollBar, saveTimeLabel]() {
         int value = saveTimeScrollBar->value();
         QString text;
         switch (value) {
@@ -212,10 +212,11 @@ void qt_modbus2::initUI(){
             saveIntervalSeconds = 86400; // 1일
             break;
         case 3:
-            text = "DB Save Frequency: 1 Week";
-            saveIntervalSeconds = 604800; // 1주
+            text = "DB Save Frequency: 1 Month";
+            saveIntervalSeconds = 2629746; // 1달
             break;
         }
+        saveTimeLabel->setText(text);
         // 타이머 업데이트
         saveTimer.stop();
         saveTimer.start(saveIntervalSeconds * 1000);
@@ -226,11 +227,16 @@ void qt_modbus2::initUI(){
     // 저장 버튼
     QPushButton* saveButton = new QPushButton("Save", this);
     saveButton->setFixedHeight(60);
-    connect(saveButton, &QPushButton::clicked, this, [this]() {
+    connect(saveButton, &QPushButton::clicked, this, [this, graphTimeScrollBar]() {
         saveTimer.stop(); // 기존 타이머 중지
         saveTimer.start(saveIntervalSeconds * 1000); // 새로운 주기로 시작
-
         qDebug() << "Save timer started with interval:" << saveIntervalSeconds << "seconds.";
+        // 모든 그래프의 X축 스케일 업데이트
+        int graphDisplayTime = graphTimeScrollBar->value();
+        for (auto graph : graphWidgets) {
+            graph->setRangeType(graphDisplayTime); // 그래프의 X축 스케일 변경
+        }
+
         });
     textLayout->addWidget(saveButton);
 
