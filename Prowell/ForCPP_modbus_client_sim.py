@@ -7,7 +7,6 @@ import time
 SERVER_IP = '192.168.0.68'  # 서버 IP 주소
 SERVER_PORT = 5950       # 서버 포트
 
-
 def create_modbus_request_register(transaction_id, unit_id, start_address, values):
     """
     Modbus 요청 생성 함수 (Write Multiple Registers)
