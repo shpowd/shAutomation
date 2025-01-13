@@ -10,6 +10,9 @@ qt_modbus2::qt_modbus2(QWidget *parent)
     setWindowTitle("Main");
     setMinimumSize(50, 40);
     resize(1024, 819);
+    QIcon icon("./src/icon.png");
+    setWindowIcon(icon);
+
     initUI();
 }
 
@@ -153,7 +156,7 @@ void qt_modbus2::initUI(){
     graphTimeLabel->setStyleSheet("font-weight: bold;");
     textLayout->addWidget(graphTimeLabel);
 
-    QScrollBar* graphTimeScrollBar = new QScrollBar(Qt::Horizontal, this);
+    graphTimeScrollBar = new QScrollBar(Qt::Horizontal, this);
     graphTimeScrollBar->setMinimum(0);
     graphTimeScrollBar->setMaximum(3);
     graphTimeScrollBar->setPageStep(1);         // 한 번에 이동할 수 있는 범위
@@ -165,8 +168,7 @@ void qt_modbus2::initUI(){
         "    border-radius: 6px;"               // 둥근 모서리
         "}"
     );
-    connect(graphTimeScrollBar, &QScrollBar::valueChanged, this, [graphTimeScrollBar, graphTimeLabel]() {
-        int value = graphTimeScrollBar->value();
+    connect(graphTimeScrollBar, &QScrollBar::valueChanged, this, [graphTimeLabel](int value) {
         QString text;
         switch (value) {
         case 0: text = "Graph Display Time: 1 Minute"; break;
@@ -217,9 +219,6 @@ void qt_modbus2::initUI(){
             break;
         }
         saveTimeLabel->setText(text);
-        // 타이머 업데이트
-        saveTimer.stop();
-        saveTimer.start(saveIntervalSeconds * 1000);
         qDebug() << "Updated save interval to" << saveIntervalSeconds << "seconds.";
         });
     textLayout->addWidget(saveTimeScrollBar);
@@ -227,7 +226,7 @@ void qt_modbus2::initUI(){
     // 저장 버튼
     QPushButton* saveButton = new QPushButton("Save", this);
     saveButton->setFixedHeight(60);
-    connect(saveButton, &QPushButton::clicked, this, [this, graphTimeScrollBar]() {
+    connect(saveButton, &QPushButton::clicked, this, [this]() {
         saveTimer.stop(); // 기존 타이머 중지
         saveTimer.start(saveIntervalSeconds * 1000); // 새로운 주기로 시작
         qDebug() << "Save timer started with interval:" << saveIntervalSeconds << "seconds.";
@@ -363,7 +362,7 @@ void qt_modbus2::onStateChanged(int state) {
         case QModbusDevice::ConnectedState:
             stateMessage = "Modbus server online.";
             connectionStartTime = QDateTime::currentDateTime(); // 연결 시작 시간 재설정
-            saveTimer.start(saveCSVtime); // 타이머 재시작
+            saveTimer.start(saveIntervalSeconds * 1000); // 타이머 재시작
             break;
         case QModbusDevice::ClosingState:
             stateMessage = "Modbus server closing...";
@@ -407,21 +406,16 @@ void qt_modbus2::savingInput(QModbusDataUnit::RegisterType table, int address, c
 
 }
 
-void qt_modbus2::savingCoilInput(int coilIndex, bool state) {
-    // 코일 데이터 버퍼에 추가 (128개의 초기값이 설정된 상태를 유지)
-    if (coilBuffer.isEmpty()) {
-        QVector<bool> initialStates(128, false); // 초기값은 모두 OFF
-        coilBuffer.append(qMakePair(QDateTime(), initialStates)); // 타임스탬프는 빈 값으로 유지
+void qt_modbus2::savingCoilInput(const QVector<bool>& coilStates) {
+    if (coilStates.size() != 128) {
+        qWarning() << "Invalid coil state size. Expected 128, got:" << coilStates.size();
+        //return;
     }
 
-    // 코일 값 업데이트
-    QVector<bool>& currentCoilState = coilBuffer.last().second;
-    if (coilIndex >= 0 && coilIndex < currentCoilState.size()) {
-        currentCoilState[coilIndex] = state;
-    }
-    else {
-        qWarning() << "Invalid coil index:" << coilIndex;
-    }
+    // 현재 상태를 버퍼에 추가
+    QDateTime currentTime = QDateTime::currentDateTime();
+    coilBuffer.append(qMakePair(currentTime, coilStates)); // 타임스탬프와 상태 저장
+    qDebug() << "Coil states added to buffer. Buffer size:" << coilBuffer.size();
 }
 
 
@@ -480,7 +474,6 @@ void qt_modbus2::saveDataToCSV() {
     
     saveBuffer.clear();
     qDebug() << "Data saved to CSV:" << filePath;
-    emit dataSavedToCSV(filePath);
 
 }
 
@@ -490,7 +483,6 @@ void qt_modbus2::saveCoilDataToCSV() {
         return;
     }
 
-    // log 폴더가 없다면 생성
     QDir dir;
     if (!dir.exists("log")) {
         if (!dir.mkpath("log")) {
@@ -498,10 +490,10 @@ void qt_modbus2::saveCoilDataToCSV() {
             return;
         }
     }
+
     QString filePath = QDir::currentPath() + "/log/" + QDateTime::currentDateTime().toString("yyyyMMdd_hhmmss") + "_modbus_coil_data.csv";
     QFile file(filePath);
 
-    // 파일 열기 (쓰기 모드, 기존 데이터 유지)
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append)) {
         qWarning() << "Failed to open file for saving coil data:" << filePath;
         return;
@@ -512,6 +504,7 @@ void qt_modbus2::saveCoilDataToCSV() {
     // 헤더 작성 (파일이 새로 생성된 경우만)
     if (file.size() == 0) {
         QStringList header;
+        header << "Timestamp"; // 타임스탬프 추가
         for (int i = 0; i < 128; ++i) {
             header << QString("Coil Address %1").arg(i);
         }
@@ -521,15 +514,15 @@ void qt_modbus2::saveCoilDataToCSV() {
     // 데이터 작성
     for (const auto& entry : coilBuffer) {
         QStringList row;
+        row << entry.first.toString("yyyy-MM-dd hh:mm:ss"); // 첫 번째 열: 타임스탬프
         for (bool state : entry.second) {
-            row << (state ? "1" : "0");
+            row << (state ? "1" : "0"); // 두 번째 열부터: 코일 데이터
         }
         out << row.join(",") << "\n";
     }
 
     file.close();
-    coilBuffer.clear(); // 저장 후 버퍼 초기화
-
+    coilBuffer.clear(); // 버퍼 초기화
     qDebug() << "Coil data saved to CSV:" << filePath;
 }
 
@@ -543,9 +536,13 @@ void qt_modbus2::openGraphWidget(int graphIndex) {
         newGraphWidget->setWindowTitle(tr("모터 %1").arg(graphIndex + 1)); // 그래프 제목 설정
         connect(newGraphWidget, &QObject::destroyed, this, [this, graphIndex]() {
             graphWidgets.remove(graphIndex); // 삭제된 그래프 제거
-            });
+        });
 
         graphWidgets.insert(graphIndex, newGraphWidget);
+
+        // 그래프 X축 범위를 save 버튼 설정 값으로 초기화
+        int graphDisplayTime = graphTimeScrollBar->value();
+        newGraphWidget->setRangeType(graphDisplayTime); // 설정된 X축 스케일 반영
     }
 
     graphWidgets[graphIndex]->show(); // 그래프 표시
@@ -578,6 +575,62 @@ void qt_modbus2::updateGraphData(const QVector<quint16>& values) {
         qDebug() << "Invalid graph index:" << graphIndex + 1;
     }
 }
+
+
+/* 알람 홀딩 레지스터용
+void qt_modbus2::updateGraphAlarm(int graphIndex, const QVector<bool>& alarmStates) {
+    // 그래프 번호가 유효한지 확인
+    if (!graphWidgets.contains(graphIndex)) {
+        qWarning() << "Invalid graph index:" << graphIndex;
+        return;
+    }
+    GraphWidget* graph = graphWidgets.value(graphIndex, nullptr);
+    if (!graph) {
+        qWarning() << "GraphWidget for index" << graphIndex << "is nullptr.";
+        return;
+    }
+
+    // 알람 상태 업데이트
+    for (int i = 0; i < alarmStates.size(); ++i) {
+        QLabel* alarmLabel = graph->findChild<QLabel*>(QString("alarmLabel_%1").arg(i + 1));
+        if (alarmLabel) {
+            if (alarmStates[i]) {           // 알람 ON 스타일                
+                alarmLabel->setText(QString("알람%1 ON").arg(i + 1));
+                alarmLabel->setStyleSheet(
+                    "QLabel {"
+                    "    background-color: orange;"
+                    "    border: 1px solid #d0d0d0;"
+                    "    border-radius: 5px;"
+                    "    color: white;"
+                    "    font-size: 14px;"
+                    "    padding: 5px;"
+                    "    text-align: center;"
+                    "}"
+                );
+            }
+            else {                          // 알람 OFF 스타일
+                alarmLabel->setText(QString("알람%1 OFF").arg(i + 1));
+                alarmLabel->setStyleSheet(
+                    "QLabel {"
+                    "    background-color: #f0f0f0;"
+                    "    border: 1px solid #d0d0d0;"
+                    "    border-radius: 5px;"
+                    "    color: black;"
+                    "    font-size: 14px;"
+                    "    padding: 5px;"
+                    "    text-align: center;"
+                    "}"
+                );
+            }
+        }
+        else {
+            qWarning() << "Alarm label not found for index" << i + 1 << "in graph" << graphIndex;
+        }
+    }
+}
+*/
+
+
 
 void qt_modbus2::updateGraphAlarm(int coilIndex, bool state) {
     // 코일 번호에 따라 그래프 및 알람 인덱스 계산

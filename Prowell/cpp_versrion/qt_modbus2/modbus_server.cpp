@@ -34,8 +34,11 @@ QModbusResponse qt_modbus_server::processRequest(const QModbusPdu& request) {
     case QModbusPdu::WriteMultipleRegisters:
         handleWriteMultipleRegisters(request);
         break;
-    case QModbusPdu::WriteMultipleCoils:
-        handleWriteMultipleCoils(request);
+    //case QModbusPdu::WriteMultipleCoils:
+    //    handleWriteMultipleCoils(request);
+    //    break;
+    case QModbusPdu::WriteSingleCoil:
+        handleWriteSingleCoil(request);
         break;
     default:
         break;
@@ -68,6 +71,20 @@ void qt_modbus_server::handleWriteMultipleRegisters(const QModbusPdu& request) {
         qDebug() << "Register" << startAddress + i << "=" << value;
         values.append(value);
     }
+
+    //// 11번째 레지스터를 알람 상태로 해석
+    //if (startAddress <= 10 && (startAddress + quantity) > 10) {
+    //    int alarmIndex = 10 - startAddress;
+    //    quint16 alarmValue = values[alarmIndex];
+    //    int graphNumber = values[0] - 1; // 그래프 번호는 1부터 시작한다고 가정
+    //    QVector<bool> alarmStates;
+    //    for (int i = 0; i < 16; ++i) {
+    //        alarmStates.append((alarmValue & (1 << i)) != 0);
+    //    }
+    //    if (mainWindow) {
+    //        mainWindow->updateGraphAlarm(graphNumber, alarmStates);
+    //    }
+    //}
 
     // qt_modbus2::updateModbus 호출
     if (mainWindow) {
@@ -125,9 +142,35 @@ void qt_modbus_server::handleWriteMultipleCoils(const QModbusPdu& request) {
 
         if (mainWindow) {
             mainWindow->updateGraphAlarm(coilIndex, values[i]);
-            mainWindow->savingCoilInput(coilIndex, values[i]);
         }
     }
 
+    if (mainWindow) {
+        mainWindow->savingCoilInput(values); // 모든 코일 상태를 저장
+    }
     qDebug() << "Alarm updates processed successfully.";
+}
+
+
+
+void qt_modbus_server::handleWriteSingleCoil(const QModbusPdu& request) {
+    const QByteArray& data = request.data();
+
+    if (data.size() < 4) {       // 데이터 크기 확인 (Write Single Coil은 최소 4바이트 필요)
+        qWarning() << "Invalid Write Single Coil request: insufficient data size.";
+        return;
+    }
+    quint16 address = quint16((data[0] << 8) | quint8(data[1])); // 2바이트 주소
+    quint16 value = quint16((data[2] << 8) | quint8(data[3]));   // 2바이트 값
+
+    bool state = (value == 0xFF00);
+
+    qDebug() << "Write Single Coil: Address =" << address << ", State =" << (state ? "ON" : "OFF");
+
+    // 그래프 알람 업데이트
+    if (mainWindow) {
+        mainWindow->updateGraphAlarm(address-1, state); // 개별 코일 상태 업데이트
+    }
+
+    // 추가 로직 (Coil 저장, 상태 변경 등 필요 시 구현 가능)
 }

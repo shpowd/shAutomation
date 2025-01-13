@@ -4,6 +4,8 @@ GraphWidget::GraphWidget(QWidget* parent) : QWidget(parent)
 {
     setWindowFlags(Qt::Window); // 독립적인 창으로 설정
     setAttribute(Qt::WA_DeleteOnClose); // 창 닫을 때 자동 삭제
+    QIcon icon("./src/icon.png");
+    setWindowIcon(icon);
     initSettingUI(); // UI 초기화
     // 부모 창의 크기로 초기화
     if (parent) {

@@ -33,7 +33,7 @@ public:
     ~qt_modbus2();
     void updateModbus(QModbusDataUnit::RegisterType table, int address, int size);
     void updateGraphAlarm(int coilIndex, bool state);
-    void savingCoilInput(int coilIndex, bool state);
+    void savingCoilInput(const QVector<bool>& coilStates);
 
 private slots:
     void connectModbus();
@@ -55,7 +55,7 @@ private:
     QList<QPair<QDateTime, QVector<bool>>> coilBuffer; // 코일 데이터 버퍼
     void saveCoilDataToCSV();                // 코일 데이터를 CSV로 저장
 
-    const int saveCSVtime = 3000; // CSV로 저장하기 위한 시간ms
+    //const int saveCSVtime = 3000; // CSV로 저장하기 위한 시간ms
     int selectedTimeRange = 60;     // 그래프 x축 표시 시간 
 
     QTextEdit* protocolSettings; // Modbus ID 입력 필드
@@ -67,6 +67,7 @@ private:
     QVBoxLayout* buttonLayout; // 버튼 레이아웃
     QHBoxLayout* mainLayout; // 메인 레이아웃
     GraphWidget* graphWidget = nullptr; // 새로운 위젯
+    QScrollBar* graphTimeScrollBar; // 그래프 X축 스케일 설정용 스크롤바
 
 
     qt_modbus_server *modbusDevice;

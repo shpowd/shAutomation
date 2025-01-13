@@ -5,7 +5,7 @@ import time
 
 # 서버 정보
 SERVER_IP = '127.0.0.1'  # 서버 IP 주소
-SERVER_PORT = 50200       # 서버 포트
+SERVER_PORT = 5020       # 서버 포트
 
 
 def create_modbus_request_register(transaction_id, unit_id, start_address, values):
