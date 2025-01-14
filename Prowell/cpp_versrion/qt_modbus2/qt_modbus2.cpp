@@ -403,8 +403,8 @@ void qt_modbus2::savingInput(QModbusDataUnit::RegisterType table, int address, c
     newData.append(static_cast<quint16>(table)); // 첫 번째 열에 table 값 추가
     newData.append(values);                     // 이후 열에 레지스터 값 추가
     saveBuffer.append(newData);
-
 }
+
 
 void qt_modbus2::savingCoilInput(const QVector<bool>& coilStates) {
     if (coilStates.size() != 128) {
@@ -429,13 +429,11 @@ void qt_modbus2::saveDataOnTimer() {
 
 // 모드버스 CSV 저장
 void qt_modbus2::saveDataToCSV() {
-
     // saveBuffer가 비어 있는 경우 저장하지 않음
     if (saveBuffer.isEmpty()) {
         qDebug() << "No data to save. Skipping CSV save.";
         return;
     }
-
     // log 폴더가 없다면 생성
     QDir dir;
     if (!dir.exists("log")) {
@@ -451,16 +449,13 @@ void qt_modbus2::saveDataToCSV() {
         qWarning() << "Failed to save data to CSV file:" << filePath;
         return;
     }
-
     QTextStream out(&file);
-
     // 헤더 작성
     out << "Table";
     for (int i = 0; i < saveBuffer.first().size() - 1; ++i) {
         out << ",Address" << i;
     }
     out << "\n";
-
     // 데이터 작성
     for (const auto& row : saveBuffer) {
         for (int i = 0; i < row.size(); ++i) {
@@ -469,12 +464,9 @@ void qt_modbus2::saveDataToCSV() {
         }
         out << "\n";
     }
-
-    file.close();
-    
+    file.close();    
     saveBuffer.clear();
     qDebug() << "Data saved to CSV:" << filePath;
-
 }
 
 void qt_modbus2::saveCoilDataToCSV() {
@@ -646,7 +638,7 @@ void qt_modbus2::updateGraphAlarm(int coilIndex, bool state) {
             if (alarmLabel) {
                 // 알람 상태에 따른 텍스트 및 스타일 설정
                 if (state) {
-                    alarmLabel->setText("알람 ON");
+                    alarmLabel->setText(tr("알람%1 ON").arg(alarmIndex + 1));
                     alarmLabel->setStyleSheet(
                         "QLabel {"
                         "    background-color: orange;"  // 배경색: 오렌지색
@@ -660,7 +652,7 @@ void qt_modbus2::updateGraphAlarm(int coilIndex, bool state) {
                     );
                 }
                 else {
-                    alarmLabel->setText("알람 OFF");
+                    alarmLabel->setText(tr("알람%1 ON").arg(alarmIndex + 1));
                     alarmLabel->setStyleSheet(
                         "QLabel {"
                         "    background-color: #f0f0f0;"  // 배경색: 기본 회색

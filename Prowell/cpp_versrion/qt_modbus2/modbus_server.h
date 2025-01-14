@@ -28,7 +28,7 @@ protected:
 
 private slots:
     void handleWriteMultipleRegisters(const QModbusPdu& request);
-    void handleWriteMultipleCoils(const QModbusPdu& request);
+    //void handleWriteMultipleCoils(const QModbusPdu& request);
     void handleWriteSingleCoil(const QModbusPdu& request);
 };
 

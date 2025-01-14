@@ -95,61 +95,61 @@ void qt_modbus_server::handleWriteMultipleRegisters(const QModbusPdu& request) {
 
 
 
-void qt_modbus_server::handleWriteMultipleCoils(const QModbusPdu& request) {
-    const QByteArray& data = request.data();
-
-    // 데이터 크기 검증: 최소 5바이트 (헤더 크기)
-    if (data.size() < 5) {
-        qWarning() << "Invalid Write Multiple Coils request: insufficient header size.";
-        return;
-    }
-
-    // 시작 주소와 코일 수 읽기
-    quint16 startAddress = quint16((data[0] << 8) | quint8(data[1]));
-    quint16 quantity = quint16((data[2] << 8) | quint8(data[3]));
-
-    qDebug() << "Write Multiple Coils: Start Address =" << startAddress
-        << ", Quantity =" << quantity;
-
-    // 시작 주소와 범위 확인
-    if (startAddress < 0 || startAddress >= 128 || (startAddress + quantity) > 128) {
-        qWarning() << "Illegal Data Address: Start Address =" << startAddress
-            << ", Quantity =" << quantity;
-        return;
-    }
-
-    // 요청 처리에 필요한 데이터 크기 계산
-    int requiredSize = 5 + (quantity + 7) / 8; // 헤더 크기(5) + 코일 데이터 크기
-    if (data.size() < requiredSize) {
-        qWarning() << "Data size too small for requested coils. Required:" << requiredSize
-            << ", Provided:" << data.size();
-        return;
-    }
-
-    // Coils 데이터를 읽어 bool 값으로 변환
-    QVector<bool> values;
-    values.reserve(quantity); // 벡터 크기 예약 (성능 최적화)
-    for (int i = 0; i < quantity; ++i) {
-        int byteIndex = 5 + (i / 8); // 데이터에서 바이트 위치
-        int bitIndex = i % 8;        // 해당 바이트에서 비트 위치
-        bool value = (data[byteIndex] & (1 << bitIndex)) != 0; // 비트 확인
-        values.append(value);
-    }
-
-    // 각 코일 값을 처리하여 그래프 알람 업데이트
-    for (int i = 0; i < quantity; ++i) {
-        int coilIndex = startAddress + i; // 코일의 전체 주소
-
-        if (mainWindow) {
-            mainWindow->updateGraphAlarm(coilIndex, values[i]);
-        }
-    }
-
-    if (mainWindow) {
-        mainWindow->savingCoilInput(values); // 모든 코일 상태를 저장
-    }
-    qDebug() << "Alarm updates processed successfully.";
-}
+//void qt_modbus_server::handleWriteMultipleCoils(const QModbusPdu& request) {
+//    const QByteArray& data = request.data();
+//
+//    // 데이터 크기 검증: 최소 5바이트 (헤더 크기)
+//    if (data.size() < 5) {
+//        qWarning() << "Invalid Write Multiple Coils request: insufficient header size.";
+//        return;
+//    }
+//
+//    // 시작 주소와 코일 수 읽기
+//    quint16 startAddress = quint16((data[0] << 8) | quint8(data[1]));
+//    quint16 quantity = quint16((data[2] << 8) | quint8(data[3]));
+//
+//    qDebug() << "Write Multiple Coils: Start Address =" << startAddress
+//        << ", Quantity =" << quantity;
+//
+//    // 시작 주소와 범위 확인
+//    if (startAddress < 0 || startAddress >= 128 || (startAddress + quantity) > 128) {
+//        qWarning() << "Illegal Data Address: Start Address =" << startAddress
+//            << ", Quantity =" << quantity;
+//        return;
+//    }
+//
+//    // 요청 처리에 필요한 데이터 크기 계산
+//    int requiredSize = 5 + (quantity + 7) / 8; // 헤더 크기(5) + 코일 데이터 크기
+//    if (data.size() < requiredSize) {
+//        qWarning() << "Data size too small for requested coils. Required:" << requiredSize
+//            << ", Provided:" << data.size();
+//        return;
+//    }
+//
+//    // Coils 데이터를 읽어 bool 값으로 변환
+//    QVector<bool> values;
+//    values.reserve(quantity); // 벡터 크기 예약 (성능 최적화)
+//    for (int i = 0; i < quantity; ++i) {
+//        int byteIndex = 5 + (i / 8); // 데이터에서 바이트 위치
+//        int bitIndex = i % 8;        // 해당 바이트에서 비트 위치
+//        bool value = (data[byteIndex] & (1 << bitIndex)) != 0; // 비트 확인
+//        values.append(value);
+//    }
+//
+//    // 각 코일 값을 처리하여 그래프 알람 업데이트
+//    for (int i = 0; i < quantity; ++i) {
+//        int coilIndex = startAddress + i; // 코일의 전체 주소
+//
+//        if (mainWindow) {
+//            mainWindow->updateGraphAlarm(coilIndex, values[i]);
+//        }
+//    }
+//
+//    if (mainWindow) {
+//        mainWindow->savingCoilInput(values); // 모든 코일 상태를 저장
+//    }
+//    qDebug() << "Alarm updates processed successfully.";
+//}
 
 
 
@@ -169,8 +169,14 @@ void qt_modbus_server::handleWriteSingleCoil(const QModbusPdu& request) {
 
     // 그래프 알람 업데이트
     if (mainWindow) {
-        mainWindow->updateGraphAlarm(address-1, state); // 개별 코일 상태 업데이트
-    }
+        mainWindow->updateGraphAlarm(address-1, state);
 
-    // 추가 로직 (Coil 저장, 상태 변경 등 필요 시 구현 가능)
+    }
+    // 저장을 위한 Coil 상태 업데이트
+    QVector<bool> coilStates(128, false); // 128개의 Coil 초기화
+    coilStates[address] = state;          // 변경된 Coil 주소 업데이트
+
+    if (mainWindow) {
+        mainWindow->savingCoilInput(coilStates); // Coil 상태 저장
+    }
 }
