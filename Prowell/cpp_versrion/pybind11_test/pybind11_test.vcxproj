@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{93aab448-32f8-46ce-9beb-411121fe04e1}</ProjectGuid>
+    <RootNamespace>pybind11test</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\admin\anaconda3\envs\dp_modbus\include;C:\Users\admin\anaconda3\envs\dp_modbus\include\pybind11_global</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\admin\anaconda3\envs\dp_modbus\libs</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="pybind11_test.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\attr.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\buffer_info.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\cast.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\chrono.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\common.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\complex.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\detail\class.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\detail\common.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\detail\cpp_conduit.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\detail\descr.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\detail\exception_translation.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\detail\init.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\detail\internals.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\detail\typeid.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\detail\type_caster_base.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\detail\value_and_holder.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\eigen.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\eigen\common.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\eigen\matrix.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\eigen\tensor.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\embed.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\eval.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\functional.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\gil.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\gil_safe_call_once.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\iostream.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\numpy.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\operators.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\options.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\pybind11.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\pytypes.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\stl.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\stl\filesystem.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\stl_bind.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\type_caster_pyobject_ptr.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\anaconda3\envs\dp_modbus\include\pybind11_global\pybind11\typing.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
