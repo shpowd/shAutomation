@@ -21,9 +21,13 @@ qt_modbus2::~qt_modbus2(){
     if (graphWidget) {
         delete graphWidget;
     }
-    if (modbusDevice) {
-        modbusDevice->disconnectDevice();
-        delete modbusDevice;
+    //if (modbusDevice) {
+    //    modbusDevice->disconnectDevice();
+    //    delete modbusDevice;
+    //}
+    if (modbusClientDevice) {
+        modbusClientDevice->disconnectDevice();
+        delete modbusClientDevice;
     }
 }
 
@@ -243,7 +247,6 @@ void qt_modbus2::initUI(){
     QSpacerItem* saveSpacer = new QSpacerItem(20, 80, QSizePolicy::Minimum, QSizePolicy::Expanding);
     textLayout->addSpacerItem(saveSpacer);
 
-
     // 메인 레이아웃에 추가
     mainLayout->addLayout(buttonLayout, 3);  // 버튼 레이아웃
     mainLayout->addLayout(textLayout, 1);   // 텍스트 레이아웃
@@ -266,257 +269,308 @@ void qt_modbus2::connectModbus() {
         return;
     }
 
-    // 기존 Modbus 서버 초기화
-    if (modbusDevice) {
+    //// Modbus 서버
+    //// 기존 Modbus 서버 초기화
+    //if (modbusDevice) {
+    //    disconnectModbus();
+    //}
+
+    //// Modbus 서버 객체 생성
+    //modbusDevice = new qt_modbus_server(this, this);
+
+    //// 상태 변경 핸들러 연결
+    //connect(modbusDevice, &qt_modbus_server::stateChanged, this, &qt_modbus2::onStateChanged);
+    //// 에러 변경 핸들러 연결
+    //connect(modbusDevice, &qt_modbus_server::errorOccurred, this, &qt_modbus2::handleDeviceError);
+    //
+    //// 데이터 변경 핸들러 연결
+    ////connect(modbusDevice, &QModbusServer::dataWritten, this, &qt_modbus2::updateModbus);
+
+
+    //// Modbus 서버 시작
+    //if (modbusDevice->startServer(url.host(), url.port(), modbusID)) {
+    //    qDebug() << "Modbus server successfully started at" << ipAddress << "with ID" << modbusID;
+    //}
+    //else {
+    //    qDebug() << "Failed to start Modbus server.";
+    //}
+
+    //connect(&saveTimer, &QTimer::timeout, this, &qt_modbus2::saveDataOnTimer);
+
+    //// Modbus 클라이언트
+    // 기존 클라이언트 연결 종료
+    if (modbusClientDevice) {
         disconnectModbus();
     }
 
-    // Modbus 서버 객체 생성
-    modbusDevice = new qt_modbus_server(this, this);
+    modbusClientDevice = new qt_modbus_client(this, this);
 
-    // 상태 변경 핸들러 연결
-    connect(modbusDevice, &qt_modbus_server::stateChanged, this, &qt_modbus2::onStateChanged);
-    // 에러 변경 핸들러 연결
-    connect(modbusDevice, &qt_modbus_server::errorOccurred, this, &qt_modbus2::handleDeviceError);
-    
-    // 데이터 변경 핸들러 연결
-    //connect(modbusDevice, &QModbusServer::dataWritten, this, &qt_modbus2::updateModbus);
+    connect(modbusClientDevice, &qt_modbus_client::dataReceived, this, &qt_modbus2::handleDataReceived);
 
+    if (modbusClientDevice->connectToServer(url.host(), url.port())) {
+        qDebug() << "Connected to external Modbus server.";
 
-    // Modbus 서버 시작
-    if (modbusDevice->startServer(url.host(), url.port(), modbusID)) {
-        qDebug() << "Modbus server successfully started at" << ipAddress << "with ID" << modbusID;
+        // 타이머 초기화
+        if (!modbusTimer) {
+            modbusTimer = new QTimer(this); // 타이머 생성
+            connect(modbusTimer, &QTimer::timeout, this, &qt_modbus2::requestModbusData);
+        }
+        // 2초마다 데이터 요청
+        modbusTimer->start(2000); // 2초마다 호출
     }
     else {
-        qDebug() << "Failed to start Modbus server.";
+        qDebug() << "Failed to connect Modbus client.";
     }
-
-    connect(&saveTimer, &QTimer::timeout, this, &qt_modbus2::saveDataOnTimer);
-
 }
 
 
 void qt_modbus2::disconnectModbus() {
-    if (modbusDevice) {
-        modbusDevice->disconnectDevice();
-        delete modbusDevice;
-        modbusDevice = nullptr;
-        qDebug() << "Modbus server destroyed.";
+    //if (modbusDevice) {
+    //    modbusDevice->disconnectDevice();
+    //    delete modbusDevice;
+    //    modbusDevice = nullptr;
+    //    qDebug() << "Modbus server destroyed.";
+    //}
+    if (modbusClientDevice) {
+        modbusClientDevice->disconnectDevice();
+        delete modbusClientDevice;
+        modbusClientDevice = nullptr;
+    }
+
+    if (modbusTimer) {
+        modbusTimer->stop();
     }
 }
 
 
-
-
-void qt_modbus2::updateModbus(QModbusDataUnit::RegisterType table, int address, int size) {
-    if (!modbusDevice)
-        return;
-
-    QVector<quint16> values;
-    for (int i = 0; i < size; ++i) {
-        quint16 value;
-        if (modbusDevice->data(table, address + i, &value)) {
-            values.append(value);
-
-            qDebug() << "Register" << address + i << "updated to" << value;
-
-            // displayTextWidget에 변경 내용 추가
-            QString logMessage = QString("Table %1, Address %2, Value %3")
-                .arg(static_cast<int>(table))
-                .arg(address + i)
-                .arg(value);
-            if (debugTextWidget) {
-                if (i == 0) {
-                    debugTextWidget->setText(logMessage);
-                }
-                else {
-                    QString currentText = debugTextWidget->toPlainText();
-                    debugTextWidget->setText(currentText + "\n" + logMessage);
-                }
-            }
-        }
+void qt_modbus2::requestModbusData() {
+    if (modbusClientDevice) {
+        modbusClientDevice->readData(QModbusDataUnit::HoldingRegisters, 0, 20);
     }
-
-    if (!values.isEmpty()) {
-        savingInput(table, address, values);
-        updateGraphData(values);
-    }
-    else{
-        qDebug() << "No values provided to updateGraphData.";
-        return;
-    }
-
 }
 
-void qt_modbus2::onStateChanged(int state) {
-    QString stateMessage;
-    switch (state) {
-        case QModbusDevice::UnconnectedState:
-            stateMessage = "Modbus server offline.";
-            saveDataToCSV(); // 연결이 끊어진 경우 데이터 저장
-            saveTimer.stop(); // 타이머 중지
-            break;
-        case QModbusDevice::ConnectingState:
-            stateMessage = "Modbus server connecting...";
-            break;
-        case QModbusDevice::ConnectedState:
-            stateMessage = "Modbus server online.";
-            connectionStartTime = QDateTime::currentDateTime(); // 연결 시작 시간 재설정
-            saveTimer.start(saveIntervalSeconds * 1000); // 타이머 재시작
-            break;
-        case QModbusDevice::ClosingState:
-            stateMessage = "Modbus server closing...";
-            break;
-        default:
-            stateMessage = "Modbus server unknown state.";
-            break;
-    }
+void qt_modbus2::handleDataReceived(const QModbusDataUnit& data) {
+    // QModbusDataUnit에서 데이터 추출
+    QVector<quint16> vectorData = data.values();
 
-    // displayTextWidget에 상태 메시지 추가
-    if (stateTextWidget) {
-        stateTextWidget->setText(stateMessage);
-    }
+    // QVector -> QList로 변환
+    QList<quint16> listData = vectorData.toList();
 
-    // 디버그 로그 출력
-    qDebug() << "State message updated to:" << stateMessage;
-}
-
-void qt_modbus2::handleDeviceError(QModbusDevice::Error newError) {
-    if (newError == QModbusDevice::NoError || !modbusDevice)
-        return;
-
-    QString errorMessage = modbusDevice->errorString();
-
-    // displayTextWidget에 에러 메시지 추가
-    if (debugTextWidget) {
-        debugTextWidget->setText(errorMessage); // 새 메시지 추가
-    }
-
-    // 상태 표시줄 대신 이 코드로 표시
-    qDebug() << "Error: " << errorMessage; // 디버그 로그 출력
-}
-
-
-// 모드버스 레지스터 CSV 데이터 셋
-void qt_modbus2::savingInput(QModbusDataUnit::RegisterType table, int address, const QVector<quint16>& values){
-    QList<quint16> newData;
-    newData.append(static_cast<quint16>(table)); // 첫 번째 열에 table 값 추가
-    newData.append(values);                     // 이후 열에 레지스터 값 추가
-    saveBuffer.append(newData);
-}
-
-
-void qt_modbus2::savingCoilInput(const QVector<bool>& coilStates) {
-    if (coilStates.size() != 128) {
-        qWarning() << "Invalid coil state size. Expected 128, got:" << coilStates.size();
-        //return;
-    }
-
-    // 현재 상태를 버퍼에 추가
-    QDateTime currentTime = QDateTime::currentDateTime();
-    coilBuffer.append(qMakePair(currentTime, coilStates)); // 타임스탬프와 상태 저장
-    qDebug() << "Coil states added to buffer. Buffer size:" << coilBuffer.size();
+    // 기존 updateGraphData 호출
+    updateGraphData(listData);
 }
 
 
 
-// 모드버스 CSV 저장 타이머
-void qt_modbus2::saveDataOnTimer() {
-    qDebug() << "Saving data after 1 minute of connection.";
-    saveDataToCSV();
-    saveCoilDataToCSV();
-}
-
-// 모드버스 CSV 저장
-void qt_modbus2::saveDataToCSV() {
-    // saveBuffer가 비어 있는 경우 저장하지 않음
-    if (saveBuffer.isEmpty()) {
-        qDebug() << "No data to save. Skipping CSV save.";
-        return;
-    }
-    // log 폴더가 없다면 생성
-    QDir dir;
-    if (!dir.exists("log")) {
-        if (!dir.mkpath("log")) {
-            qDebug() << "Failed to create log directory.";
-            return;
-        }
-    }
-    QString filePath = QDir::currentPath() + "/log/" + QDateTime::currentDateTime().toString("yyyyMMdd_hhmmss") + "_modbus_data.csv";
-    QFile file(filePath);
-
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        qWarning() << "Failed to save data to CSV file:" << filePath;
-        return;
-    }
-    QTextStream out(&file);
-    // 헤더 작성
-    out << "Table";
-    for (int i = 0; i < saveBuffer.first().size() - 1; ++i) {
-        out << ",Address" << i;
-    }
-    out << "\n";
-    // 데이터 작성
-    for (const auto& row : saveBuffer) {
-        for (int i = 0; i < row.size(); ++i) {
-            if (i > 0) out << ",";
-            out << row[i];
-        }
-        out << "\n";
-    }
-    file.close();    
-    saveBuffer.clear();
-    qDebug() << "Data saved to CSV:" << filePath;
-}
-
-void qt_modbus2::saveCoilDataToCSV() {
-    if (coilBuffer.isEmpty()) {
-        qDebug() << "No coil data to save.";
-        return;
-    }
-
-    QDir dir;
-    if (!dir.exists("log")) {
-        if (!dir.mkpath("log")) {
-            qDebug() << "Failed to create log directory.";
-            return;
-        }
-    }
-
-    QString filePath = QDir::currentPath() + "/log/" + QDateTime::currentDateTime().toString("yyyyMMdd_hhmmss") + "_modbus_coil_data.csv";
-    QFile file(filePath);
-
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append)) {
-        qWarning() << "Failed to open file for saving coil data:" << filePath;
-        return;
-    }
-
-    QTextStream out(&file);
-
-    // 헤더 작성 (파일이 새로 생성된 경우만)
-    if (file.size() == 0) {
-        QStringList header;
-        header << "Timestamp"; // 타임스탬프 추가
-        for (int i = 0; i < 128; ++i) {
-            header << QString("Coil Address %1").arg(i);
-        }
-        out << header.join(",") << "\n";
-    }
-
-    // 데이터 작성
-    for (const auto& entry : coilBuffer) {
-        QStringList row;
-        row << entry.first.toString("yyyy-MM-dd hh:mm:ss"); // 첫 번째 열: 타임스탬프
-        for (bool state : entry.second) {
-            row << (state ? "1" : "0"); // 두 번째 열부터: 코일 데이터
-        }
-        out << row.join(",") << "\n";
-    }
-
-    file.close();
-    coilBuffer.clear(); // 버퍼 초기화
-    qDebug() << "Coil data saved to CSV:" << filePath;
-}
+//void qt_modbus2::updateModbus(QModbusDataUnit::RegisterType table, int address, int size) {
+//    if (!modbusDevice)
+//        return;
+//
+//    QVector<quint16> values;
+//    for (int i = 0; i < size; ++i) {
+//        quint16 value;
+//        if (modbusDevice->data(table, address + i, &value)) {
+//            values.append(value);
+//
+//            qDebug() << "Register" << address + i << "updated to" << value;
+//
+//            // displayTextWidget에 변경 내용 추가
+//            QString logMessage = QString("Table %1, Address %2, Value %3")
+//                .arg(static_cast<int>(table))
+//                .arg(address + i)
+//                .arg(value);
+//            if (debugTextWidget) {
+//                if (i == 0) {
+//                    debugTextWidget->setText(logMessage);
+//                }
+//                else {
+//                    QString currentText = debugTextWidget->toPlainText();
+//                    debugTextWidget->setText(currentText + "\n" + logMessage);
+//                }
+//            }
+//        }
+//    }
+//
+//    if (!values.isEmpty()) {
+//        savingInput(table, address, values);
+//        updateGraphData(values);
+//    }
+//    else{
+//        qDebug() << "No values provided to updateGraphData.";
+//        return;
+//    }
+//
+//}
+//
+//void qt_modbus2::onStateChanged(int state) {
+//    QString stateMessage;
+//    switch (state) {
+//        case QModbusDevice::UnconnectedState:
+//            stateMessage = "Modbus server offline.";
+//            saveDataToCSV(); // 연결이 끊어진 경우 데이터 저장
+//            saveTimer.stop(); // 타이머 중지
+//            break;
+//        case QModbusDevice::ConnectingState:
+//            stateMessage = "Modbus server connecting...";
+//            break;
+//        case QModbusDevice::ConnectedState:
+//            stateMessage = "Modbus server online.";
+//            connectionStartTime = QDateTime::currentDateTime(); // 연결 시작 시간 재설정
+//            saveTimer.start(saveIntervalSeconds * 1000); // 타이머 재시작
+//            break;
+//        case QModbusDevice::ClosingState:
+//            stateMessage = "Modbus server closing...";
+//            break;
+//        default:
+//            stateMessage = "Modbus server unknown state.";
+//            break;
+//    }
+//
+//    // displayTextWidget에 상태 메시지 추가
+//    if (stateTextWidget) {
+//        stateTextWidget->setText(stateMessage);
+//    }
+//
+//    // 디버그 로그 출력
+//    qDebug() << "State message updated to:" << stateMessage;
+//}
+//
+//void qt_modbus2::handleDeviceError(QModbusDevice::Error newError) {
+//    if (newError == QModbusDevice::NoError || !modbusDevice)
+//        return;
+//
+//    QString errorMessage = modbusDevice->errorString();
+//
+//    // displayTextWidget에 에러 메시지 추가
+//    if (debugTextWidget) {
+//        debugTextWidget->setText(errorMessage); // 새 메시지 추가
+//    }
+//
+//    // 상태 표시줄 대신 이 코드로 표시
+//    qDebug() << "Error: " << errorMessage; // 디버그 로그 출력
+//}
+//
+//
+//// 모드버스 레지스터 CSV 데이터 셋
+//void qt_modbus2::savingInput(QModbusDataUnit::RegisterType table, int address, const QVector<quint16>& values){
+//    QList<quint16> newData;
+//    newData.append(static_cast<quint16>(table)); // 첫 번째 열에 table 값 추가
+//    newData.append(values);                     // 이후 열에 레지스터 값 추가
+//    saveBuffer.append(newData);
+//}
+//
+//
+//void qt_modbus2::savingCoilInput(const QVector<bool>& coilStates) {
+//    if (coilStates.size() != 128) {
+//        qWarning() << "Invalid coil state size. Expected 128, got:" << coilStates.size();
+//        //return;
+//    }
+//
+//    // 현재 상태를 버퍼에 추가
+//    QDateTime currentTime = QDateTime::currentDateTime();
+//    coilBuffer.append(qMakePair(currentTime, coilStates)); // 타임스탬프와 상태 저장
+//    qDebug() << "Coil states added to buffer. Buffer size:" << coilBuffer.size();
+//}
+//
+//
+//
+//// 모드버스 CSV 저장 타이머
+//void qt_modbus2::saveDataOnTimer() {
+//    qDebug() << "Saving data after 1 minute of connection.";
+//    saveDataToCSV();
+//    saveCoilDataToCSV();
+//}
+//
+//// 모드버스 CSV 저장
+//void qt_modbus2::saveDataToCSV() {
+//    // saveBuffer가 비어 있는 경우 저장하지 않음
+//    if (saveBuffer.isEmpty()) {
+//        qDebug() << "No data to save. Skipping CSV save.";
+//        return;
+//    }
+//    // log 폴더가 없다면 생성
+//    QDir dir;
+//    if (!dir.exists("log")) {
+//        if (!dir.mkpath("log")) {
+//            qDebug() << "Failed to create log directory.";
+//            return;
+//        }
+//    }
+//    QString filePath = QDir::currentPath() + "/log/" + QDateTime::currentDateTime().toString("yyyyMMdd_hhmmss") + "_modbus_data.csv";
+//    QFile file(filePath);
+//
+//    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+//        qWarning() << "Failed to save data to CSV file:" << filePath;
+//        return;
+//    }
+//    QTextStream out(&file);
+//    // 헤더 작성
+//    out << "Table";
+//    for (int i = 0; i < saveBuffer.first().size() - 1; ++i) {
+//        out << ",Address" << i;
+//    }
+//    out << "\n";
+//    // 데이터 작성
+//    for (const auto& row : saveBuffer) {
+//        for (int i = 0; i < row.size(); ++i) {
+//            if (i > 0) out << ",";
+//            out << row[i];
+//        }
+//        out << "\n";
+//    }
+//    file.close();    
+//    saveBuffer.clear();
+//    qDebug() << "Data saved to CSV:" << filePath;
+//}
+//
+//void qt_modbus2::saveCoilDataToCSV() {
+//    if (coilBuffer.isEmpty()) {
+//        qDebug() << "No coil data to save.";
+//        return;
+//    }
+//
+//    QDir dir;
+//    if (!dir.exists("log")) {
+//        if (!dir.mkpath("log")) {
+//            qDebug() << "Failed to create log directory.";
+//            return;
+//        }
+//    }
+//
+//    QString filePath = QDir::currentPath() + "/log/" + QDateTime::currentDateTime().toString("yyyyMMdd_hhmmss") + "_modbus_coil_data.csv";
+//    QFile file(filePath);
+//
+//    if (!file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append)) {
+//        qWarning() << "Failed to open file for saving coil data:" << filePath;
+//        return;
+//    }
+//
+//    QTextStream out(&file);
+//
+//    // 헤더 작성 (파일이 새로 생성된 경우만)
+//    if (file.size() == 0) {
+//        QStringList header;
+//        header << "Timestamp"; // 타임스탬프 추가
+//        for (int i = 0; i < 128; ++i) {
+//            header << QString("Coil Address %1").arg(i);
+//        }
+//        out << header.join(",") << "\n";
+//    }
+//
+//    // 데이터 작성
+//    for (const auto& entry : coilBuffer) {
+//        QStringList row;
+//        row << entry.first.toString("yyyy-MM-dd hh:mm:ss"); // 첫 번째 열: 타임스탬프
+//        for (bool state : entry.second) {
+//            row << (state ? "1" : "0"); // 두 번째 열부터: 코일 데이터
+//        }
+//        out << row.join(",") << "\n";
+//    }
+//
+//    file.close();
+//    coilBuffer.clear(); // 버퍼 초기화
+//    qDebug() << "Coil data saved to CSV:" << filePath;
+//}
 
 
 // 그래프 창 생성
@@ -622,8 +676,7 @@ void qt_modbus2::updateGraphAlarm(int graphIndex, const QVector<bool>& alarmStat
 }
 */
 
-
-
+/*알람 코일 레지스터용
 void qt_modbus2::updateGraphAlarm(int coilIndex, bool state) {
     // 코일 번호에 따라 그래프 및 알람 인덱스 계산
     int graphIndex = coilIndex / 16; // 16개씩 나눠 그래프 인덱스 결정
@@ -672,3 +725,4 @@ void qt_modbus2::updateGraphAlarm(int coilIndex, bool state) {
         qWarning() << "Invalid graph index:" << graphIndex;
     }
 }
+*/

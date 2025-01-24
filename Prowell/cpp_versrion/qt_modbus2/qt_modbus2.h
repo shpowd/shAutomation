@@ -3,6 +3,7 @@
 
 #include "graph_widget.h"
 #include "modbus_server.h"
+#include "modbus_client.h"
 
 #include <QMainWindow>
 #include <QWidget>
@@ -31,29 +32,35 @@ class qt_modbus2 : public QMainWindow{
 public:
     explicit qt_modbus2(QWidget *parent = nullptr);
     ~qt_modbus2();
-    void updateModbus(QModbusDataUnit::RegisterType table, int address, int size);
-    void updateGraphAlarm(int coilIndex, bool state);
-    void savingCoilInput(const QVector<bool>& coilStates);
+    //void updateModbus(QModbusDataUnit::RegisterType table, int address, int size);
+    //void updateGraphAlarm(int coilIndex, bool state);
+    //void savingCoilInput(const QVector<bool>& coilStates);
+    void updateGraphData(const QVector<quint16>& values); // 그래프 데이터 업데이트
 
 private slots:
     void connectModbus();
     void disconnectModbus();
-    void handleDeviceError(QModbusDevice::Error newError);
-    void onStateChanged(int state);
-    void saveDataOnTimer();
+    //void handleDeviceError(QModbusDevice::Error newError);
+    //void onStateChanged(int state);
+    //void saveDataOnTimer();
 
     void openGraphWidget(int graphIndex); // 특정 인덱스의 그래프를 열기
-    void updateGraphData(const QVector<quint16>& values); // 그래프 데이터 업데이트
+
+    void handleDataReceived(const QModbusDataUnit& data); // 별도 함수로 분리
 
 signals:
     void dataSavedToCSV(const QString& filePath);
 
 private:
     void initUI();
+    void setupTimer();
+    
+    /*
     void savingInput(QModbusDataUnit::RegisterType table, int address, const QVector<quint16>& values);
     void saveDataToCSV();
     QList<QPair<QDateTime, QVector<bool>>> coilBuffer; // 코일 데이터 버퍼
     void saveCoilDataToCSV();                // 코일 데이터를 CSV로 저장
+    */
 
     //const int saveCSVtime = 3000; // CSV로 저장하기 위한 시간ms
     int selectedTimeRange = 60;     // 그래프 x축 표시 시간 
@@ -70,7 +77,12 @@ private:
     QScrollBar* graphTimeScrollBar; // 그래프 X축 스케일 설정용 스크롤바
 
 
-    qt_modbus_server *modbusDevice;
+    //qt_modbus_server *modbusDevice;
+    qt_modbus_client *modbusClientDevice;
+    QTimer* modbusTimer = nullptr;            // 타이머 객체
+    void requestModbusData();
+
+
     QButtonGroup coilButtons;
     QButtonGroup discreteButtons;
     QHash<QString, QLineEdit*> registers;

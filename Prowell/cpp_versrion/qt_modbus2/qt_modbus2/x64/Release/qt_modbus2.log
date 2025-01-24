@@ -1,470 +1,213 @@
 ﻿   Qt/MSBuild: 3.3.1.1
+  Reading Qt configuration (C:/Qt/6.8.1/msvc2022_64/bin/qmake)
    Qt: 6.8.1
-  main.cpp
-  modbus_server.cpp
-  qt_modbus2.cpp
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x8a0 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x8a1 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x8a5 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x8a6 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x8a8 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x8aa that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x8e6 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x8e8 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x8e9 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x8eb that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x8ec that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x8ee that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x8f0 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x92e that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x92f that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x933 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x934 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x936 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x937 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x938 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9b0 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9b1 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9b5 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9b6 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9b7 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9b8 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9be that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9c0 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9c3 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9c7 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9c9 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9ca that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9cc that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9ce that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9cf that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xaa2 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xaa5 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xaa6 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xaa9 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xaaa that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xaad that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xaae that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xab1 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xab2 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xab4 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xab6 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xab7 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xab9 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xabf that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xac2 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xac3 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xac4 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xbf9 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xd0a that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xd0b that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xd0c that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xd0d that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xd0f that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xd13 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xd14 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xd17 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xd19 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xd1f that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xd22 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xd23 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xd25 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xd27 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xd2a that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xd2c that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xd2d that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xd31 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xd32 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xdd3 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xdd4 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xdd6 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xdd8 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xddd that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xddf that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xde1 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xde2 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xde4 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xde5 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xde9 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xdea that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xefa that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xefb that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xefd that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xeff that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xf04 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xf06 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xf07 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xf08 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xf09 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xf0d that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0xf0e that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x100b that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x100c that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1012 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1013 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1014 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1015 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1017 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1019 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x101a that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x101e that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x101f that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1020 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1021 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1023 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1027 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1028 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x102b that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1063 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1065 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1066 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x106a that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x106b that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1072 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1074 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1075 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1077 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1078 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1079 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x107a that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x107c that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1080 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1081 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1163 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1164 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1165 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1166 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x116a that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x116c that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x116f that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1176 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1177 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1178 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1179 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x117a that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x117b that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x117d that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x117e that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x11c1 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x11c2 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x11c3 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x11c8 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x11c9 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x11cc that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x11cd that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x11ce that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x11d1 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x11d2 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x11d3 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x11d4 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x11d6 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x11d8 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x11d9 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1233 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1234 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1235 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1236 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x123a that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x123b that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x123c that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x123e that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x123f that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1241 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1243 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1245 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1246 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1274 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1276 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1277 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x127a that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x127c that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x127e that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x127f that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1280 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1281 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1282 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1284 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1285 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1289 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x128a that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x12d2 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x12d3 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x12d9 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x12da that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1310 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1311 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1313 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1315 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1316 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1318 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1319 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x131a that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x131b that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x131f that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1320 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1321 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1323 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1324 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1326 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1329 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x132a that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x132d that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1330 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1334 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1335 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1336 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1337 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1339 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1395 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1397 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1398 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x139a that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x139c that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x139d that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x13a1 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x13a4 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1468 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1469 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x146d that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x146f that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1470 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1472 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1473 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1477 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1479 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x147a that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x147b that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x147c that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1564 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1565 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1566 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1567 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1569 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x156d that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x156e that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1571 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1572 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1573 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1587 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1588 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x158a that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x158c that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x158d that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1590 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1591 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1593 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1595 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1597 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1599 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x159a that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x164c that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x164d that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x164f that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1651 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1653 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1656 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x169d that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x169e that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x16a0 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x16a2 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x16a4 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x16a5 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1739 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x173c that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x173d that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1740 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1743 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1747 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1748 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1749 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x174a that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x174c that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x17aa that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x17ab that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x17ac that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x17ad that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x17b1 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x17b2 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x17b3 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x17bb that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x17bc that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x17c0 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x17c1 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x17c5 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x17c7 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x17f9 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x17fa that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x17fb that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x17fc that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1803 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1805 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1806 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1837 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1838 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1839 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x183a that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1843 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1846 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1848 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1849 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x184d that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x184f that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x18a1 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x18a2 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x18a6 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x18a7 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x18a8 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.cpp(1,1): warning C4828: The file contains a character starting at offset 0x18a9 that is illegal in the current source character set (codepage 65001).
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xcc that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'modbus_server.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xcd that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'modbus_server.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xce that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'modbus_server.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xcf that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'modbus_server.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xd2 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'modbus_server.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xd3 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'modbus_server.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xd4 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'modbus_server.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0x23a that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'modbus_server.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0x23b that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'modbus_server.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0x23f that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'modbus_server.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0x241 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'modbus_server.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0x242 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'modbus_server.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xcc that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'qt_modbus2.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xcc that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'main.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xcd that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'qt_modbus2.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xcd that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'main.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xce that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'qt_modbus2.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xce that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'main.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xcf that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'main.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xcf that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'qt_modbus2.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xd2 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'main.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xd2 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'qt_modbus2.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xd3 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'main.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xd3 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'qt_modbus2.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xd4 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'main.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xd4 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'qt_modbus2.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0x23a that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'main.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0x23a that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'qt_modbus2.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0x23b that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'main.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0x23b that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'qt_modbus2.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0x23f that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'qt_modbus2.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0x23f that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'main.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0x241 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'qt_modbus2.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0x241 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'main.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0x242 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'qt_modbus2.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0x242 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'main.cpp')
-  
-  moc_modbus_server.cpp
   moc_qt_modbus2.cpp
+  moc_modbus_client.cpp
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x94 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x95 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x97 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x99 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x9a that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x9b that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x9d that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x9e that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0xa1 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0xa2 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0xa5 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0xa6 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0xa7 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0xa8 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x25c that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x25d that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x25e that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x25f that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x263 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x265 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x266 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x267 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x268 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x269 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x26a that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x26b that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x26c that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x26d that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x26e that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x270 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x271 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x275 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x277 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x279 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x27a that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x27c that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x27f that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x280 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x282 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x283 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x285 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x286 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x288 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x2d2 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x2d3 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x2d4 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x2d5 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x2d7 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x2da that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x2dc that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x2dd that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x2e1 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x2e2 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x312 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x313 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x315 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x316 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x317 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x318 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x319 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x31b that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x31c that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x31f that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x320 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x32e that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x330 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x331 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_client.cpp')
+  
 C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xcc that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_server.cpp')
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
   
 C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xcd that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_server.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xce that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_server.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xcf that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_server.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xd2 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_server.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xd3 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_server.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xd4 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_server.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0x23a that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_server.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0x23b that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_server.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0x23f that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_server.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0x241 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_server.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0x242 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_modbus_server.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xcc that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
-  
-C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xcd that is illegal in the current source character set (codepage 65001).
   (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
   
 C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0xce that is illegal in the current source character set (codepage 65001).
@@ -495,12 +238,213 @@ C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus
   (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
   
 C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_server.h(1,1): warning C4828: The file contains a character starting at offset 0x242 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x94 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x95 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x97 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x99 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x9a that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x9b that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x9d that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x9e that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0xa1 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0xa2 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0xa5 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0xa6 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0xa7 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0xa8 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x25c that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x25d that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x25e that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x25f that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x263 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x265 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x266 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x267 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x268 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x269 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x26a that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x26b that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x26c that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x26d that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x26e that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x270 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x271 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x275 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x277 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x279 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x27a that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x27c that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x27f that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x280 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x282 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x283 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x285 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x286 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x288 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x2d2 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x2d3 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x2d4 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x2d5 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x2d7 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x2da that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x2dc that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x2dd that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x2e1 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x2e2 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x312 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x313 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x315 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x316 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x317 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x318 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x319 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x31b that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x31c that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x31f that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x320 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x32e that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x330 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
+  
+C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\modbus_client.h(1,1): warning C4828: The file contains a character starting at offset 0x331 that is illegal in the current source character set (codepage 65001).
   (compiling source file 'qt_modbus2/x64/Release/qt/moc/moc_qt_modbus2.cpp')
   
   Generating code
-  137 of 1764 functions ( 7.8%) were compiled, the rest were copied from previous compilation.
-    2 functions were new in current compilation
-    107 functions had inline decision re-evaluated but remain unchanged
+  319 of 1034 functions (30.9%) were compiled, the rest were copied from previous compilation.
+    71 functions were new in current compilation
+    120 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   qt_modbus2.vcxproj -> C:\Users\admin\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\qt_modbus2\x64\Release\qt_modbus2.exe
   'pwsh.exe'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는

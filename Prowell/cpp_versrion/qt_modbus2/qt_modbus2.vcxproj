@@ -96,7 +96,13 @@
     <QtRcc Include="qt_modbus2.qrc" />
     <QtUic Include="qt_modbus2.ui" />
     <QtMoc Include="qt_modbus2.h" />
-    <ClCompile Include="modbus_server.cpp" />
+    <ClCompile Include="modbus_client.cpp" />
+    <ClCompile Include="modbus_server.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </DeploymentContent>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="qt_modbus2.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -104,7 +110,13 @@
     <QtMoc Include="graph_widget.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="modbus_server.h" />
+    <QtMoc Include="modbus_server.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="modbus_client.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
