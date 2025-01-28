@@ -43,8 +43,6 @@ private:
     int currentTime;
     const int maxTime = 60; // X축 범위 (60초)
 
-    // 예측을 위한 데이터 준비
-    std::vector<double> getDataForPrediction();
 };
 
 #endif // PREDICTIVE_GRAPH_H

@@ -1,0 +1,683 @@
+﻿   Qt/MSBuild: 3.3.1.1
+  Reading Qt configuration (C:/Qt/6.8.1/msvc2022_64/bin/qmake)
+   Qt: 6.8.1
+  pybind_.cpp
+  predictive_graph.cpp
+  main.cpp
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.cpp(1,1): warning C4828: The file contains a character starting at offset 0x97 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xfd that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0xce that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.cpp(1,1): warning C4828: The file contains a character starting at offset 0x98 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xff that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0xcf that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.cpp(1,1): warning C4828: The file contains a character starting at offset 0x99 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x100 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0xd1 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9a that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x102 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0xd3 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.cpp(1,1): warning C4828: The file contains a character starting at offset 0xa3 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x104 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0xd4 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.cpp(1,1): warning C4828: The file contains a character starting at offset 0xa4 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x532 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0xd5 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x533 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0xd6 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x534 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0xd9 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.cpp(1,1): warning C4828: The file contains a character starting at offset 0xa6 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x536 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0xda that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x537 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0xdb that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.cpp(1,1): warning C4828: The file contains a character starting at offset 0xa8 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x538 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0xdc that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x539 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0xde that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.cpp(1,1): warning C4828: The file contains a character starting at offset 0xa9 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x53b that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0xe0 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0xe1 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.cpp(1,1): warning C4828: The file contains a character starting at offset 0xaa that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x53c that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.cpp(1,1): warning C4828: The file contains a character starting at offset 0xab that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x53d that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.cpp(1,1): warning C4828: The file contains a character starting at offset 0xae that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x53e that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0xf3 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.cpp(1,1): warning C4828: The file contains a character starting at offset 0xb0 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x540 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0xf4 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.cpp(1,1): warning C4828: The file contains a character starting at offset 0xb1 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x541 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0xf5 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x542 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0xf7 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x543 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0xf8 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x544 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0xfa that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x545 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0xfb that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x546 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x547 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0xfc that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x54b that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0xff that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x54c that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x5a7 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x101 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x5a8 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x102 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x5a9 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x106 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x5aa that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x107 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x5ab that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2eb that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x5ac that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2ec that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x5ad that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x5ae that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2ed that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x5b0 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2ef that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x5b1 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2f0 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x5b2 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2f1 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x5b3 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2f2 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x60d that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2f4 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x60e that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2f5 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x60f that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2f6 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x610 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x305 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x612 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x307 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x613 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x308 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x614 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x39a that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x615 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x39d that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x39e that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x616 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x617 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3a1 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x618 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x619 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3a2 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x61b that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x61c that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3a3 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x61d that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3a4 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x61e that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x737 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3a6 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x73a that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x73b that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3df that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x73c that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3e2 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x73d that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x73f that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3e3 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x740 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3e4 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x741 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3e5 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x743 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3ea that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x744 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x748 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x74a that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x7f6 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x7f7 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x7f8 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x7f9 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x7fb that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x7fd that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x7ff that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x800 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x88d that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x892 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x894 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x895 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x896 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x897 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x899 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x89b that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x89c that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x89d that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x89e that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x946 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x947 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x948 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x949 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x94d that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x94f that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x950 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x953 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x958 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x959 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x95a that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x95b that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x95d that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x95e that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x95f that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x960 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x962 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x963 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x964 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x967 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x968 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x99c that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x99e that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x99f that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9a3 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9a4 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9a5 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9a6 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9a8 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9a9 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9aa that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9ab that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9af that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9b7 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9b8 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9b9 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9ba that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9bc that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9bd that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9be that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9bf that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xa81 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xa82 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xa83 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xa88 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xaeb that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xaec that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xaed that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xaef that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xaf0 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xaf2 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xaf5 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xaf6 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xaf8 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xaf9 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xafb that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xafd that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xafe that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xb3a that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xb3c that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xb3d that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xb3f that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xb41 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xb45 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xb46 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xb49 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xb4b that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xb4c that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xb4e that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xb4f that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xb50 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xb52 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xb53 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xb54 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xb55 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xb57 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xb58 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xb59 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xb5a that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xb9f that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xba1 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xba8 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xbf1 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xbf2 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xbf6 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xbf7 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xbf8 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xbfa that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xbfb that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xbff that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xc15 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xc16 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xc17 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xc18 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xc1a that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xc1e that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xc20 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xc21 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xc23 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xc25 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xc26 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xc2a that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xc2c that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xc2d that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xc2f that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xc33 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xc35 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xc36 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xcbc that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xcbd that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xcbe that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xcbf that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xcc2 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xcc4 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xcc5 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xcc7 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xcc9 that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xcca that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.cpp(1,1): warning C4828: The file contains a character starting at offset 0xccc that is illegal in the current source character set (codepage 65001).
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0xf3 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0xf4 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0xf5 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0xf7 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0xf8 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0xfa that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0xfb that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0xfc that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0xff that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x101 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x102 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x106 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x107 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2eb that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2ec that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2ed that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2ef that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2f0 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2f1 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2f2 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2f4 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2f5 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2f6 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x305 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x307 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x308 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x39a that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x39d that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x39e that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3a1 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3a2 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3a3 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3a4 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3a6 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3df that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3e2 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3e3 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3e4 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3e5 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3ea that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.h(1,1): warning C4828: The file contains a character starting at offset 0x44 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'pybind_.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.h(1,1): warning C4828: The file contains a character starting at offset 0x45 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'pybind_.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.h(1,1): warning C4828: The file contains a character starting at offset 0x46 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'pybind_.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.h(1,1): warning C4828: The file contains a character starting at offset 0x48 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'pybind_.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.h(1,1): warning C4828: The file contains a character starting at offset 0x49 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'pybind_.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.h(1,1): warning C4828: The file contains a character starting at offset 0x4b that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'pybind_.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.h(1,1): warning C4828: The file contains a character starting at offset 0x4c that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'pybind_.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.h(1,1): warning C4828: The file contains a character starting at offset 0x4d that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'pybind_.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.h(1,1): warning C4828: The file contains a character starting at offset 0x50 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'pybind_.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.h(1,1): warning C4828: The file contains a character starting at offset 0x52 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'pybind_.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.h(1,1): warning C4828: The file contains a character starting at offset 0x53 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'pybind_.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.h(1,1): warning C4828: The file contains a character starting at offset 0x57 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'pybind_.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.h(1,1): warning C4828: The file contains a character starting at offset 0x58 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'pybind_.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.h(1,1): warning C4828: The file contains a character starting at offset 0x44 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.h(1,1): warning C4828: The file contains a character starting at offset 0x45 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.h(1,1): warning C4828: The file contains a character starting at offset 0x46 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.h(1,1): warning C4828: The file contains a character starting at offset 0x48 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.h(1,1): warning C4828: The file contains a character starting at offset 0x49 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.h(1,1): warning C4828: The file contains a character starting at offset 0x4b that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.h(1,1): warning C4828: The file contains a character starting at offset 0x4c that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.h(1,1): warning C4828: The file contains a character starting at offset 0x4d that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.h(1,1): warning C4828: The file contains a character starting at offset 0x50 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.h(1,1): warning C4828: The file contains a character starting at offset 0x52 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.h(1,1): warning C4828: The file contains a character starting at offset 0x53 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.h(1,1): warning C4828: The file contains a character starting at offset 0x57 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\pybind_.h(1,1): warning C4828: The file contains a character starting at offset 0x58 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'predictive_graph.cpp')
+  
+  qrc_Predictive_Graph.cpp
+  moc_predictive_graph.cpp
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0xf3 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0xf4 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0xf5 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0xf7 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0xf8 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0xfa that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0xfb that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0xfc that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0xff that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x101 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x102 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x106 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x107 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2eb that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2ec that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2ed that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2ef that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2f0 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2f1 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2f2 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2f4 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2f5 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x2f6 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x305 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x307 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x308 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x39a that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x39d that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x39e that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3a1 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3a2 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3a3 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3a4 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3a6 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3df that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3e2 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3e3 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3e4 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3e5 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\predictive_graph.h(1,1): warning C4828: The file contains a character starting at offset 0x3ea that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'Predictive_Graph/x64/Release/qt/moc/moc_predictive_graph.cpp')
+  
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 2347 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  Predictive_Graph.vcxproj -> C:\Users\psh\Desktop\code\git_code\shAutomation\Prowell\cpp_versrion\Predictive_Graph\x64\Release\Predictive_Graph.exe

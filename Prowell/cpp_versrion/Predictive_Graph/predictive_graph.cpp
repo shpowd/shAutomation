@@ -55,7 +55,7 @@ Predictive_Graph::Predictive_Graph(QWidget* parent)
 
     updateTimer = new QTimer(this);
     connect(updateTimer, &QTimer::timeout, this, &Predictive_Graph::updateGraph);
-    updateTimer->start(1000);  // 1초 간격으로 업데이트
+    updateTimer->start(100);  // 1초 간격으로 업데이트
 }
 
 Predictive_Graph::~Predictive_Graph() = default;
@@ -77,22 +77,34 @@ void Predictive_Graph::updateGraph() {
 
     currentTime++;
 
-    // 예측값 계산 (현재 시간부터 30초까지 30개의 예측값)
-    std::vector<double> predictions = predict_sarima(getDataForPrediction(), 30);  // 예측 결과 가져오기
+    // 데이터가 정확히 30개일 때만 예측 수행
+    if (dataPoints.size() == 30) {
+        // 최근 30개의 데이터를 Python으로 전달
+        std::vector<double> recentData;
+        for (const auto& point : dataPoints) {
+            recentData.push_back(point.y());
+        }
 
-    // 예측된 데이터 그래프에 추가 (빨간 점선으로 표시)
-    predictedSeries->clear();  // 기존 예측값 제거
-    for (int i = 0; i < predictions.size(); ++i) {
-        // 예측값을 추가할 때 x 값을 currentTime + i로 설정하여 1초 간격으로 표시
-        predictedSeries->append( i, predictions[i]);  // 1초 간격으로 예측값 추가
-    }
-}
+        try {
+            // Python ARIMA 예측 호출
+            std::vector<double> predictions = predict_arima(recentData, 30);
 
-// 데이터 준비 (최근 30개의 데이터)
-std::vector<double> Predictive_Graph::getDataForPrediction() {
-    std::vector<double> data;
-    for (const auto& point : dataPoints) {
-        data.push_back(point.y());
+            // 예측값 그래프에 추가
+            predictedSeries->clear();
+
+            // 0초의 현재값과 1초의 예측값을 연결
+            predictedSeries->append(0, dataPoints.back().y()); // 현재값 (0초)
+            predictedSeries->append(1, predictions[0]);       // 첫 번째 예측값 (1초)
+
+            // 나머지 예측값 추가 (1초부터 30초까지)
+            for (int i = 1; i < predictions.size(); ++i) {
+                predictedSeries->append(i + 1, predictions[i]); // X값은 1초부터 시작
+            }
+
+        }
+        catch (const std::exception& e) {
+            qDebug() << "Prediction error:" << e.what();
+        }
     }
-    return data;
+
 }

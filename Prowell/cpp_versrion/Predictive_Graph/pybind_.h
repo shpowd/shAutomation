@@ -3,7 +3,7 @@
 
 #include <vector>
 
-// SARIMA 예측을 위한 함수 선언
-std::vector<double> predict_sarima(const std::vector<double>& data, int steps, int seasonal_period = 12);
+// ARIMA 예측을 위한 함수 선언
+std::vector<double> predict_arima(const std::vector<double>& data, int steps);
 
 #endif // PYBIND_H
