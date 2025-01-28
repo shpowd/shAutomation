@@ -6,12 +6,11 @@
 #include <QVBoxLayout>
 #include <cmath>
 #include <numeric>
-#include "pybind_.h"
+#include "pybind_.h"  // pybind_.h 파일 포함
 
 Predictive_Graph::Predictive_Graph(QWidget* parent)
     : QMainWindow(parent)
-    , currentTime(0)
-{
+    , currentTime(0) {
     this->resize(600, 400);
 
     chart = new QChart();
@@ -44,9 +43,19 @@ Predictive_Graph::Predictive_Graph(QWidget* parent)
     mainLayout->addWidget(yScrollBar);
     setCentralWidget(centralWidget);
 
+    // 예측값을 빨간 점선으로 표시
+    QPen redPen;
+    redPen.setColor(Qt::red);
+    redPen.setStyle(Qt::DashLine);  // 점선으로 설정
+    predictedSeries = new QLineSeries(this);
+    predictedSeries->setPen(redPen);  // 빨간 점선으로 설정
+    chart->addSeries(predictedSeries);
+    predictedSeries->attachAxis(xAxis);
+    predictedSeries->attachAxis(yAxis);
+
     updateTimer = new QTimer(this);
     connect(updateTimer, &QTimer::timeout, this, &Predictive_Graph::updateGraph);
-    updateTimer->start(1000);
+    updateTimer->start(1000);  // 1초 간격으로 업데이트
 }
 
 Predictive_Graph::~Predictive_Graph() = default;
@@ -60,24 +69,23 @@ void Predictive_Graph::updateGraph() {
         dataPoints.pop_front();
     }
 
-    currentTime++;
-
     // 실시간 데이터 갱신
     series->clear();
     for (const auto& point : dataPoints) {
         series->append(point.x() - currentTime, point.y());
     }
-    test();
-    int result = test();
-    qDebug() << "test() returned:" << result;
 
-    // ARIMA 모델을 사용하여 미래 예측
-    //std::vector<double> predictions = predict_arima(getDataForPrediction(), 10);  // 예측 결과 가져오기
+    currentTime++;
 
-    // 예측된 데이터 그래프에 추가
-    //for (int i = 0; i < predictions.size(); ++i) {
-    //    series->append(currentTime + i + 1, predictions[i]);
-    //}
+    // 예측값 계산 (현재 시간부터 30초까지 30개의 예측값)
+    std::vector<double> predictions = predict_sarima(getDataForPrediction(), 30);  // 예측 결과 가져오기
+
+    // 예측된 데이터 그래프에 추가 (빨간 점선으로 표시)
+    predictedSeries->clear();  // 기존 예측값 제거
+    for (int i = 0; i < predictions.size(); ++i) {
+        // 예측값을 추가할 때 x 값을 currentTime + i로 설정하여 1초 간격으로 표시
+        predictedSeries->append( i, predictions[i]);  // 1초 간격으로 예측값 추가
+    }
 }
 
 // 데이터 준비 (최근 30개의 데이터)

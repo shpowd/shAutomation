@@ -10,12 +10,14 @@
 #include <QChart>
 #include <vector>
 
+// ARIMA 예측을 위한 함수 선언
+std::vector<double> predict_arima(const std::vector<double>& data, int steps);
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class Predictive_Graph; }
 QT_END_NAMESPACE
 
-class Predictive_Graph : public QMainWindow
-{
+class Predictive_Graph : public QMainWindow {
     Q_OBJECT
 
 public:
@@ -29,6 +31,8 @@ private:
     QChart* chart;
     QChartView* chartView;
     QLineSeries* series;
+
+    QLineSeries* predictedSeries;  // 예측값을 위한 QLineSeries 추가
 
     QValueAxis* xAxis;
     QValueAxis* yAxis;
