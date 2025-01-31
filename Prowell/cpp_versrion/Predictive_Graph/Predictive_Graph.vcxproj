@@ -65,20 +65,20 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\psh\miniconda3\envs\dp_modbus\include;C:\Users\psh\miniconda3\envs\dp_modbus\include\pybind11_global;C:\Users\admin\anaconda3\envs\dp_modbus\include;C:\Users\admin\anaconda3\envs\dp_modbus\include\pybind11_global;C:\Users\psh\miniconda3\envs\dp_modbus\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\admin\anaconda3\envs\dp_modbus\include;C:\Users\admin\anaconda3\envs\dp_modbus\include\pybind11_global</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>C:\Users\psh\miniconda3\envs\dp_modbus\libs;C:\Users\admin\anaconda3\envs\dp_modbus\libs</AdditionalLibraryDirectories>
-      <AdditionalDependencies>C:\Users\psh\miniconda3\envs\dp_modbus\libs\python313.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\admin\anaconda3\envs\dp_modbus\libs</AdditionalLibraryDirectories>
+      <AdditionalDependencies>C:\Users\admin\anaconda3\envs\dp_modbus\libs\python313.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\psh\miniconda3\envs\dp_modbus\include;C:\Users\psh\miniconda3\envs\dp_modbus\include\pybind11_global;;C:\Users\psh\miniconda3\envs\dp_modbus\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\admin\anaconda3\envs\dp_modbus\include;C:\Users\admin\anaconda3\envs\dp_modbus\include\pybind11_global;C:\Users\psh\miniconda3\envs\dp_modbus\include;C:\Users\psh\miniconda3\envs\dp_modbus\include\pybind11_global</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>C:\Users\psh\miniconda3\envs\dp_modbus\libs;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>C:\Users\psh\miniconda3\envs\dp_modbus\libs\python313.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\admin\anaconda3\envs\dp_modbus\libs;C:\Users\psh\miniconda3\envs\dp_modbus\libs</AdditionalLibraryDirectories>
+      <AdditionalDependencies>C:\Users\admin\anaconda3\envs\dp_modbus\libs\python313.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
