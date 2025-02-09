@@ -1,0 +1,4 @@
+<RCC>
+    <qresource prefix="qt_modbus_multi">
+    </qresource>
+</RCC>

@@ -1,0 +1,2 @@
+print("tetetet")
+input("ddd")
