@@ -92,23 +92,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="qt_graph.cpp" />
+    <ClCompile Include="qt_monitoring.cpp" />
     <ClCompile Include="qt_window.cpp" />
     <QtRcc Include="qt_modbus_multi.qrc" />
     <QtUic Include="qt_modbus_multi.ui" />
-    <QtMoc Include="qt_modbus_multi.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </QtMoc>
-    <ClCompile Include="qt_modbus_multi.cpp">
-      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
-      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
-      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
-      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="qt_window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="qt_monitoring.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="qt_graph.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
