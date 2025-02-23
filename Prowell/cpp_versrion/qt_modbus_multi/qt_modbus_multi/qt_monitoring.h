@@ -12,20 +12,21 @@
 #include <QCloseEvent>
 #include <QMap>
 #include <QString>
+#include <QPointer>
 
 class MonitoringWindow : public QMainWindow {
     Q_OBJECT
 
 public:
     explicit MonitoringWindow(int rowNumber, const QMap<int, QMap<QString, QString>>& settings, QWidget* parent = nullptr);
-
+    ~MonitoringWindow();
 
 private:
     int rowNumber;
     QLabel* descriptionLabel;
     
     // 그래프 창
-    QMap<int, GraphWidget*> graphWindows; // ✅ 그래프 창을 저장하는 맵
+    QMap<int, QPointer<GraphWidget>> graphWindows; // ✅ 그래프 창을 저장하는 맵
 
 private slots:
     // "Monitoring" 창

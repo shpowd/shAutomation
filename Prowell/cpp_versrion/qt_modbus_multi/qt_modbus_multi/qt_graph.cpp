@@ -1,7 +1,7 @@
 ﻿#include "qt_graph.h"
 
-GraphWidget::GraphWidget(QWidget* parent) : QWidget(parent)
-{
+
+GraphWidget::GraphWidget(int graphIndex, QWidget* parent) : QWidget(parent), graphIndex(graphIndex) {
     setWindowFlags(Qt::Window); // 독립적인 창으로 설정
     setAttribute(Qt::WA_DeleteOnClose); // 창 닫을 때 자동 삭제
     QIcon icon("./src/icon.png");
@@ -17,10 +17,37 @@ GraphWidget::GraphWidget(QWidget* parent) : QWidget(parent)
     }
 }
 
-GraphWidget::~GraphWidget()
-{
-    qDebug() << "GraphWidget destroyed.";
+
+GraphWidget::~GraphWidget() {
+    //qDebug() << "🛑 GraphWidget 닫힘: " << graphIndex;
+
+    //if (series) {
+    //    series->deleteLater();
+    //    series = nullptr;
+    //}
+    //if (predictionSeries) {
+    //    predictionSeries->deleteLater();
+    //    predictionSeries = nullptr;
+    //}
+    //if (axisX) {
+    //    axisX->deleteLater();
+    //    axisX = nullptr;
+    //}
+    //if (axisY) {
+    //    axisY->deleteLater();
+    //    axisY = nullptr;
+    //}
+    //if (chart) {
+    //    chart->deleteLater();
+    //    chart = nullptr;
+    //}
+    //if (chartView) {
+    //    chartView->deleteLater();
+    //    chartView = nullptr;
+    //}
 }
+
+
 
 void GraphWidget::initSettingUI() {
     // Chart 초기화

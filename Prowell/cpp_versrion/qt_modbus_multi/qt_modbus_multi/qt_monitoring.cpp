@@ -127,43 +127,50 @@ MonitoringWindow::MonitoringWindow(int rowNumber, const QMap<int, QMap<QString, 
     mainLayout->addLayout(bottomLayout);
 }
 
+// ✅ "MonitoringWindow" 소멸자
+MonitoringWindow::~MonitoringWindow() {
+    qDebug() << "❌ Monitoring 창 닫힘, 관련 Graph 창 제거";
 
+}
 
-// ✅ Monitoring 창이 닫힐 때 열린 모든 그래프 창도 닫음
 void MonitoringWindow::closeEvent(QCloseEvent* event) {
-    qDebug() << "🔄 Monitoring 창이 닫혔음 - Row:" << rowNumber;
+    qDebug() << "❌ Monitoring 창 닫힘, 자식 Graph 창 자동 정리됨";
 
-    // ✅ 열린 모든 Graph 창 닫기
-    for (auto graphWindow : graphWindows) {
-        graphWindow->close(); // 모든 그래프 창 닫기
+    // 모든 그래프 창을 안전하게 닫기
+    for (auto it = graphWindows.begin(); it != graphWindows.end(); ++it) {
+        if (it.value()) {
+            it.value()->close();  // 그래프 창 닫기
+            it.value()->deleteLater();  // 메모리 해제 예약
+        }
     }
-    graphWindows.clear(); // ✅ 모든 창을 닫은 후 맵 초기화
+    graphWindows.clear();  // 그래프 창 목록 정리
 
+    emit windowClosed(rowNumber);  // 메인 윈도우에 알림
     event->accept();
 }
 
 
 
+
 // ✅ "그래프" 창 생성 함수
-void MonitoringWindow::openGraphWindow(int buttonNumber) {
-    if (graphWindows.contains(buttonNumber)) {
-        graphWindows[buttonNumber]->raise();
-        graphWindows[buttonNumber]->activateWindow();
+void MonitoringWindow::openGraphWindow(int graphIndex) {
+    if (graphWindows.contains(graphIndex)) {
+        graphWindows[graphIndex]->raise();
+        graphWindows[graphIndex]->activateWindow();
         return;
     }
 
-    // ✅ 새 그래프 창 생성
-    GraphWidget* graphWindow = new GraphWidget(this);
-    graphWindow->setWindowFlags(Qt::Window); // 독립 창 설정
-    graphWindow->resize(this->size());
-    graphWindow->move(this->pos()); // Monitoring 창과 동일한 위치에서 시작
+    // ✅ 부모를 'this'로 설정하여 모니터링 창의 자식으로 둠
+    GraphWidget* graphWindow = new GraphWidget(graphIndex, this);
+    graphWindows[graphIndex] = graphWindow;
+    graphWindow->setWindowFlags(Qt::Window);
+    graphWindow->move(this->pos());
     graphWindow->show();
 
-    // ✅ 창이 닫힐 때 graphWindows에서 제거
-    connect(graphWindow, &QObject::destroyed, this, [this, buttonNumber]() {
-        graphWindows.remove(buttonNumber);
-        });
+    // ✅ 그래프 창이 닫힐 때 제거
+    connect(graphWindow, &GraphWidget::destroyed, this, [this, graphIndex]() {
+        graphWindows.remove(graphIndex);
+        qDebug() << "✅ Graph 창이 닫혀서 제거됨: " << graphIndex;
+    });
 
-    graphWindows[buttonNumber] = graphWindow;
-    graphWindow->show();
 }

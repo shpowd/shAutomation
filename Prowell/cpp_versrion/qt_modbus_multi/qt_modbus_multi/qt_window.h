@@ -19,13 +19,13 @@
 #include <QFile>
 #include <QTextStream>
 #include <QCloseEvent>
+#include <QPointer>
 
 
 constexpr int NUM_REGISTERS = 14;  // 14개의 Holding Register 값
 constexpr int NUM_SLAVES = 16;     // 16개의 Modbus 슬레이브 장치
 
-class qt_window : public QWidget
-{
+class qt_window : public QWidget{
     Q_OBJECT
 
 
@@ -58,7 +58,7 @@ private:
 
 
         // "Monitoring" 창
-    QMap<int, MonitoringWindow*> monitoringWindows; // 여러 개의 Monitoring 창을 관리할 맵
+    QMap<int, QPointer<MonitoringWindow>> monitoringWindows; // 여러 개의 Monitoring 창을 관리할 맵
 
 
 

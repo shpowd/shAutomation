@@ -8,12 +8,11 @@
 #include <QDateTime>
 #include <QRandomGenerator>
 
-class GraphWidget : public QWidget
-{
+class GraphWidget : public QWidget{
     Q_OBJECT
 
 public:
-    explicit GraphWidget(QWidget* parent = nullptr);
+    explicit GraphWidget(int graphIndex, QWidget* parent = nullptr);  // ✅ 생성자 추가
     ~GraphWidget();
     void addDataPoints(qint64 timestamp, const QVector<quint16>& values);
     void setCurrentChartIndex(int index);
@@ -25,6 +24,8 @@ private:
     void updateXAxisRange();
     void updateYAxisRange();
     void updateButtonStyles();
+
+    int graphIndex;  // ✅ 저장할 변수 추가
 
     QChart* chart;
     QChartView* chartView;

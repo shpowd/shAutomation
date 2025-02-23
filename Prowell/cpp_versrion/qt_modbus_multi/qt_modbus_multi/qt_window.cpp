@@ -126,9 +126,11 @@ qt_window::qt_window(QWidget* parent)
     refreshMainWindow();
 }
 
-// ✅ main 창 파괴자
-qt_window::~qt_window()
-{
+// ✅ main 창 소멸자
+qt_window::~qt_window(){
+    monitoringWindows.clear();  // 
+
+
     for (auto client : clients) {
         if (client) {
             client->disconnectDevice();
@@ -208,14 +210,14 @@ void qt_window::refreshMainWindow() {
 
 // ✅ "Monitoring" 창 생성 함수
 void qt_window::openMonitoringWindow(int rowNumber) {
-    if (monitoringWindows.contains(rowNumber)) {
+    if (monitoringWindows.contains(rowNumber) && !monitoringWindows[rowNumber].isNull()) {
         monitoringWindows[rowNumber]->raise();
         monitoringWindows[rowNumber]->activateWindow();
         return;
     }
 
-    // ✅ MonitoringWindow를 독립 창으로 실행
-    MonitoringWindow* monitoringWindow = new MonitoringWindow(rowNumber, settings);
+    // ✅ MonitoringWindow를 자식 창으로 실행
+    MonitoringWindow* monitoringWindow = new MonitoringWindow(rowNumber, settings, this);
     monitoringWindow->setWindowFlags(Qt::Window);  // ✅ 새 창으로 실행
     monitoringWindow->move(this->pos());
     monitoringWindow->show();
@@ -224,10 +226,12 @@ void qt_window::openMonitoringWindow(int rowNumber) {
     connect(monitoringWindow, &MonitoringWindow::windowClosed, this, [this](int rowNumber) {
         monitoringWindows.remove(rowNumber);
         qDebug() << "✅ Monitoring 창이 닫혀서 제거됨: " << rowNumber;
-        });
+    });
 
     monitoringWindows[rowNumber] = monitoringWindow;
 }
+
+
 
 
 
