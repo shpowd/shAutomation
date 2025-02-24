@@ -24,7 +24,10 @@ public:
 private:
     int rowNumber;
     QLabel* descriptionLabel;
-    
+    void openCSVSettingDialog();
+    int getCSVSetting(int rowNum);
+    void updateCSVSetting(int rowNum, int newValue);
+
     // 그래프 창
     QMap<int, QPointer<GraphWidget>> graphWindows; // ✅ 그래프 창을 저장하는 맵
 

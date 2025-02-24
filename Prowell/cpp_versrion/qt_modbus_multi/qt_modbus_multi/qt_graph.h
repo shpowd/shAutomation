@@ -7,6 +7,7 @@
 #include <QVBoxLayout>
 #include <QDateTime>
 #include <QRandomGenerator>
+#include <QGraphicsDropShadowEffect>
 
 class GraphWidget : public QWidget{
     Q_OBJECT
@@ -24,6 +25,7 @@ private:
     void updateXAxisRange();
     void updateYAxisRange();
     void updateButtonStyles();
+    void openGraphSettings();
 
     int graphIndex;  // ✅ 저장할 변수 추가
 

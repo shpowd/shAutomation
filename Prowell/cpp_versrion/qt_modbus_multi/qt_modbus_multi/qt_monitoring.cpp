@@ -112,6 +112,7 @@ MonitoringWindow::MonitoringWindow(int rowNumber, const QMap<int, QMap<QString, 
         "} "
         "QPushButton:hover { background-color: #E0E0E0; }"
         "QPushButton:pressed { background-color: #C8C8C8; }");
+    connect(csvButton, &QPushButton::clicked, this, &MonitoringWindow::openCSVSettingDialog);
     bottomLayout->addWidget(csvButton);
 
     // ✅ 유동적 간격 추가 (버튼과 로고 사이)
@@ -149,6 +150,137 @@ void MonitoringWindow::closeEvent(QCloseEvent* event) {
     event->accept();
 }
 
+
+
+
+// ✅ "CSV 설정" 버튼 클릭 시 팝업 창 열기
+void MonitoringWindow::openCSVSettingDialog() {
+    QDialog* csvDialog = new QDialog(this);
+    csvDialog->setWindowTitle("CSV 저장 주기 설정");
+    csvDialog->setFixedSize(400, 300);
+
+    QVBoxLayout* layout = new QVBoxLayout(csvDialog);
+
+    // ✅ CSV 저장 주기 라벨
+    QLabel* titleLabel = new QLabel("CSV 저장 주기", csvDialog);
+    titleLabel->setAlignment(Qt::AlignCenter);
+    titleLabel->setStyleSheet("font-size: 18px; font-weight: bold;");
+    layout->addWidget(titleLabel);
+
+    // ✅ CSV 설정용 프레임
+    QFrame* csvFrame = new QFrame(csvDialog);
+    csvFrame->setStyleSheet("border: 1px solid gray; border-radius: 10px; padding: 10px;");
+    QVBoxLayout* csvOptionsLayout = new QVBoxLayout(csvFrame);
+
+    // ✅ CSV 설정용 라디오 버튼 생성
+    QStringList csvOptions = { "1회차", "10회차", "60회차", "240회차" };
+    QList<QRadioButton*> csvButtons;
+    QButtonGroup* csvButtonGroup = new QButtonGroup(csvDialog);
+
+    for (int i = 0; i < csvOptions.size(); ++i) {
+        QRadioButton* radioButton = new QRadioButton(csvOptions[i], csvFrame);
+        csvButtons.append(radioButton);
+        csvButtonGroup->addButton(radioButton, csvOptions[i].remove("회차").toInt());  // ✅ 버튼 ID를 정수값으로 설정
+        csvOptionsLayout->addWidget(radioButton);
+    }
+    csvFrame->setLayout(csvOptionsLayout);
+    layout->addWidget(csvFrame);
+
+    // ✅ 현재 모니터링 인덱스에 맞는 CSV 설정 값을 가져와서 반영
+    int currentSetting = getCSVSetting(rowNumber);
+    for (auto* btn : csvButtons) {
+        if (csvButtonGroup->id(btn) == currentSetting) {
+            btn->setChecked(true);
+            break;
+        }
+    }
+
+    // ✅ 저장 및 닫기 버튼 추가
+    QHBoxLayout* buttonLayout = new QHBoxLayout;
+    QPushButton* saveButton = new QPushButton("저장", csvDialog);
+    QPushButton* closeButton = new QPushButton("닫기", csvDialog);
+
+    buttonLayout->addWidget(saveButton);
+    buttonLayout->addWidget(closeButton);
+    layout->addLayout(buttonLayout);
+
+    // ✅ 저장 버튼 클릭 시 선택된 값 저장
+    connect(saveButton, &QPushButton::clicked, this, [=]() {
+        int selectedValue = csvButtonGroup->checkedId();
+        if (selectedValue != -1) {
+            updateCSVSetting(rowNumber, selectedValue);
+        }
+        csvDialog->accept();
+        });
+
+    // ✅ 닫기 버튼 클릭 시 창 닫기
+    connect(closeButton, &QPushButton::clicked, csvDialog, &QDialog::reject);
+
+    csvDialog->exec();
+}
+
+int MonitoringWindow::getCSVSetting(int rowNum) {
+    QFile file("./config.csv");
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qDebug() << "⚠ CSV 파일을 열 수 없음!";
+        return -1;
+    }
+
+    QTextStream in(&file);
+    QString line;
+
+    while (!in.atEnd()) {
+        line = in.readLine();
+        QStringList columns = line.split(",");
+        if (columns.size() > 7) {  // ✅ CSVsetting이 존재하는지 확인
+            int no = columns[0].toInt();
+            if (no == rowNum) {
+                file.close();
+                return columns[7].toInt();  // ✅ CSVsetting 값 반환
+            }
+        }
+    }
+
+    file.close();
+    return -1;  // ✅ 일치하는 값이 없으면 -1 반환 (버튼 선택 안 함)
+}
+
+void MonitoringWindow::updateCSVSetting(int rowNum, int newValue) {
+    QFile file("./config.csv");
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qDebug() << "⚠ CSV 파일을 열 수 없음!";
+        return;
+    }
+
+    QStringList lines;
+    QTextStream in(&file);
+
+    while (!in.atEnd()) {
+        QString line = in.readLine();
+        QStringList columns = line.split(",");
+        if (columns.size() > 7) {
+            int no = columns[0].toInt();
+            if (no == rowNum) {
+                columns[7] = QString::number(newValue);  // ✅ CSVsetting 값 업데이트
+            }
+            lines.append(columns.join(","));  // ✅ 변경된 라인 저장
+        }
+    }
+    file.close();
+
+    // ✅ 변경된 내용을 다시 CSV 파일에 저장
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        qDebug() << "⚠ CSV 파일을 다시 열 수 없음!";
+        return;
+    }
+
+    QTextStream out(&file);
+    for (const QString& line : lines) {
+        out << line << "\n";
+    }
+    file.close();
+    qDebug() << "✅ CSV 설정이 성공적으로 저장됨!";
+}
 
 
 
