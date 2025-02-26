@@ -20,7 +20,7 @@ public:
     void setRangeType(int type); // X축 범위 유형 설정
 
 private:
-    void initSettingUI(); // UI 구성 메서드
+    void initGraphUI(); // UI 구성 메서드
     void updateData();
     void updateXAxisRange();
     void updateYAxisRange();

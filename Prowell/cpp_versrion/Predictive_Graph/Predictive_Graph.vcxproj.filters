@@ -43,10 +43,18 @@
     <ClCompile Include="pybind_.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="trackpadwidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pybind_.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="trackpadwidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>

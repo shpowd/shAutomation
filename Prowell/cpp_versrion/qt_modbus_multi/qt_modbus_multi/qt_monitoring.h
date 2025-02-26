@@ -18,11 +18,13 @@ class MonitoringWindow : public QMainWindow {
     Q_OBJECT
 
 public:
-    explicit MonitoringWindow(int rowNumber, const QMap<int, QMap<QString, QString>>& settings, QWidget* parent = nullptr);
+    explicit MonitoringWindow(int monitoringIndex, const QMap<int, QMap<QString, QString>>& settings, QWidget* parent = nullptr);
     ~MonitoringWindow();
 
 private:
-    int rowNumber;
+    void initMonitoringUI(); // UI 구성 메서드
+    int monitoringIndex;
+    QMap<int, QMap<QString, QString>> settings; // ✅ settings을 멤버 변수로 저장
     QLabel* descriptionLabel;
     void openCSVSettingDialog();
     int getCSVSetting(int rowNum);
@@ -33,11 +35,11 @@ private:
 
 private slots:
     // "Monitoring" 창
-    void openGraphWindow(int rowNumber); // ✅ Monitoring 창을 여는 함수
+    void openGraphWindow(int monitoringIndex); // ✅ Monitoring 창을 여는 함수
 
 
 signals:
-    void windowClosed(int rowNumber); // ✅ 창이 닫힐 때 rowNumber를 전달하는 시그널
+    void windowClosed(int monitoringIndex); // ✅ 창이 닫힐 때 monitoringIndex를 전달하는 시그널
 
 
 protected:

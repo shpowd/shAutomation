@@ -36,6 +36,7 @@ public:
 
 private:
     // UI 요소 정의
+    void initMainUI();                      // UI 구성 메서드
         // "Main" 창
     QPushButton* openSiteSettingButton;     // 현장 설정 버튼
     QTableWidget* mainTableWidget;          // Main Window 전용 테이블
@@ -87,11 +88,11 @@ private slots:
     void refreshMainWindow();                                       // siteSetupWindow가 닫힐 때 Main Window 업데이트
 
     // "통신 설정" 창
-    void openCommSettingsWindow(int rowNumber); // 통신 설정창 여는 함수
+    void openCommSettingsWindow(int monitoringIndex); // 통신 설정창 여는 함수
 
 
     // "Monitoring" 창
-    void openMonitoringWindow(int rowNumber); // ✅ Monitoring 창을 여는 함수
+    void openMonitoringWindow(int monitoringIndex); // ✅ Monitoring 창을 여는 함수
 
 
 

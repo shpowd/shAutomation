@@ -3,21 +3,24 @@
 #include <QtCharts/QChartView>
 #include <QtCharts/QLineSeries>
 #include <QtCharts/QValueAxis>
+#include <QtCharts/QScatterSeries>
+#include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <QVector>
+#include <QFrame>
 #include <cmath>
 #include <numeric>
-#include "pybind_.h"  // pybind_.h ÆÄÀÏ Æ÷ÇÔ
+#include "pybind_.h"  // pybind_.h íŒŒì¼ í¬í•¨
 
 Predictive_Graph::Predictive_Graph(QWidget* parent)
     : QMainWindow(parent)
     , currentTime(0) {
-    this->resize(600, 400);
+    this->resize(1000, 800); // ì°½ í¬ê¸° ì¦ê°€
 
+    // ì²« ë²ˆì§¸ ê·¸ë˜í”„ ì„¤ì •
     chart = new QChart();
     series = new QLineSeries(this);
-
     chart->addSeries(series);
-
     xAxis = new QValueAxis(this);
     yAxis = new QValueAxis(this);
     xAxis->setRange(-maxTime / 2, maxTime / 2);
@@ -26,85 +29,219 @@ Predictive_Graph::Predictive_Graph(QWidget* parent)
     chart->addAxis(yAxis, Qt::AlignLeft);
     series->attachAxis(xAxis);
     series->attachAxis(yAxis);
-
-    chart->setTitle("");
+    chart->setTitle("Graph 1");
     chart->legend()->hide();
-
     chartView = new QChartView(chart, this);
     chartView->setRenderHint(QPainter::Antialiasing);
 
-    yScrollBar = new QScrollBar(Qt::Vertical, this);
-    yScrollBar->setRange(0, 1000);
-    yScrollBar->setValue(500);
-
-    QWidget* centralWidget = new QWidget(this);
-    QHBoxLayout* mainLayout = new QHBoxLayout(centralWidget);
-    mainLayout->addWidget(chartView, 1);
-    mainLayout->addWidget(yScrollBar);
-    setCentralWidget(centralWidget);
-
-    // ¿¹Ãø°ªÀ» »¡°£ Á¡¼±À¸·Î Ç¥½Ã
+    // ì˜ˆì¸¡ ì„  ì¶”ê°€ (Graph 1)
     QPen redPen;
     redPen.setColor(Qt::red);
-    redPen.setStyle(Qt::DashLine);  // Á¡¼±À¸·Î ¼³Á¤
+    redPen.setStyle(Qt::DashLine);
     predictedSeries = new QLineSeries(this);
-    predictedSeries->setPen(redPen);  // »¡°£ Á¡¼±À¸·Î ¼³Á¤
+    predictedSeries->setPen(redPen);
     chart->addSeries(predictedSeries);
     predictedSeries->attachAxis(xAxis);
     predictedSeries->attachAxis(yAxis);
 
+    // ë‘ ë²ˆì§¸ ê·¸ë˜í”„ ì„¤ì •
+    chart2 = new QChart();
+    series2 = new QLineSeries(this);
+    chart2->addSeries(series2);
+    xAxis2 = new QValueAxis(this);
+    yAxis2 = new QValueAxis(this);
+    xAxis2->setRange(-maxTime / 2, maxTime / 2);
+    yAxis2->setRange(0, 1000);
+    chart2->addAxis(xAxis2, Qt::AlignBottom);
+    chart2->addAxis(yAxis2, Qt::AlignLeft);
+    series2->attachAxis(xAxis2);
+    series2->attachAxis(yAxis2);
+    chart2->setTitle("Graph 2");
+    chart2->legend()->hide();
+    chartView2 = new QChartView(chart2, this);
+    chartView2->setRenderHint(QPainter::Antialiasing);
+
+    // ì˜ˆì¸¡ ì„  ì¶”ê°€ (Graph 2)
+    predictedSeries2 = new QLineSeries(this);
+    predictedSeries2->setPen(redPen);
+    chart2->addSeries(predictedSeries2);
+    predictedSeries2->attachAxis(xAxis2);
+    predictedSeries2->attachAxis(yAxis2);
+
+    // ì„¸ ë²ˆì§¸ ê·¸ë˜í”„ (ì‚°ì ë„) ì„¤ì •
+    chart3 = new QChart();
+    lineSeries3 = new QLineSeries(this); // ğŸ”¹ QLineSeriesë§Œ ì‚¬ìš©
+    chart3->addSeries(lineSeries3);
+    xAxis3 = new QValueAxis(this);
+    yAxis3 = new QValueAxis(this);
+    xAxis3->setRange(0, 1000);
+    yAxis3->setRange(0, 1000);
+    xAxis3->setTitleText("Graph 1 Y-values");
+    yAxis3->setTitleText("Graph 2 Y-values");
+    chart3->addAxis(xAxis3, Qt::AlignBottom);
+    chart3->addAxis(yAxis3, Qt::AlignLeft);
+    lineSeries3->attachAxis(xAxis3);
+    lineSeries3->attachAxis(yAxis3);
+    // ğŸ”¹ ì˜ˆì¸¡ê°’ì„ ì ì„ ìœ¼ë¡œ í‘œì‹œí•  ìƒˆë¡œìš´ QLineSeries ì¶”ê°€
+    predictedSeries3 = new QLineSeries(this);
+    QPen redDashedPen(Qt::red);
+    redDashedPen.setStyle(Qt::DashLine);
+    redDashedPen.setWidth(2);
+    predictedSeries3->setPen(redDashedPen);
+    chart3->addSeries(predictedSeries3);
+    predictedSeries3->attachAxis(xAxis3);
+    predictedSeries3->attachAxis(yAxis3);
+    chart3->setTitle("Line Graph (Graph1 Y vs Graph2 Y)");
+
+
+    chart3->legend()->hide();
+    chartView3 = new QChartView(chart3, this);
+    chartView3->setRenderHint(QPainter::Antialiasing);
+
+    // ìŠ¤í¬ë¡¤ë°” 2ê°œ ì¶”ê°€
+    yScrollBar1 = new QScrollBar(Qt::Vertical, this);
+    yScrollBar1->setRange(0, 1000);
+    yScrollBar1->setValue(500);
+    yScrollBar2 = new QScrollBar(Qt::Vertical, this);
+    yScrollBar2->setRange(0, 1000);
+    yScrollBar2->setValue(500);
+
+    // ì²« ë²ˆì§¸ ê·¸ë˜í”„ & ìŠ¤í¬ë¡¤ë°” (ê°€ë¡œ ì •ë ¬)
+    QHBoxLayout* graph1Layout = new QHBoxLayout();
+    graph1Layout->addWidget(chartView, 1);
+    graph1Layout->addWidget(yScrollBar1);
+
+    // ë‘ ë²ˆì§¸ ê·¸ë˜í”„ & ìŠ¤í¬ë¡¤ë°” (ê°€ë¡œ ì •ë ¬)
+    QHBoxLayout* graph2Layout = new QHBoxLayout();
+    graph2Layout->addWidget(chartView2, 1);
+    graph2Layout->addWidget(yScrollBar2);
+
+    // ê·¸ë˜í”„ 1, 2ë¥¼ ì„¸ë¡œë¡œ ì •ë ¬
+    QVBoxLayout* rightLayout = new QVBoxLayout();
+    rightLayout->addLayout(graph1Layout);
+    rightLayout->addLayout(graph2Layout);
+
+
+    // íŠ¸ë™íŒ¨ë“œ ì¶”ê°€
+    trackpadWidget = new TrackpadWidget(this);
+    connect(trackpadWidget, &TrackpadWidget::moveScrollBars, this, &Predictive_Graph::handleTrackpadMove);
+
+    // ğŸ”¹ ê·¸ë˜í”„ 3 + íŠ¸ë™íŒ¨ë“œë¥¼ ì„¸ë¡œ ë°°ì¹˜
+    QVBoxLayout* leftLayout = new QVBoxLayout();
+    leftLayout->addWidget(chartView3, 3);  // ğŸ”¹ ê·¸ë˜í”„ 3 
+    leftLayout->addWidget(trackpadWidget, 2);  // ğŸ”¹ íŠ¸ë™íŒ¨ë“œ 
+
+
+    // ì „ì²´ ë ˆì´ì•„ì›ƒ (ì¢Œ: Graph3, ìš°: Graph1 & Graph2 + Scrollbars)
+    QWidget* centralWidget = new QWidget(this);
+    QHBoxLayout* mainLayout = new QHBoxLayout(centralWidget);
+    mainLayout->addLayout(leftLayout, 4); // ì™¼ìª½: ì‚°ì ë„
+    mainLayout->addLayout(rightLayout, 2); // ì˜¤ë¥¸ìª½: ê·¸ë˜í”„1,2 + ê°œë³„ ìŠ¤í¬ë¡¤ë°”
+    setCentralWidget(centralWidget);
+
     updateTimer = new QTimer(this);
     connect(updateTimer, &QTimer::timeout, this, &Predictive_Graph::updateGraph);
-    updateTimer->start(100);  // 1ÃÊ °£°İÀ¸·Î ¾÷µ¥ÀÌÆ®
+    updateTimer->start(100);
 }
 
-Predictive_Graph::~Predictive_Graph() = default;
+
 
 void Predictive_Graph::updateGraph() {
-    int yValue = yScrollBar->maximum() - yScrollBar->value();
+    int yValue1 = yScrollBar1->maximum() - yScrollBar1->value();
+    int yValue2 = yScrollBar2->maximum() - yScrollBar2->value();
 
-    // µ¥ÀÌÅÍ Ãß°¡
-    dataPoints.append(QPointF(currentTime, yValue));
-    if (dataPoints.size() > 30) {
-        dataPoints.pop_front();
-    }
+    // ğŸ”¹ ê·¸ë˜í”„ 1 ë°ì´í„° ì—…ë°ì´íŠ¸ (ë…ë¦½ì )
+    dataPoints.append(QPointF(currentTime, yValue1));
+    if (dataPoints.size() > 30) dataPoints.pop_front();
 
-    // ½Ç½Ã°£ µ¥ÀÌÅÍ °»½Å
+    // ğŸ”¹ ê·¸ë˜í”„ 2 ë°ì´í„° ì—…ë°ì´íŠ¸ (ë…ë¦½ì )
+    dataPoints2.append(QPointF(currentTime, yValue2));
+    if (dataPoints2.size() > 30) dataPoints2.pop_front();
+
+    // ğŸ”¹ ì‹¤ì‹œê°„ ê·¸ë˜í”„ ì—…ë°ì´íŠ¸ (ë…ë¦½ì )
     series->clear();
     for (const auto& point : dataPoints) {
         series->append(point.x() - currentTime, point.y());
     }
 
-    currentTime++;
+    series2->clear();
+    for (const auto& point : dataPoints2) {
+        series2->append(point.x() - currentTime, point.y());
+    }
 
-    // µ¥ÀÌÅÍ°¡ Á¤È®È÷ 30°³ÀÏ ¶§¸¸ ¿¹Ãø ¼öÇà
+
+    // ğŸ”¹ ê·¸ë˜í”„ 3 ì—…ë°ì´íŠ¸ (ì‹¤ì œ ë°ì´í„°)
+    lineSeries3->clear();
+    for (int i = 0; i < dataPoints.size() && i < dataPoints2.size(); ++i) {
+        double xValue = dataPoints[i].y();
+        double yValue = dataPoints2[i].y();
+        lineSeries3->append(xValue, yValue);
+    }
+
+    // ğŸ”¹ ê·¸ë˜í”„ 3 ì˜ˆì¸¡ê°’ ì ì„  ì´ˆê¸°í™”
+    predictedSeries3->clear();
+
+    // ğŸ”¹ ì˜ˆì¸¡ê°’ ì €ì¥ì„ ìœ„í•œ ë³€ìˆ˜ ì„ ì–¸
+    std::vector<double> predictions1;
+    std::vector<double> predictions2;
+
+    // ğŸ”¹ ê·¸ë˜í”„ 1 ì˜ˆì¸¡ ìˆ˜í–‰ (ë…ë¦½ì )
     if (dataPoints.size() == 30) {
-        // ÃÖ±Ù 30°³ÀÇ µ¥ÀÌÅÍ¸¦ PythonÀ¸·Î Àü´Ş
-        std::vector<double> recentData;
+        std::vector<double> recentData1;
         for (const auto& point : dataPoints) {
-            recentData.push_back(point.y());
+            recentData1.push_back(point.y());
         }
 
         try {
-            // Python ARIMA ¿¹Ãø È£Ãâ
-            std::vector<double> predictions = predict_arima(recentData, 30);
+            predictions1 = predict_arima(recentData1, 30);
 
-            // ¿¹Ãø°ª ±×·¡ÇÁ¿¡ Ãß°¡
             predictedSeries->clear();
-
-            // 0ÃÊÀÇ ÇöÀç°ª°ú 1ÃÊÀÇ ¿¹Ãø°ªÀ» ¿¬°á
-            predictedSeries->append(0, dataPoints.back().y()); // ÇöÀç°ª (0ÃÊ)
-            predictedSeries->append(1, predictions[0]);       // Ã¹ ¹øÂ° ¿¹Ãø°ª (1ÃÊ)
-
-            // ³ª¸ÓÁö ¿¹Ãø°ª Ãß°¡ (1ÃÊºÎÅÍ 30ÃÊ±îÁö)
-            for (int i = 1; i < predictions.size(); ++i) {
-                predictedSeries->append(i + 1, predictions[i]); // X°ªÀº 1ÃÊºÎÅÍ ½ÃÀÛ
+            predictedSeries->append(0, dataPoints.back().y());
+            for (int i = 0; i < predictions1.size(); ++i) {
+                predictedSeries->append(i + 1, predictions1[i]);
             }
-
         }
         catch (const std::exception& e) {
-            qDebug() << "Prediction error:" << e.what();
+            qDebug() << "Prediction error (Graph 1):" << e.what();
         }
     }
 
+    // ğŸ”¹ ê·¸ë˜í”„ 2 ì˜ˆì¸¡ ìˆ˜í–‰ (ë…ë¦½ì )
+    if (dataPoints2.size() == 30) {
+        std::vector<double> recentData2;
+        for (const auto& point : dataPoints2) {
+            recentData2.push_back(point.y());
+        }
+
+        try {
+            predictions2 = predict_arima(recentData2, 30);
+
+            predictedSeries2->clear();
+            predictedSeries2->append(0, dataPoints2.back().y());
+            for (int i = 0; i < predictions2.size(); ++i) {
+                predictedSeries2->append(i + 1, predictions2[i]);
+            }
+        }
+        catch (const std::exception& e) {
+            qDebug() << "Prediction error (Graph 2):" << e.what();
+        }
+    }
+
+    // ğŸ”¹ ê·¸ë˜í”„ 1, 2ì˜ ì˜ˆì¸¡ì´ ì™„ë£Œëœ í›„ ê·¸ë˜í”„ 3ì—ë„ ì˜ˆì¸¡ê°’ ì¶”ê°€ (ë¹¨ê°„ ì ì„ )
+    if (!predictions1.empty() && !predictions2.empty()) {
+        for (int i = 0; i < predictions1.size() && i < predictions2.size(); ++i) {
+            double xPred = predictions1[i];  // ì˜ˆì¸¡ëœ Graph 1 Yê°’
+            double yPred = predictions2[i];  // ì˜ˆì¸¡ëœ Graph 2 Yê°’
+            predictedSeries3->append(xPred, yPred);
+        }
+    }
+
+    currentTime++;
+}
+
+
+void Predictive_Graph::handleTrackpadMove(int deltaX, int deltaY) {
+    int sensitivity = 2; // ì´ë™ ì†ë„ ì¡°ì ˆ
+    yScrollBar1->setValue(yScrollBar1->value() - deltaX / sensitivity);
+    yScrollBar2->setValue(yScrollBar2->value() - deltaY / sensitivity);
 }

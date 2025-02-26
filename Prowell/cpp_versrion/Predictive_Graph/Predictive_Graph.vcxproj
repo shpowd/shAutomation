@@ -111,6 +111,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="pybind_.cpp" />
+    <ClCompile Include="trackpadwidget.cpp" />
     <QtRcc Include="Predictive_Graph.qrc" />
     <QtUic Include="Predictive_Graph.ui" />
     <QtMoc Include="predictive_graph.h" />
@@ -119,6 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pybind_.h" />
+    <QtMoc Include="trackpadwidget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

@@ -1,11 +1,39 @@
 #include "qt_window.h"
 #include <QDebug>
 
-
 // ✅ main 창 생성 함수
 qt_window::qt_window(QWidget* parent)
-    : QWidget(parent), siteSettingWindow(nullptr){
+    : QWidget(parent), siteSettingWindow(nullptr) {
+    setWindowTitle("Main");
+    setMinimumSize(200, 150);
+    resize(1024, 768);
+    QIcon icon("./src/icon.png");
+    setWindowIcon(icon);
 
+    initMainUI(); // UI 초기화
+}
+
+// ✅ main 창 소멸자
+qt_window::~qt_window() {
+    monitoringWindows.clear();  // 
+
+
+    for (auto client : clients) {
+        if (client) {
+            client->disconnectDevice();
+            delete client;
+        }
+    }
+    for (auto timer : pollTimers) {
+        if (timer) {
+            timer->stop();
+            delete timer;
+        }
+    }
+}
+
+// ✅ mainUI 생성 함수 
+void qt_window::initMainUI(){
     setWindowTitle("Main");
     setMinimumSize(200, 150);
     resize(1024, 768);
@@ -126,24 +154,6 @@ qt_window::qt_window(QWidget* parent)
     refreshMainWindow();
 }
 
-// ✅ main 창 소멸자
-qt_window::~qt_window(){
-    monitoringWindows.clear();  // 
-
-
-    for (auto client : clients) {
-        if (client) {
-            client->disconnectDevice();
-            delete client;
-        }
-    }
-    for (auto timer : pollTimers) {
-        if (timer) {
-            timer->stop();
-            delete timer;
-        }
-    }
-}
 
 // ✅ main 페이지 전환 함수
 void qt_window::mainWindowDisplayPage(int pageIndex){
@@ -154,10 +164,10 @@ void qt_window::mainWindowDisplayPage(int pageIndex){
     QFont cellFont("맑은 고딕", 16, QFont::Normal);
 
     for (int i = 0; i < 10; ++i) {
-        int rowNumber = (pageIndex == 1) ? i + 1 : i + 11;
+        int monitoringIndex = (pageIndex == 1) ? i + 1 : i + 11;
 
-        QTableWidgetItem* itemNo = new QTableWidgetItem(QString::number(rowNumber));
-        QTableWidgetItem* description = new QTableWidgetItem(settings.value(rowNumber).value("description", ""));
+        QTableWidgetItem* itemNo = new QTableWidgetItem(QString::number(monitoringIndex));
+        QTableWidgetItem* description = new QTableWidgetItem(settings.value(monitoringIndex).value("description", ""));
 
         // ✅ 폰트 적용 (한 번만 설정)
         itemNo->setFont(cellFont);
@@ -168,7 +178,7 @@ void qt_window::mainWindowDisplayPage(int pageIndex){
         description->setTextAlignment(Qt::AlignCenter);
 
         // ✅ 모니터링 버튼 추가
-        QPushButton* monitorButton = new QPushButton("Monitoring" + QString::number(rowNumber));
+        QPushButton* monitorButton = new QPushButton("Monitoring" + QString::number(monitoringIndex));
         monitorButton->setStyleSheet("QPushButton {"
             "font-size: 18px; font - family: '맑은 고딕'; font-weight: Thin;"
             "background-color: #F0F0F0;"  // Windows 기본 버튼 색
@@ -181,8 +191,8 @@ void qt_window::mainWindowDisplayPage(int pageIndex){
         );
 
         // ✅ 버튼 클릭 시 Monitoring 창 열기
-        connect(monitorButton, &QPushButton::clicked, this, [this, rowNumber]() {
-            openMonitoringWindow(rowNumber);
+        connect(monitorButton, &QPushButton::clicked, this, [this, monitoringIndex]() {
+            openMonitoringWindow(monitoringIndex);
         });
 
         mainTableWidget->setItem(i, 0, itemNo);
@@ -206,32 +216,28 @@ void qt_window::refreshMainWindow() {
 
 
 
-
-
 // ✅ "Monitoring" 창 생성 함수
-void qt_window::openMonitoringWindow(int rowNumber) {
-    if (monitoringWindows.contains(rowNumber) && !monitoringWindows[rowNumber].isNull()) {
-        monitoringWindows[rowNumber]->raise();
-        monitoringWindows[rowNumber]->activateWindow();
+void qt_window::openMonitoringWindow(int monitoringIndex) {
+    if (monitoringWindows.contains(monitoringIndex) && !monitoringWindows[monitoringIndex].isNull()) {
+        monitoringWindows[monitoringIndex]->raise();
+        monitoringWindows[monitoringIndex]->activateWindow();
         return;
     }
 
     // ✅ MonitoringWindow를 자식 창으로 실행
-    MonitoringWindow* monitoringWindow = new MonitoringWindow(rowNumber, settings, this);
-    monitoringWindow->setWindowFlags(Qt::Window);  // ✅ 새 창으로 실행
+    MonitoringWindow* monitoringWindow = new MonitoringWindow(monitoringIndex, settings, this);
+    monitoringWindows[monitoringIndex] = monitoringWindow;
     monitoringWindow->move(this->pos());
     monitoringWindow->show();
 
     // ✅ 창이 닫힐 때 monitoringWindows에서 제거
-    connect(monitoringWindow, &MonitoringWindow::windowClosed, this, [this](int rowNumber) {
-        monitoringWindows.remove(rowNumber);
-        qDebug() << "✅ Monitoring 창이 닫혀서 제거됨: " << rowNumber;
+    connect(monitoringWindow, &MonitoringWindow::windowClosed, this, [this](int monitoringIndex) {
+        monitoringWindows.remove(monitoringIndex);
+        qDebug() << "✅ Monitoring 창이 닫혀서 제거됨: " << monitoringIndex;
     });
 
-    monitoringWindows[rowNumber] = monitoringWindow;
+    monitoringWindows[monitoringIndex] = monitoringWindow;
 }
-
-
 
 
 
@@ -386,12 +392,12 @@ void qt_window::siteSettingWindowDisplayPage(int pageIndex){
     QFont cellFont("맑은 고딕", 16, QFont::Normal);
 
     for (int i = 0; i < 10; ++i) {
-        int rowNumber = (pageIndex == 1) ? i + 1 : i + 11;
+        int monitoringIndex = (pageIndex == 1) ? i + 1 : i + 11;
 
-        QTableWidgetItem* itemNo = new QTableWidgetItem(QString::number(rowNumber));
-        QTableWidgetItem* description = new QTableWidgetItem(settings.value(rowNumber).value("description", ""));
-        QTableWidgetItem* commState = new QTableWidgetItem(QString("Value %1").arg(rowNumber + 20));
-        QTableWidgetItem* notes = new QTableWidgetItem(settings.value(rowNumber).value("notes", ""));
+        QTableWidgetItem* itemNo = new QTableWidgetItem(QString::number(monitoringIndex));
+        QTableWidgetItem* description = new QTableWidgetItem(settings.value(monitoringIndex).value("description", ""));
+        QTableWidgetItem* commState = new QTableWidgetItem(QString("Value %1").arg(monitoringIndex + 20));
+        QTableWidgetItem* notes = new QTableWidgetItem(settings.value(monitoringIndex).value("notes", ""));
 
         // ✅ 폰트 적용 (메인 페이지와 동일)
         itemNo->setFont(cellFont);
@@ -410,7 +416,7 @@ void qt_window::siteSettingWindowDisplayPage(int pageIndex){
         commState->setFlags(Qt::ItemIsEnabled);
 
         // ✅ "통신 설정" 버튼 추가 (메인 윈도우의 Monitoring 버튼과 동일한 스타일)
-        QPushButton* commButton = new QPushButton("통신 설정" + QString::number(rowNumber));
+        QPushButton* commButton = new QPushButton("통신 설정" + QString::number(monitoringIndex));
 
         commButton->setStyleSheet("QPushButton {"
             "font-size: 18px; font - family: '맑은 고딕'; font-weight: Thin;"
@@ -424,8 +430,8 @@ void qt_window::siteSettingWindowDisplayPage(int pageIndex){
         );
 
         // ✅ 버튼 클릭 시 "통신 설정" 팝업 창 열기
-        connect(commButton, &QPushButton::clicked, this, [this, rowNumber]() {
-            openCommSettingsWindow(rowNumber);
+        connect(commButton, &QPushButton::clicked, this, [this, monitoringIndex]() {
+            openCommSettingsWindow(monitoringIndex);
             });
 
 
@@ -441,7 +447,7 @@ void qt_window::siteSettingWindowDisplayPage(int pageIndex){
 // ✅ "현장 설정" save 함수
 void qt_window::siteSettingWindowSave() {
     for (int i = 0; i < 10; ++i) {
-        int rowNumber = (currentSiteSettingpPage == 1) ? i + 1 : i + 11;  // ✅ 현재 페이지에 따라 행 번호 변경
+        int monitoringIndex = (currentSiteSettingpPage == 1) ? i + 1 : i + 11;  // ✅ 현재 페이지에 따라 행 번호 변경
 
         QTableWidgetItem* descriptionItem = siteSettingTableWidget->item(i, 1);
         QTableWidgetItem* notesItem = siteSettingTableWidget->item(i, 4);
@@ -449,8 +455,8 @@ void qt_window::siteSettingWindowSave() {
         QString description = descriptionItem ? descriptionItem->text() : "";
         QString notes = notesItem ? notesItem->text() : "";
 
-        settings[rowNumber]["description"] = description;
-        settings[rowNumber]["notes"] = notes;
+        settings[monitoringIndex]["description"] = description;
+        settings[monitoringIndex]["notes"] = notes;
     }
 
     saveSettingsToCSV();
@@ -461,11 +467,10 @@ void qt_window::siteSettingWindowSave() {
 
 
 
-
 // ✅ "통신 설정" 창 생성 함수
-void qt_window::openCommSettingsWindow(int rowNumber){
+void qt_window::openCommSettingsWindow(int monitoringIndex){
     QWidget* commSettingsDialog = new QWidget;
-    commSettingsDialog->setWindowTitle("통신 설정 " + QString::number(rowNumber));
+    commSettingsDialog->setWindowTitle("통신 설정 " + QString::number(monitoringIndex));
     commSettingsDialog->setFixedSize(400, 350);
 
     QVBoxLayout* mainLayout = new QVBoxLayout(commSettingsDialog);
@@ -479,7 +484,7 @@ void qt_window::openCommSettingsWindow(int rowNumber){
     QVBoxLayout* groupLayout = new QVBoxLayout(modbusGroup);
 
     // ✅ CSV에서 기존 설정 불러오기
-    QMap<QString, QString> rowData = settings.value(rowNumber, {});
+    QMap<QString, QString> rowData = settings.value(monitoringIndex, {});
 
     // ✅ Modbus ID 입력 필드
     QLabel* modbusIdLabel = new QLabel("Modbus ID:");
@@ -522,9 +527,9 @@ void qt_window::openCommSettingsWindow(int rowNumber){
     saveButton->setFont(font);
     saveButton->setFixedSize(160, 80);
     connect(saveButton, &QPushButton::clicked, commSettingsDialog, [=]() {
-        settings[rowNumber]["modbus_id"] = modbusIdInput->text();
-        settings[rowNumber]["ip"] = ipInput->text();
-        settings[rowNumber]["port"] = portInput->text();
+        settings[monitoringIndex]["modbus_id"] = modbusIdInput->text();
+        settings[monitoringIndex]["ip"] = ipInput->text();
+        settings[monitoringIndex]["port"] = portInput->text();
         saveSettingsToCSV();
         commSettingsDialog->close();
         });
@@ -572,7 +577,7 @@ void qt_window::loadSettingsFromCSV() {
             continue;
         }
 
-        int rowNumber = fields[0].toInt();
+        int monitoringIndex = fields[0].toInt();
         QMap<QString, QString> rowData;
         rowData["description"] = fields[1].trimmed();
         rowData["modbus_id"] = fields[2].trimmed();
@@ -580,10 +585,10 @@ void qt_window::loadSettingsFromCSV() {
         rowData["port"] = fields[4].trimmed();
         rowData["notes"] = fields[5].trimmed();
 
-        settings[rowNumber] = rowData;
+        settings[monitoringIndex] = rowData;
 
         // ✅ CSV에서 읽은 데이터 확인 (디버깅)
-        qDebug() << "📌 CSV 로드 - Row:" << rowNumber
+        qDebug() << "📌 CSV 로드 - Row:" << monitoringIndex
             << "| Description:" << rowData["description"]
             << "| Modbus ID:" << rowData["modbus_id"]
             << "| IP:" << rowData["ip"]
@@ -617,7 +622,7 @@ void qt_window::saveSettingsToCSV() {
     qDebug() << "📌 현재 settings 데이터 크기:" << settings.size();
 
     for (auto it = settings.begin(); it != settings.end(); ++it) {
-        int rowNumber = it.key();
+        int monitoringIndex = it.key();
         const QMap<QString, QString>& rowData = it.value();
 
         QString description = rowData.value("description", "");
@@ -627,14 +632,14 @@ void qt_window::saveSettingsToCSV() {
         QString notes = rowData.value("notes", "");
 
         // ✅ 저장되는 값 디버깅 출력
-        qDebug() << "📌 저장 데이터 - No:" << rowNumber
+        qDebug() << "📌 저장 데이터 - No:" << monitoringIndex
             << "| Description:" << description
             << "| Modbus ID:" << modbusId
             << "| IP:" << ip
             << "| Port:" << port
             << "| notes:" << notes;
 
-        out << rowNumber << ","
+        out << monitoringIndex << ","
             << description << ","
             << modbusId << ","
             << ip << ","

@@ -1,13 +1,54 @@
 #include "qt_monitoring.h"
 #include <QDebug>
 
-MonitoringWindow::MonitoringWindow(int rowNumber, const QMap<int, QMap<QString, QString>>& settings, QWidget* parent)
-    : QMainWindow(parent), rowNumber(rowNumber) {
+// ✅ Monitoring 창 생성 함수
+MonitoringWindow::MonitoringWindow(int monitoringIndex, const QMap<int, QMap<QString, QString>>& settings, QWidget* parent)
+    : QMainWindow(parent), monitoringIndex(monitoringIndex) {
+    setWindowFlags(Qt::Window); // 독립적인 창으로 설정
+    setAttribute(Qt::WA_DeleteOnClose); // 창 닫을 때 자동 삭제
+    QIcon icon("./src/icon.png");
+    setWindowIcon(icon);
+    setWindowTitle("Monitoring " + QString::number(monitoringIndex));
 
-    setWindowTitle("Monitoring " + QString::number(rowNumber));
-    resize(1024, 768);
-    setAttribute(Qt::WA_DeleteOnClose);  // ✅ 창이 닫힐 때 자동으로 메모리 해제
+    initMonitoringUI(); // UI 초기화
+    // 부모 창의 크기로 초기화
+    if (parent) {
+        qDebug() << "✅ Parent exists! Size:" << parent->size();
+        resize(parent->size());
+        move(parent->frameGeometry().topLeft());
+    }
+    else {
+        qDebug() << "⚠️ No Parent! Using default size.";
+        resize(800, 600);
+    }
+}
 
+
+// ✅ Monitoring 창 소멸자
+MonitoringWindow::~MonitoringWindow() {
+    qDebug() << "❌ Monitoring 창 닫힘, 관련 Graph 창 제거";
+
+}
+
+// ✅ Monitoring 창 소멸 이벤트
+void MonitoringWindow::closeEvent(QCloseEvent* event) {
+    qDebug() << "❌ Monitoring 창 닫힘, 자식 Graph 창 자동 정리됨";
+
+    // 모든 그래프 창을 안전하게 닫기
+    for (auto it = graphWindows.begin(); it != graphWindows.end(); ++it) {
+        if (it.value()) {
+            it.value()->close();  // 그래프 창 닫기
+            it.value()->deleteLater();  // 메모리 해제 예약
+        }
+    }
+    graphWindows.clear();  // 그래프 창 목록 정리
+
+    emit windowClosed(monitoringIndex);  // 메인 윈도우에 알림
+    event->accept();
+}
+
+// ✅ MonitoringUI 생성 함수
+void MonitoringWindow::initMonitoringUI() {
     QWidget* centralWidget = new QWidget(this);
     setCentralWidget(centralWidget);
 
@@ -26,7 +67,7 @@ MonitoringWindow::MonitoringWindow(int rowNumber, const QMap<int, QMap<QString, 
     descriptionTextLabel->setFont(QFont("맑은 고딕", 20, QFont::Bold));
     descriptionTextLabel->setStyleSheet("padding-right: 5px;");  // ✅ 오른쪽 여백 최소화
 
-    descriptionLabel = new QLabel(settings.value(rowNumber).value("description", "No Description"));
+    descriptionLabel = new QLabel(settings.value(monitoringIndex).value("description", "No Description"));
     descriptionLabel->setFont(QFont("맑은 고딕", 20, QFont::Normal));
     descriptionLabel->setAlignment(Qt::AlignCenter);
     descriptionLabel->setStyleSheet("background-color: white; border-radius: 10px; padding: 10px; border: 2px solid darkgray;");
@@ -128,32 +169,8 @@ MonitoringWindow::MonitoringWindow(int rowNumber, const QMap<int, QMap<QString, 
     mainLayout->addLayout(bottomLayout);
 }
 
-// ✅ "MonitoringWindow" 소멸자
-MonitoringWindow::~MonitoringWindow() {
-    qDebug() << "❌ Monitoring 창 닫힘, 관련 Graph 창 제거";
 
-}
-
-void MonitoringWindow::closeEvent(QCloseEvent* event) {
-    qDebug() << "❌ Monitoring 창 닫힘, 자식 Graph 창 자동 정리됨";
-
-    // 모든 그래프 창을 안전하게 닫기
-    for (auto it = graphWindows.begin(); it != graphWindows.end(); ++it) {
-        if (it.value()) {
-            it.value()->close();  // 그래프 창 닫기
-            it.value()->deleteLater();  // 메모리 해제 예약
-        }
-    }
-    graphWindows.clear();  // 그래프 창 목록 정리
-
-    emit windowClosed(rowNumber);  // 메인 윈도우에 알림
-    event->accept();
-}
-
-
-
-
-// ✅ "CSV 설정" 버튼 클릭 시 팝업 창 열기
+// ✅ CSV 설정 창 생성 함수
 void MonitoringWindow::openCSVSettingDialog() {
     QDialog* csvDialog = new QDialog(this);
     csvDialog->setWindowTitle("CSV 저장 주기 설정");
@@ -187,7 +204,7 @@ void MonitoringWindow::openCSVSettingDialog() {
     layout->addWidget(csvFrame);
 
     // ✅ 현재 모니터링 인덱스에 맞는 CSV 설정 값을 가져와서 반영
-    int currentSetting = getCSVSetting(rowNumber);
+    int currentSetting = getCSVSetting(monitoringIndex);
     for (auto* btn : csvButtons) {
         if (csvButtonGroup->id(btn) == currentSetting) {
             btn->setChecked(true);
@@ -208,7 +225,7 @@ void MonitoringWindow::openCSVSettingDialog() {
     connect(saveButton, &QPushButton::clicked, this, [=]() {
         int selectedValue = csvButtonGroup->checkedId();
         if (selectedValue != -1) {
-            updateCSVSetting(rowNumber, selectedValue);
+            updateCSVSetting(monitoringIndex, selectedValue);
         }
         csvDialog->accept();
         });
@@ -219,6 +236,7 @@ void MonitoringWindow::openCSVSettingDialog() {
     csvDialog->exec();
 }
 
+// ✅ config.csv 불러오기 함수
 int MonitoringWindow::getCSVSetting(int rowNum) {
     QFile file("./config.csv");
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -245,6 +263,7 @@ int MonitoringWindow::getCSVSetting(int rowNum) {
     return -1;  // ✅ 일치하는 값이 없으면 -1 반환 (버튼 선택 안 함)
 }
 
+// ✅ config.csv 저장 함수
 void MonitoringWindow::updateCSVSetting(int rowNum, int newValue) {
     QFile file("./config.csv");
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -295,7 +314,6 @@ void MonitoringWindow::openGraphWindow(int graphIndex) {
     // ✅ 부모를 'this'로 설정하여 모니터링 창의 자식으로 둠
     GraphWidget* graphWindow = new GraphWidget(graphIndex, this);
     graphWindows[graphIndex] = graphWindow;
-    graphWindow->setWindowFlags(Qt::Window);
     graphWindow->move(this->pos());
     graphWindow->show();
 

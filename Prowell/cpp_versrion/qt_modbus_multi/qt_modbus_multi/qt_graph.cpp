@@ -1,57 +1,34 @@
 ﻿#include "qt_graph.h"
 
 
+// ✅ Graph 창 생성 함수
 GraphWidget::GraphWidget(int graphIndex, QWidget* parent)
     : QWidget(parent), graphIndex(graphIndex) {
     setWindowFlags(Qt::Window); // 독립적인 창으로 설정
     setAttribute(Qt::WA_DeleteOnClose); // 창 닫을 때 자동 삭제
     QIcon icon("./src/icon.png");
     setWindowIcon(icon);
-
     setWindowTitle(QString("모터%1 예측 그래프").arg(graphIndex));
 
-    initSettingUI(); // UI 초기화
+    initGraphUI(); // UI 초기화
     // 부모 창의 크기로 초기화
     if (parent) {
+        qDebug() << "✅ Parent exists! Size:" << parent->size();
         resize(parent->size());
         move(parent->frameGeometry().topLeft());
     }
     else {
-        resize(800, 600); // 부모 창이 없는 경우 기본 크기
+        qDebug() << "⚠️ No Parent! Using default size.";
+        resize(800, 600);
     }
 }
 
-
+// ✅ Graph 창 소멸자
 GraphWidget::~GraphWidget() {
-    //qDebug() << "🛑 GraphWidget 닫힘: " << graphIndex;
 
-    //if (series) {
-    //    series->deleteLater();
-    //    series = nullptr;
-    //}
-    //if (predictionSeries) {
-    //    predictionSeries->deleteLater();
-    //    predictionSeries = nullptr;
-    //}
-    //if (axisX) {
-    //    axisX->deleteLater();
-    //    axisX = nullptr;
-    //}
-    //if (axisY) {
-    //    axisY->deleteLater();
-    //    axisY = nullptr;
-    //}
-    //if (chart) {
-    //    chart->deleteLater();
-    //    chart = nullptr;
-    //}
-    //if (chartView) {
-    //    chartView->deleteLater();
-    //    chartView = nullptr;
-    //}
 }
 
-// ✅ 공통 스타일 및 그림자 효과 적용 함수
+// ✅ 공통 버튼 스타일 및 그림자 효과 함수
 void applyShadowEffect(QWidget* widget) {
     QGraphicsDropShadowEffect* shadowEffect = new QGraphicsDropShadowEffect(widget);
     shadowEffect->setBlurRadius(10.0);        // 그림자의 흐림 정도
@@ -81,7 +58,8 @@ void applyButtonStyle(QPushButton* button) {
 }
 
 
-void GraphWidget::initSettingUI() {
+// ✅ GraphUI 생성 함수
+void GraphWidget::initGraphUI() {
     // Chart 초기화
     chart = new QChart();
     chart->legend()->hide();
@@ -95,26 +73,19 @@ void GraphWidget::initSettingUI() {
     chart->addSeries(series);
     chart->addSeries(predictionSeries);
 
-    // X축 설정 (DateTime)
+    // ✅ X축 설정을 별도의 함수로 관리
     axisX = new QDateTimeAxis();
-    axisX->setFormat("hh:mm:ss");
-    axisX->setTitleText("Time");
-
-    timestamp = QDateTime::currentDateTime().toMSecsSinceEpoch();
-    now = QDateTime::fromMSecsSinceEpoch(timestamp);
-    QDateTime minTime = now.addSecs(-60); // 현재 시간 - 60초
-    QDateTime maxTime = now.addSecs(60);  // 현재 시간 + 60초
-
-    axisX->setTickCount(9); // 틱 수를 9개로 설정 (범위: -60초 ~ +60초)
-    axisX->setRange(minTime, maxTime);
     chart->addAxis(axisX, Qt::AlignBottom);
     series->attachAxis(axisX);
     predictionSeries->attachAxis(axisX);
 
+    // ✅ X축 업데이트 함수 호출 (초기화 시점에서 자동 적용)
+    updateXAxisRange();
+
+
 
     // Y축 설정 (Value)
     axisY = new QValueAxis();
-    axisY->setTitleText("Value");
     chart->addAxis(axisY, Qt::AlignLeft);
     series->attachAxis(axisY);
     predictionSeries->attachAxis(axisY);
@@ -133,15 +104,7 @@ void GraphWidget::initSettingUI() {
         "베어링\n온도",
         "권선\n온도"
     };
-    //// 버튼에 표시할 Y축 레이블 목록
-    //QStringList yAxisLabels = {
-    //    "mA",        // 전류(R)
-    //    "mA",        // 전류(S)
-    //    "mA",        // 전류(T)
-    //    "cm/sec²", // 진동
-    //    "°C",      // 베어링 온도
-    //    "°C"       // 권선 온도
-    //};
+
     QHBoxLayout* buttonLayout = new QHBoxLayout;
     for (int i = 0; i < buttonTexts.size(); ++i) {
         QPushButton* button = new QPushButton(buttonTexts[i], this);
@@ -168,18 +131,18 @@ void GraphWidget::initSettingUI() {
     }
 
 
+
     // Chart 영역 레이아웃
     QVBoxLayout* chartLayout = new QVBoxLayout();
     chartLayout->addWidget(chartView);
     chartLayout->addLayout(buttonLayout);
 
 
-
-
     // ▶ 우측 레이아웃 (알람 + 추가 UI 요소)
     QVBoxLayout* rightLayout = new QVBoxLayout;
     rightLayout->setSpacing(10);
     rightLayout->setContentsMargins(10, 10, 10, 10);
+
 
     // ▶ "Monitoring" 버튼 (그래프 창 닫기)
     QPushButton* monitoringButton = new QPushButton("Monitoring", this);
@@ -194,6 +157,15 @@ void GraphWidget::initSettingUI() {
     rightLayout->addSpacing(5);
 
 
+    // ✅ 알람 텍스트 설정 (2줄 형식)
+    QStringList alarmTexts = {
+        "R Phase Current\nAlarm",
+        "S Phase Current\nAlarm",
+        "T Phase Current\nAlarm",
+        "Vibration\nAlarm",
+        "Winding Temperature\nAlarm",
+        "Bearing Temperature\nAlarm"
+    };
 
     // ▶ 알람 텍스트 6개 추가
     QVBoxLayout* arlamBoxLayout = new QVBoxLayout;
@@ -201,10 +173,10 @@ void GraphWidget::initSettingUI() {
     arlamBoxLayout->setContentsMargins(10, 10, 10, 10);     // 레이아웃의 여백을 없앰
 
     for (int i = 0; i < 6; ++i) {
-        QLabel* alarmLabel = new QLabel(tr("알람%1 OFF").arg(i + 1), this);
+        QLabel* alarmLabel = new QLabel(alarmTexts[i], this);
         alarmLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         alarmLabel->setAlignment(Qt::AlignCenter);
-        alarmLabel->setStyleSheet("background-color: #ADB9CA; border: 1px solid #d0d0d0; border-radius: 15px; color: white; font-size: 14px; padding: 5px;");
+        alarmLabel->setStyleSheet("background-color: #ADB9CA; border: 1px solid #d0d0d0; border-radius: 22px; color: white; font-size: 14px; padding: 5px;");
         applyShadowEffect(alarmLabel); 
         arlamBoxLayout->addWidget(alarmLabel);
     }
@@ -213,7 +185,7 @@ void GraphWidget::initSettingUI() {
 
 
     // ▶ 그래프 설정 위쪽 Expanding 스페이서 추가
-    rightLayout->addSpacing(100);
+    rightLayout->addSpacing(15);
 
 
     // ▶ "그래프 설정" 버튼 추가
@@ -239,7 +211,7 @@ void GraphWidget::initSettingUI() {
         "QFrame {"
         "    background-color: #ADB9CA;"  // 배경색
         "    border: 1px solid #d0d0d0;"  // 테두리
-        "    border-radius: 15px;"        // 둥근 모서리
+        "    border-radius: 10px;"        // 둥근 모서리
         "}"
     );
     applyShadowEffect(operatingTimeFrame); // ✅ 그림자 효과 추가
@@ -324,6 +296,7 @@ void GraphWidget::initSettingUI() {
 }
 
 
+// ✅ Graph 창 하단 버튼 스타일 함수
 void GraphWidget::updateButtonStyles()
 {
     for (int i = 0; i < chartButtons.size(); ++i) {
@@ -357,11 +330,11 @@ void GraphWidget::updateButtonStyles()
 }
 
 
-// ▶ "그래프 설정" 버튼 클릭 시 팝업 창 열기
+// ✅ 그래프 설정 창 생성 함수
 void GraphWidget::openGraphSettings() {
     QDialog settingsDialog(this);
     settingsDialog.setWindowTitle("그래프 설정");
-    settingsDialog.setFixedSize(320, 300); // 팝업 크기
+    settingsDialog.setFixedSize(350, 300); // 팝업 크기
 
     QVBoxLayout* mainLayout = new QVBoxLayout(&settingsDialog);
 
@@ -380,7 +353,7 @@ void GraphWidget::openGraphSettings() {
     QHBoxLayout* xAxisOptionsLayout = new QHBoxLayout;
     QButtonGroup* xAxisButtonGroup = new QButtonGroup(&settingsDialog);
 
-    QStringList xAxisOptions = { "1시간", "1일", "1주", "1달" };
+    QStringList xAxisOptions = { "1분", "1시간", "1일", "1주", "1달" };
     QList<QRadioButton*> xAxisButtons;
 
     for (int i = 0; i < xAxisOptions.size(); ++i) {
@@ -389,7 +362,11 @@ void GraphWidget::openGraphSettings() {
         xAxisButtonGroup->addButton(radioButton, i);
         xAxisOptionsLayout->addWidget(radioButton);
     }
-    xAxisButtons[1]->setChecked(true); // 기본 선택: "1일"
+
+    // ✅ rangeType 기본 선택
+    if (rangeType >= 0 && rangeType < xAxisButtons.size()) {
+        xAxisButtons[rangeType]->setChecked(true);
+    }
 
     xAxisLayout->addWidget(xAxisTitle);
     xAxisLayout->addLayout(xAxisOptionsLayout);
@@ -440,12 +417,12 @@ void GraphWidget::openGraphSettings() {
     QPushButton* closeButton = new QPushButton("닫기", &settingsDialog);
 
     connect(saveButton, &QPushButton::clicked, [&]() {
-        // 설정값 적용
-        axisY->setRange(yAxisMinInput->text().toInt(), yAxisMaxInput->text().toInt());
-
-        // X축 주기 반영 (1시간, 1일, 1주, 1달)
+        // X축 주기 반영 (1분, 1시간, 1일, 1주, 1달)
         int rangeType = xAxisButtonGroup->checkedId();
         setRangeType(rangeType);
+
+        // 설정값 적용
+        axisY->setRange(yAxisMinInput->text().toInt(), yAxisMaxInput->text().toInt());
 
         update(); // 그래프 업데이트
         settingsDialog.accept();
@@ -548,42 +525,59 @@ void GraphWidget::setRangeType(int type) {
 void GraphWidget::updateXAxisRange() {
     QDateTime now = QDateTime::currentDateTime();
     QDateTime minTime, maxTime;
+    int tickCount = 7; // ✅ Tick 개수 7개 고정
     QString format;
 
     switch (rangeType) {
-    case 0: // 1 Minute
-        minTime = now.addSecs(-60); // 현재 시간 - 1분
-        maxTime = now.addSecs(60);  // 현재 시간 + 1분
-        format = "hh:mm:ss"; // 초 단위 시간 표시
+    case 0: // 1분 단위
+        minTime = now.addSecs(-50);
+        maxTime = now.addSecs(10);
+        format = "hh:mm:ss";
         break;
-    case 1: // 1 Hour
-        minTime = now.addSecs(-3600); // 현재 시간 - 1시간
-        maxTime = now.addSecs(3600);  // 현재 시간 + 1시간
-        format = "hh:mm"; // 시간 및 분 표시
+    case 1: // 1시간 단위
+        minTime = now.addSecs(-50 * 60);
+        maxTime = now.addSecs(10 * 60);
+        format = "hh:mm";
         break;
-    case 2: // 1 Day
-        minTime = now.addDays(-1);    // 현재 시간 - 1일
-        maxTime = now.addDays(1);     // 현재 시간 + 1일
-        format = "MM-dd hh:mm"; // 날짜와 시간 표시
+    case 2: // 1일 단위
+        minTime = now.addSecs(-20 * 60 *60);
+        maxTime = now.addSecs(4 * 60 * 60);
+        format = "dd hh:mm";
         break;
-    case 3: // 1 Month
-        minTime = now.addMonths(-1);  // 현재 시간 - 1달
-        maxTime = now.addMonths(1);   // 현재 시간 + 1달
-        format = "yyyy-MM-dd"; // 연-월-일 표시
+    case 3: // 1주 단위
+        minTime = now.addDays(-5);
+        maxTime = now.addDays(1);
+        format = "MM-dd hh:mm";
+        break;
+    case 4: // 1달 단위
+        minTime = now.addDays(-25);
+        maxTime = now.addDays(5);
+        format = "MM-dd hh:mm";
         break;
     default:
         qWarning() << "Invalid range type for X-axis update.";
         return;
     }
 
-    // X축 범위 및 라벨 포맷 설정
+    // ✅ X축 범위 설정
     axisX->setRange(minTime, maxTime);
     axisX->setFormat(format);
+    axisX->setTickCount(tickCount);
+
+    //// ✅ 현재 시간이 80% 지점에 오도록 설정
+    //qreal timeSpan = maxTime.toSecsSinceEpoch() - minTime.toSecsSinceEpoch();
+    //qreal shiftAmount = timeSpan * 0.2; // ✅ 20%를 왼쪽으로 이동
+
+    //minTime = minTime.addSecs(-shiftAmount);
+    //maxTime = maxTime.addSecs(-shiftAmount);
+
+    axisX->setRange(minTime, maxTime); // ✅ 새로운 X축 범위 적용
 
     qDebug() << "Updated X Axis Range: " << minTime.toString("yyyy-MM-dd hh:mm:ss")
         << " to " << maxTime.toString("yyyy-MM-dd hh:mm:ss")
         << ", Label Format: " << format;
 }
+
 
 void GraphWidget::updateYAxisRange() {
     // 최소값과 최대값을 계산
