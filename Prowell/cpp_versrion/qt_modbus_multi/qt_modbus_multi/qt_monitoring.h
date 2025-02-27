@@ -1,7 +1,9 @@
 #ifndef QT_MONITORING_H
 #define QT_MONITORING_H
 
-#include "qt_graph.h" // ✅ GraphWidget 포함
+
+#include "qt_graph.h" 
+#include "qt_CSVReader.h" 
 
 #include <QDebug>
 #include <QMainWindow>
@@ -28,8 +30,6 @@ private:
     QMap<int, QMap<QString, QString>> settings; // ✅ settings을 멤버 변수로 저장
     QLabel* descriptionLabel;
     void openCSVSettingDialog();
-    int getCSVSetting(int rowNum);
-    void updateCSVSetting(int rowNum, int newValue);
 
     // 그래프 창
     QMap<int, QPointer<GraphWidget>> graphWindows; // ✅ 그래프 창을 저장하는 맵

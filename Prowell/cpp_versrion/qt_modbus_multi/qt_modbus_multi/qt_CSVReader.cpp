@@ -15,6 +15,7 @@ QMap<int, QMap<QString, QString>> CSVReader::readAllSettings() {
     QTextStream in(&file);
     QString headerLine = in.readLine();
     orderedHeaders = headerLine.split(",", Qt::KeepEmptyParts);  // ✅ CSV 헤더 순서 저장
+    qDebug() << headerLine;
 
     while (!in.atEnd()) {
         QString line = in.readLine();
@@ -45,6 +46,10 @@ QMap<int, QMap<QString, QString>> CSVReader::readAllSettings() {
     return settings;
 }
 
+
+
+
+
 void CSVReader::writeAllSettings(const QMap<int, QMap<QString, QString>>& settings) {
     QFile file("./config.csv");
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate)) {
@@ -59,14 +64,18 @@ void CSVReader::writeAllSettings(const QMap<int, QMap<QString, QString>>& settin
         return;
     }
 
+
     out << orderedHeaders.join(",") << "\n";  // ✅ 기존 CSV 헤더 순서 유지
 
     for (auto it = settings.begin(); it != settings.end(); ++it) {
+        qDebug() << "✅ siteSettingWindow 설정이 저장되었습니다.";
+
         QStringList row;
         row.append(QString::number(it.key()));  // ✅ Index 저장
 
         for (int i = 1; i < orderedHeaders.size(); ++i) {
             row.append(it.value().value(orderedHeaders[i], ""));  // ✅ 헤더 순서 유지하면서 값 저장
+            //qDebug() << it.value().value(orderedHeaders[i], "");  // ✅ 디버깅 메시지 추가
         }
 
         out << row.join(",") << "\n";

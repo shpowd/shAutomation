@@ -14,6 +14,19 @@ qt_window::qt_window(QWidget* parent)
     setWindowIcon(icon);
 
     initMainUI();                       // ✅ UI 초기화
+
+    // ✅ 2초 주기로 실행되는 타이머 설정
+    pollingTimer = new QTimer(this);
+    connect(pollingTimer, &QTimer::timeout, this, &qt_window::periodicCommunication);
+    pollingTimer->start(2000);
+
+    loadSettingsFromCSV();
+    usage.clear();
+    for (auto it = settings.begin(); it != settings.end(); ++it) {
+        usage[it.key()] = it.value().value("Usage", "0"); // 기본값 "0"
+    }
+
+
 }
 
 // ✅ main 창 소멸자
@@ -91,7 +104,7 @@ void qt_window::initMainUI(){
     // 현장 설정 버튼 (좌측)
     QHBoxLayout* settingsButtonLayout = new QHBoxLayout;
     openSiteSettingButton = new QPushButton("현장 설정");
-    openSiteSettingButton->setFixedSize(150, 50); // 버튼 크기
+    openSiteSettingButton->setFixedSize(150, 60); // 버튼 크기
     applyButtonStyle(openSiteSettingButton);  // ✅ 스타일 적용
     settingsButtonLayout->addWidget(openSiteSettingButton); 
     bottomLayout->addLayout(settingsButtonLayout);
@@ -168,7 +181,7 @@ void qt_window::mainWindowDisplayPage(int pageIndex){
         description->setTextAlignment(Qt::AlignCenter);
 
         // ✅ 모니터링 버튼 추가
-        QPushButton* monitorButton = new QPushButton("monitoring" + QString::number(monitoringIndex));
+        QPushButton* monitorButton = new QPushButton("monitoring");
         monitorButton->setFixedSize(250, 40);
         applyButtonStyle(monitorButton);
         // ✅ 버튼을 감싸는 위젯과 레이아웃 추가
@@ -237,8 +250,8 @@ void qt_window::openSiteSettingWindow(){
         mainLayout->setContentsMargins(20, 20, 20, 20);
 
         // ✅ 중앙 테이블 (10행 5열)
-        siteSettingTableWidget = new QTableWidget(10, 5, siteSettingWindow);
-        siteSettingTableWidget->setHorizontalHeaderLabels({ "No", "Description", "통신설정", "통신 상태", "비고" });
+        siteSettingTableWidget = new QTableWidget(10, 6, siteSettingWindow);
+        siteSettingTableWidget->setHorizontalHeaderLabels({ "No", "Description", "통신설정", "사용", "통신 상태", "비고" });
 
         // ✅ 헤더 스타일 설정
         QFont headerFont("맑은 고딕", 18, QFont::Bold);
@@ -259,12 +272,14 @@ void qt_window::openSiteSettingWindow(){
         siteSettingTableWidget->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
         siteSettingTableWidget->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
         siteSettingTableWidget->horizontalHeader()->setSectionResizeMode(2, QHeaderView::Stretch);
-        siteSettingTableWidget->horizontalHeader()->setSectionResizeMode(3, QHeaderView::Stretch);
-        siteSettingTableWidget->horizontalHeader()->setSectionResizeMode(4, QHeaderView::Stretch);
+        siteSettingTableWidget->horizontalHeader()->setSectionResizeMode(3, QHeaderView::ResizeToContents);
+        siteSettingTableWidget->horizontalHeader()->setSectionResizeMode(4, QHeaderView::ResizeToContents);
+        siteSettingTableWidget->horizontalHeader()->setSectionResizeMode(5, QHeaderView::Stretch);
 
         siteSettingTableWidget->verticalHeader()->setVisible(false);
         siteSettingTableWidget->verticalHeader()->setDefaultSectionSize(55);
         mainLayout->addWidget(siteSettingTableWidget);
+
 
         // ✅ 표와 버튼 레이아웃 사이 여백
         mainLayout->addSpacing(20);
@@ -276,7 +291,7 @@ void qt_window::openSiteSettingWindow(){
 
         // ✅ Main 버튼 (좌측)
         QPushButton* mainButton = new QPushButton("Main");
-        mainButton->setFixedSize(150, 50);
+        mainButton->setFixedSize(150, 60);
         mainButton->setFont(QFont("맑은 고딕", 20, QFont::Normal));
         applyButtonStyle(mainButton);
         bottomLayout->addWidget(mainButton);
@@ -290,14 +305,14 @@ void qt_window::openSiteSettingWindow(){
 
         // ✅ Save 버튼 (좌측)
         QPushButton* saveButton = new QPushButton("Save");
-        saveButton->setFixedSize(150, 50);
+        saveButton->setFixedSize(150, 60);
         saveButton->setFont(QFont("맑은 고딕", 20, QFont::Normal));
         applyButtonStyle(saveButton);
         bottomLayout->addWidget(saveButton);
         connect(saveButton, &QPushButton::clicked, this, &qt_window::siteSettingWindowSave);
 
         // ✅ 유동적 간격 추가 (버튼과 페이지 버튼 사이)
-        bottomLayout->addSpacerItem(new QSpacerItem(40, 10, QSizePolicy::Expanding, QSizePolicy::Minimum));
+        bottomLayout->addSpacerItem(new QSpacerItem(100, 10, QSizePolicy::Minimum, QSizePolicy::Minimum));
 
         // ✅ 페이지 변경 버튼 (중앙)
         QPushButton* page1Button = new QPushButton("1");
@@ -337,6 +352,10 @@ void qt_window::openSiteSettingWindow(){
     siteSettingWindow->show();
 }
 
+
+
+
+
 // ✅ "현장 설정" 페이지 전환 함수
 void qt_window::siteSettingWindowDisplayPage(int pageIndex){
     siteSettingTableWidget->clearContents(); // 기존 데이터 삭제
@@ -348,15 +367,34 @@ void qt_window::siteSettingWindowDisplayPage(int pageIndex){
     for (int i = 0; i < 10; ++i) {
         int monitoringIndex = (pageIndex == 1) ? i + 1 : i + 11;
 
-        // ✅ CSV에서 불러온 값 적용 (필드명 정확하게 확인)
+        // ✅ CSV에서 불러온 값 적용
         loadSettingsFromCSV();                                                                  // ✅ CSV 데이터 로드
         QString descriptionText = settings.value(monitoringIndex).value("Description", "");     // ✅ 필드
-        QString notesText = settings.value(monitoringIndex).value("Notes", "");                 // ✅ 필드
+        QString notesText = settings.value(monitoringIndex).value("Notes", "");
+        QString usageValue = settings.value(monitoringIndex).value("Usage", "0");               // ✅ 기본값 "0"
 
         QTableWidgetItem* itemNo = new QTableWidgetItem(QString::number(monitoringIndex));
         QTableWidgetItem* description = new QTableWidgetItem(descriptionText);
         QTableWidgetItem* commState = new QTableWidgetItem(QString("Value %1").arg(monitoringIndex + 20));
         QTableWidgetItem* notes = new QTableWidgetItem(notesText);
+
+        // ✅ "사용 여부" 체크박스 추가 (QCheckBox 유지)
+        QWidget* checkBoxWidget = new QWidget();
+        QHBoxLayout* checkBoxLayout = new QHBoxLayout(checkBoxWidget);
+        QCheckBox* checkBox = new QCheckBox();
+        checkBox->setChecked(usageValue == "1");  // ✅ "1"이면 체크, 아니면 해제
+
+        checkBoxLayout->addWidget(checkBox);
+        checkBoxLayout->setAlignment(Qt::AlignCenter);  // ✅ 가운데 정렬
+        checkBoxLayout->setContentsMargins(0, 0, 0, 0);
+        checkBoxWidget->setLayout(checkBoxLayout);
+
+        // ✅ 체크박스 상태 변경 시 `settings`의 "Usage" 필드 업데이트
+        connect(checkBox, &QCheckBox::checkStateChanged, this, [this, monitoringIndex](int state) {
+            settings[monitoringIndex]["Usage"] = (state == Qt::Checked) ? "1" : "0";
+            qDebug() << "✅ Usage 업데이트됨 (Index:" << monitoringIndex << ") =>" << settings[monitoringIndex]["Usage"];
+            });
+
 
         // ✅ 폰트 적용 (메인 페이지와 동일)
         itemNo->setFont(cellFont);
@@ -376,7 +414,7 @@ void qt_window::siteSettingWindowDisplayPage(int pageIndex){
 
         // ✅ "통신 설정" 버튼 추가 (메인 윈도우의 Monitoring 버튼과 동일한 스타일)
         QPushButton* commButton = new QPushButton("통신 설정" + QString::number(monitoringIndex));
-        applyButtonStyle(commButton);  // ✅ 기존 스타일 적용
+        applyButtonStyle(commButton);
         // ✅ 버튼 클릭 시 "통신 설정" 팝업 창 열기
         connect(commButton, &QPushButton::clicked, this, [this, monitoringIndex]() {
             openCommSettingsWindow(monitoringIndex);
@@ -386,9 +424,10 @@ void qt_window::siteSettingWindowDisplayPage(int pageIndex){
         // ✅ 아이템 및 버튼 추가
         siteSettingTableWidget->setItem(i, 0, itemNo);
         siteSettingTableWidget->setItem(i, 1, description);
-        siteSettingTableWidget->setCellWidget(i, 2, commButton);  // ✅ 3열(통신 설정 버튼 추가)
-        siteSettingTableWidget->setItem(i, 3, commState);
-        siteSettingTableWidget->setItem(i, 4, notes);
+        siteSettingTableWidget->setCellWidget(i, 2, commButton);
+        siteSettingTableWidget->setCellWidget(i, 3, checkBoxWidget);  // ✅ 체크박스 추가
+        siteSettingTableWidget->setItem(i, 4, commState);
+        siteSettingTableWidget->setItem(i, 5, notes);
     }
 }
 
@@ -398,19 +437,25 @@ void qt_window::siteSettingWindowSave() {
         int monitoringIndex = (currentSiteSettingpPage == 1) ? i + 1 : i + 11;
 
         QTableWidgetItem* descriptionItem = siteSettingTableWidget->item(i, 1);
-        QTableWidgetItem* notesItem = siteSettingTableWidget->item(i, 4);
+        QTableWidgetItem* notesItem = siteSettingTableWidget->item(i, 5);
+        QWidget* checkBoxWidget = siteSettingTableWidget->cellWidget(i, 3);  // ✅ 체크박스 가져오기
+        QCheckBox* checkBox = checkBoxWidget ? checkBoxWidget->findChild<QCheckBox*>() : nullptr;
+
 
         QString description = descriptionItem ? descriptionItem->text() : "";
         QString notes = notesItem ? notesItem->text() : "";
-
+        QString usageValue = (checkBox && checkBox->isChecked()) ? "1" : "0";  // ✅ 체크 여부 확인
         // ✅ settings 업데이트 시 필드명 일치
         settings[monitoringIndex]["Description"] = description;
+        settings[monitoringIndex]["Usage"] = usageValue;
+        qDebug() << settings;
         settings[monitoringIndex]["Notes"] = notes;
     }
 
     saveSettingsToCSV();
     qDebug() << "✅ siteSettingWindow 설정이 저장되었습니다.";
 }
+
 
 
 // ✅ "통신 설정" 창 생성 함수
@@ -597,13 +642,39 @@ void qt_window::saveSettingsToCSV() {
 //    setupWindow->show();
 //}
 
+//// ✅ 주기적으로 실행될 통신 함수
+void qt_window::periodicCommunication() {
+    for (int i = 0; i < NUM_SLAVES; ++i) {
+        int monitoringIndex = i + 1;  // ✅ monitoringIndex 계산
+        QString checkUsage = usage.value(monitoringIndex, "0");
+
+        if (checkUsage == "1") {  // ✅ Usage가 1인 경우에만 처리
+            if (!clients[i]) {
+                connectToSlave(i);  // ✅ Modbus 연결 함수 호출
+            }
+            else if (clients[i]->state() == QModbusDevice::UnconnectedState) {
+                clients[i]->connectDevice();
+            }
+        }
+        else {
+            if (clients[i] && clients[i]->state() == QModbusDevice::ConnectedState) {
+                disconnectFromSlave(i);  // ✅ Usage가 0이면 연결 해제
+            }
+        }
+    }
+}
+
+
+
+
 // Modbus 연결
 void qt_window::connectToSlave(int index)
 {
     if (index < 0 || index >= NUM_SLAVES) return;
 
-    QString ip = ipInputs[index]->text();
-    int port = portInputs[index]->text().toInt();
+    int monitoringIndex = index + 1;
+    QString ip = settings.value(monitoringIndex).value("IP", "127.0.0.1");
+    int port = settings.value(monitoringIndex).value("Port", "502").toInt();
 
     if (!clients[index]) {
         clients[index] = new QModbusTcpClient(this);
@@ -633,29 +704,39 @@ void qt_window::connectToSlave(int index)
     clients[index]->connectDevice();
 }
 
+
 // 연결 상태 업데이트 함수
 void qt_window::updateStatus(int index, QModbusDevice::State state)
 {
     if (index < 0 || index >= NUM_SLAVES) return;
 
+    int monitoringIndex = index + 1;
+    QString statusText;
+    QString style;
+
     switch (state) {
     case QModbusDevice::UnconnectedState:
-        statusDisplays[index]->setText("Disconnected");
-        statusDisplays[index]->setStyleSheet("border: 1px solid gray; padding: 2px; background-color: lightgray;");
+        statusText = "Disconnected";
+        style = "border: 1px solid gray; padding: 2px; background-color: lightgray;";
         break;
     case QModbusDevice::ConnectingState:
-        statusDisplays[index]->setText("Connecting...");
-        statusDisplays[index]->setStyleSheet("border: 1px solid gray; padding: 2px; background-color: yellow;");
+        statusText = "Connecting...";
+        style = "border: 1px solid gray; padding: 2px; background-color: yellow;";
         break;
     case QModbusDevice::ConnectedState:
-        statusDisplays[index]->setText("Connected");
-        statusDisplays[index]->setStyleSheet("border: 1px solid gray; padding: 2px; background-color: green;");
+        statusText = "Connected";
+        style = "border: 1px solid gray; padding: 2px; background-color: green;";
         break;
     case QModbusDevice::ClosingState:
-        statusDisplays[index]->setText("Closing...");
-        statusDisplays[index]->setStyleSheet("border: 1px solid gray; padding: 2px; background-color: orange;");
+        statusText = "Closing...";
+        style = "border: 1px solid gray; padding: 2px; background-color: orange;";
         break;
     }
+
+    //if (statusDisplays.contains(monitoringIndex)) {
+    //    statusDisplays[monitoringIndex]->setText(statusText);
+    //    statusDisplays[monitoringIndex]->setStyleSheet(style);
+    //}
 }
 
 // Modbus 연결 해제
@@ -663,12 +744,16 @@ void qt_window::disconnectFromSlave(int index)
 {
     if (index < 0 || index >= NUM_SLAVES) return;
 
+    int monitoringIndex = index + 1;
+
     if (clients[index]) {
         clients[index]->disconnectDevice();
         connectButtons[index]->setEnabled(true);
         disconnectButtons[index]->setEnabled(false);
         updateStatus(index, QModbusDevice::UnconnectedState);
     }
+
+    //settings[monitoringIndex]["Connected"] = "0";  // 연결 해제 상태 반영
 }
 
 // 데이터 읽기
@@ -677,16 +762,22 @@ void qt_window::readFromSlave(int index)
     if (index < 0 || index >= NUM_SLAVES) return;
     if (clients[index]->state() != QModbusDevice::ConnectedState) return;
 
+    int monitoringIndex = index + 1;
+
     QModbusDataUnit request(QModbusDataUnit::HoldingRegisters, 1000, NUM_REGISTERS);
     QModbusReply* reply = clients[index]->sendReadRequest(request, 1);
 
     if (reply) {
-        connect(reply, &QModbusReply::finished, this, [this, reply, index]() {
+        connect(reply, &QModbusReply::finished, this, [this, reply, index, monitoringIndex]() {
             if (reply->error() == QModbusDevice::NoError) {
                 auto values = reply->result().values();
+                QStringList dataList;
                 for (int j = 0; j < values.size() && j < NUM_REGISTERS; ++j) {
-                    dataDisplays[index][j]->setText(QString::number(values[j]));
+                    QString data = QString::number(values[j]);
+                    dataDisplays[index][j]->setText(data);
+                    dataList.append(data);
                 }
+                //settings[monitoringIndex]["LastData"] = dataList.join(",");  // 최신 데이터 저장
             }
             reply->deleteLater();
             });

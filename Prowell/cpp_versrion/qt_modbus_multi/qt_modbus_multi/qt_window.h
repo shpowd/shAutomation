@@ -1,6 +1,6 @@
 #pragma once
 #include "qt_monitoring.h"
-#include "qt_CSVReader.h" 
+#include "qt_CSVReader.h"
 
 
 #include <QtWidgets/QWidget>
@@ -26,7 +26,7 @@
 
 
 constexpr int NUM_REGISTERS = 14;  // 14개의 Holding Register 값
-constexpr int NUM_SLAVES = 16;     // 16개의 Modbus 슬레이브 장치
+constexpr int NUM_SLAVES = 20;     // 16개의 Modbus 슬레이브 장치
 
 // ✅ 공통 버튼 스타일 및 그림자 효과 함수
 inline void applyShadowEffect(QWidget* widget) {
@@ -37,7 +37,6 @@ inline void applyShadowEffect(QWidget* widget) {
     shadowEffect->setColor(QColor(0, 0, 0, 100)); // 검은색 반투명 그림자
     widget->setGraphicsEffect(shadowEffect);
 }
-
 inline void applyButtonStyle(QPushButton* button) {
     button->setStyleSheet(
         "QPushButton {"
@@ -62,7 +61,6 @@ inline void applyButtonStyle(QPushButton* button) {
 class qt_window : public QWidget{
     Q_OBJECT
 
-
 public:
     explicit qt_window(QWidget* parent = nullptr);
     ~qt_window();
@@ -83,13 +81,15 @@ private:
 
         // "현장 설정" 창
     QWidget* siteSettingWindow;             // 현장 설정 창
-    QTableWidget* siteSettingTableWidget;   // 현장 설정 전용 테이블
+    QTableWidget* siteSettingTableWidget;   // 현장 설정 전용 표
     QPushButton* siteSetting1Button;        // 현장 설정 1번 페이지 버튼
     QPushButton* siteSetting2Button;        // 현장 설정 1번 페이지 버튼
     int currentSiteSettingpPage = 1;        // siteSetupWindow의 현재 페이지
+    QMap<int, bool> usedStatus;
 
 
         // "통신 설정" 창
+    QMap<int, QString> usage;  // ✅ "Usage" 값을 저장하는 QMap 추가
 
 
         // "Monitoring" 창
@@ -99,6 +99,8 @@ private:
 
 
     // Modbus TCP 클라이언트 및 타이머
+    QTimer* pollingTimer;  // ✅ 2초 주기로 실행되는 타이머
+    void periodicCommunication(); // ✅ 2초 주기 통신 함수 선언
     QVector<QModbusTcpClient*> clients;
     QVector<QTimer*> pollTimers;
     QVector<QLineEdit*> ipInputs;
