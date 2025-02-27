@@ -1,39 +1,77 @@
 #include "qt_CSVReader.h"
 
-QString CSVReader::readCSVSetting(int monitoringIndex) {
-    QFile file("./config.csv"); // ✅ config.csv 파일 열기
+QStringList CSVReader::orderedHeaders;  // ✅ 정적 변수 정의
+
+QMap<int, QMap<QString, QString>> CSVReader::readAllSettings() {
+    QMap<int, QMap<QString, QString>> settings;
+    orderedHeaders.clear();  // ✅ 헤더 순서 초기화
+
+    QFile file("./config.csv");
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         qWarning() << "❌ CSV 파일을 열 수 없습니다: " << file.errorString();
-        return QString(); // 에러 발생 시 빈 문자열 반환
+        return settings;
     }
 
     QTextStream in(&file);
-    QString headerLine = in.readLine(); // 첫 번째 줄(헤더) 읽기
-    QStringList headers = headerLine.split(",");
+    QString headerLine = in.readLine();
+    orderedHeaders = headerLine.split(",", Qt::KeepEmptyParts);  // ✅ CSV 헤더 순서 저장
 
-    // ✅ "CSVsetting" 컬럼 찾기
-    int csvSettingIndex = headers.indexOf("CSVsetting");
-    if (csvSettingIndex == -1) {
-        qWarning() << "❌ 'CSVsetting' 열을 찾을 수 없습니다.";
-        file.close();
-        return QString();
-    }
-
-    // ✅ 지정된 monitoringIndex에 해당하는 데이터 검색
     while (!in.atEnd()) {
         QString line = in.readLine();
-        QStringList values = line.split(",");
+        QStringList values = line.split(",", Qt::KeepEmptyParts);
 
-        if (values.size() > csvSettingIndex) {
-            bool ok;
-            int rowIndex = values[0].toInt(&ok); // 첫 번째 열(인덱스) 파싱
-            if (ok && rowIndex == monitoringIndex) {
-                file.close(); // ✅ 파일 닫기
-                return values[csvSettingIndex]; // ✅ 찾은 값 반환
-            }
+        if (values.size() != orderedHeaders.size()) {
+            qWarning() << "⚠️ 잘못된 CSV 형식 (필드 개수 불일치): " << line;
+            continue;
         }
+
+        bool ok;
+        int monitoringIndex = values[0].toInt(&ok);
+        if (!ok) {
+            qWarning() << "⚠️ 잘못된 인덱스 값: " << values[0];
+            continue;
+        }
+
+        QMap<QString, QString> rowData;
+        for (int i = 1; i < orderedHeaders.size(); ++i) {  // ✅ 헤더 순서대로 저장
+            rowData[orderedHeaders[i]] = values[i];
+        }
+
+        settings[monitoringIndex] = rowData;
     }
 
-    file.close(); // ✅ 파일 닫기
-    return QString(); // 데이터가 없을 경우 빈 문자열 반환
+    file.close();
+    qDebug() << "✅ CSV 설정을 불러왔습니다. 총 " << settings.size() << "개의 설정 로드됨.";
+    return settings;
+}
+
+void CSVReader::writeAllSettings(const QMap<int, QMap<QString, QString>>& settings) {
+    QFile file("./config.csv");
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate)) {
+        qWarning() << "❌ CSV 파일을 저장할 수 없습니다: " << file.errorString();
+        return;
+    }
+
+    QTextStream out(&file);
+
+    if (settings.isEmpty() || orderedHeaders.isEmpty()) {
+        qWarning() << "⚠️ 저장할 데이터가 없거나 헤더 정보가 없습니다.";
+        return;
+    }
+
+    out << orderedHeaders.join(",") << "\n";  // ✅ 기존 CSV 헤더 순서 유지
+
+    for (auto it = settings.begin(); it != settings.end(); ++it) {
+        QStringList row;
+        row.append(QString::number(it.key()));  // ✅ Index 저장
+
+        for (int i = 1; i < orderedHeaders.size(); ++i) {
+            row.append(it.value().value(orderedHeaders[i], ""));  // ✅ 헤더 순서 유지하면서 값 저장
+        }
+
+        out << row.join(",") << "\n";
+    }
+
+    file.close();
+    qDebug() << "✅ CSV 설정을 저장했습니다.";
 }

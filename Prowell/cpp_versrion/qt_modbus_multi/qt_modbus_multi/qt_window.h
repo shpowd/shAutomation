@@ -1,5 +1,7 @@
 #pragma once
 #include "qt_monitoring.h"
+#include "qt_CSVReader.h" 
+
 
 #include <QtWidgets/QWidget>
 #include <QLineEdit>
@@ -20,10 +22,42 @@
 #include <QTextStream>
 #include <QCloseEvent>
 #include <QPointer>
+#include <QGraphicsDropShadowEffect>
 
 
 constexpr int NUM_REGISTERS = 14;  // 14개의 Holding Register 값
 constexpr int NUM_SLAVES = 16;     // 16개의 Modbus 슬레이브 장치
+
+// ✅ 공통 버튼 스타일 및 그림자 효과 함수
+inline void applyShadowEffect(QWidget* widget) {
+    QGraphicsDropShadowEffect* shadowEffect = new QGraphicsDropShadowEffect(widget);
+    shadowEffect->setBlurRadius(10.0);        // 그림자의 흐림 정도
+    shadowEffect->setXOffset(3.0);            // X축 방향 이동
+    shadowEffect->setYOffset(3.0);            // Y축 방향 이동
+    shadowEffect->setColor(QColor(0, 0, 0, 100)); // 검은색 반투명 그림자
+    widget->setGraphicsEffect(shadowEffect);
+}
+
+inline void applyButtonStyle(QPushButton* button) {
+    button->setStyleSheet(
+        "QPushButton {"
+        "    background-color: #ADB9CA;"  // 알람과 동일한 배경색
+        "    border-radius: 10px;"        // 둥근 모서리
+        "    color: white;"               // 흰색 텍스트
+        "    border: 1px solid #d0d0d0;"  // 테두리
+        "    font-size: 14px;"            // 글자 크기
+        "    padding: 10px;"              // 버튼 내 여백
+        "}"
+        "QPushButton:hover {"
+        "    background-color: #95A5C3;"  // 마우스 오버 시 밝은 파란색
+        "}"
+        "QPushButton:pressed {"
+        "    background-color: #7A92AE;"  // 클릭 시 더 어두운 색
+        "}"
+    );
+    applyShadowEffect(button); // ✅ 그림자 효과 추가
+}
+
 
 class qt_window : public QWidget{
     Q_OBJECT
@@ -33,10 +67,13 @@ public:
     explicit qt_window(QWidget* parent = nullptr);
     ~qt_window();
 
-
 private:
     // UI 요소 정의
     void initMainUI();                      // UI 구성 메서드
+    QMap<int, QMap<QString, QString>> settings;
+    void saveSettingsToCSV();
+    void loadSettingsFromCSV();
+
         // "Main" 창
     QPushButton* openSiteSettingButton;     // 현장 설정 버튼
     QTableWidget* mainTableWidget;          // Main Window 전용 테이블
@@ -53,9 +90,6 @@ private:
 
 
         // "통신 설정" 창
-    QMap<int, QMap<QString, QString>> settings;
-    void saveSettingsToCSV();
-    void loadSettingsFromCSV();
 
 
         // "Monitoring" 창
@@ -85,7 +119,6 @@ private slots:
     void openSiteSettingWindow();                                   // Main -> siteSetupWindow 슬롯
     void siteSettingWindowDisplayPage(int siteSettingpageIndex);    // "현장 설정" 페이지 전환 함수
     void siteSettingWindowSave();                                   // 셋업 윈도우 설정 저장 함수
-    void refreshMainWindow();                                       // siteSetupWindow가 닫힐 때 Main Window 업데이트
 
     // "통신 설정" 창
     void openCommSettingsWindow(int monitoringIndex); // 통신 설정창 여는 함수

@@ -1,5 +1,5 @@
 #include "qt_monitoring.h"
-#include <QDebug>
+#include "qt_window.h"
 
 // ✅ Monitoring 창 생성 함수
 MonitoringWindow::MonitoringWindow(int monitoringIndex, const QMap<int, QMap<QString, QString>>& settings, QWidget* parent)
@@ -70,7 +70,7 @@ void MonitoringWindow::initMonitoringUI() {
     descriptionLabel = new QLabel(settings.value(monitoringIndex).value("description", "No Description"));
     descriptionLabel->setFont(QFont("맑은 고딕", 20, QFont::Normal));
     descriptionLabel->setAlignment(Qt::AlignCenter);
-    descriptionLabel->setStyleSheet("background-color: white; border-radius: 10px; padding: 10px; border: 2px solid darkgray;");
+    descriptionLabel->setStyleSheet("background-color: #ADB9CA; color: white; border-radius: 10px; padding: 10px; border: 2px solid darkgray;");
     descriptionLabel->setMinimumHeight(50);
     descriptionLabel->setMinimumWidth(600);
 
@@ -88,14 +88,15 @@ void MonitoringWindow::initMonitoringUI() {
     buttonLayout->setVerticalSpacing(40); 
     QFont buttonFont("맑은 고딕", 20, QFont::Bold);
     QString buttonStyle = "QPushButton {"
-        "background-color: #F0F0F0;"
+        "background-color: #ADB9CA;"
+        "color: white; "
         "border: 2px solid darkgray;"
         "border-radius: 10px;"
         "padding: 20px;"
         "font-size: 24px;"
         "} "
-        "QPushButton:hover { background-color: #E0E0E0; }"
-        "QPushButton:pressed { background-color: #C8C8C8; }";
+        "QPushButton:hover { background-color: #2E75B6; }"
+        "QPushButton:pressed { background-color: #FFA500; }";
 
     for (int i = 0; i < 2; ++i) {
         for (int j = 0; j < 4; ++j) {
@@ -128,31 +129,17 @@ void MonitoringWindow::initMonitoringUI() {
 
     // ✅ Main 버튼 (좌측)
     QPushButton* mainButton = new QPushButton("Main");
-    mainButton->setFixedSize(150, 75);
+    mainButton->setFixedSize(150, 50);
     mainButton->setFont(QFont("맑은 고딕", 20, QFont::Normal));
-    mainButton->setStyleSheet("QPushButton {"
-        "background-color: #EFF4F9;"
-        "border: 2px solid darkgray;"
-        "border-radius: 10px;"
-        "padding: 10px;"
-        "} "
-        "QPushButton:hover { background-color: #E0E0E0; }"
-        "QPushButton:pressed { background-color: #C8C8C8; }");
+    applyButtonStyle(mainButton);
     connect(mainButton, &QPushButton::clicked, this, &QMainWindow::close);
     bottomLayout->addWidget(mainButton);
 
     // ✅ CSV 설정 버튼 (좌측)
     QPushButton* csvButton = new QPushButton("CSV 설정");
-    csvButton->setFixedSize(150, 75);
+    csvButton->setFixedSize(150, 50);
     csvButton->setFont(QFont("맑은 고딕", 20, QFont::Normal));
-    csvButton->setStyleSheet("QPushButton {"
-        "background-color: #EFF4F9;"
-        "border: 2px solid darkgray;"
-        "border-radius: 10px;"
-        "padding: 10px;"
-        "} "
-        "QPushButton:hover { background-color: #E0E0E0; }"
-        "QPushButton:pressed { background-color: #C8C8C8; }");
+    applyButtonStyle(csvButton);
     connect(csvButton, &QPushButton::clicked, this, &MonitoringWindow::openCSVSettingDialog);
     bottomLayout->addWidget(csvButton);
 

@@ -9,6 +9,7 @@
 #include <QRandomGenerator>
 #include <QGraphicsDropShadowEffect>
 
+
 class GraphWidget : public QWidget{
     Q_OBJECT
 

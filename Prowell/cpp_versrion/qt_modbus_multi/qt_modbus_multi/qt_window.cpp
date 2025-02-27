@@ -1,6 +1,9 @@
 #include "qt_window.h"
 #include <QDebug>
 
+
+
+
 // ✅ main 창 생성 함수
 qt_window::qt_window(QWidget* parent)
     : QWidget(parent), siteSettingWindow(nullptr) {
@@ -10,7 +13,7 @@ qt_window::qt_window(QWidget* parent)
     QIcon icon("./src/icon.png");
     setWindowIcon(icon);
 
-    initMainUI(); // UI 초기화
+    initMainUI();                       // ✅ UI 초기화
 }
 
 // ✅ main 창 소멸자
@@ -49,7 +52,7 @@ void qt_window::initMainUI(){
     mainTableWidget->setHorizontalHeaderLabels({ "No", "Description", "Monitoring" });
 
         // 헤더 스타일 설정
-    QFont headerFont("맑은 고딕", 22, QFont::Bold);
+    QFont headerFont("맑은 고딕", 18, QFont::Bold);
     mainTableWidget->horizontalHeader()->setFont(headerFont);
     mainTableWidget->horizontalHeader()->setFixedHeight(55);
     mainTableWidget->horizontalHeader()->setStyleSheet("QHeaderView::section {"
@@ -85,20 +88,11 @@ void qt_window::initMainUI(){
     mainLayout->addLayout(bottomLayout);
 
 
-    // 환경 설정 버튼 (좌측)
+    // 현장 설정 버튼 (좌측)
     QHBoxLayout* settingsButtonLayout = new QHBoxLayout;
     openSiteSettingButton = new QPushButton("현장 설정");
-    openSiteSettingButton->setFixedSize(250, 75); // 버튼 크기
-    QFont openSiteSettingButtonFont("맑은 고딕", 20, QFont::Normal);
-    openSiteSettingButton->setFont(openSiteSettingButtonFont);  // 폰트 적용
-    openSiteSettingButton->setStyleSheet("QPushButton {"
-        "background-color: #EFF4F9;"  // Windows 기본 버튼 색
-        "border: 2px solid darkgray;"
-        "border-radius: 10px;"
-        "padding: 10px;"
-        "}"
-        "QPushButton:hover { background-color: #E0E0E0; }"
-        "QPushButton:pressed { background-color: #C8C8C8; }");
+    openSiteSettingButton->setFixedSize(150, 50); // 버튼 크기
+    applyButtonStyle(openSiteSettingButton);  // ✅ 스타일 적용
     settingsButtonLayout->addWidget(openSiteSettingButton); 
     bottomLayout->addLayout(settingsButtonLayout);
     connect(openSiteSettingButton, &QPushButton::clicked, this, &qt_window::openSiteSettingWindow);
@@ -109,30 +103,19 @@ void qt_window::initMainUI(){
 
 
     // 페이지 변경 버튼 (중앙)
-    QString pageButtonStyle = "QPushButton {"
-        "font-size: 30px; font-family: '맑은 고딕'; font-weight: normal;"
-        "background-color: #F0F0F0;"
-        "border: 2px solid darkgray;"
-        "border-radius: 10px;"
-        "padding: 10px;"
-        "} "
-        "QPushButton:hover { background-color: #E0E0E0; }"
-        "QPushButton:pressed { background-color: #C8C8C8; }";
     mainPage1Button = new QPushButton("1");
     mainPage2Button = new QPushButton("2");
-    mainPage1Button->setFixedSize(100, 75);
-    mainPage2Button->setFixedSize(100, 75);
-    mainPage1Button->setStyleSheet(pageButtonStyle);
-    mainPage2Button->setStyleSheet(pageButtonStyle);
+    mainPage1Button->setFixedSize(70, 50);
+    mainPage2Button->setFixedSize(70, 50);
+    applyButtonStyle(mainPage1Button);
+    applyButtonStyle(mainPage2Button);
     bottomLayout->addWidget(mainPage1Button);
     bottomLayout->addWidget(mainPage2Button);
 
     // ✅ 버튼 클릭 시 페이지 변경 함수 호출
     connect(mainPage1Button, &QPushButton::clicked, this, [this]() { mainWindowDisplayPage(1); });
     connect(mainPage2Button, &QPushButton::clicked, this, [this]() { mainWindowDisplayPage(2); });
-
-    mainWindowDisplayPage(1); // 초기 페이지 로드
-
+    
 
     // 유동적 간격 추가 (페이지 버튼과 로고 사이)
     bottomLayout->addSpacerItem(new QSpacerItem(40, 10, QSizePolicy::Expanding, QSizePolicy::Minimum));
@@ -151,7 +134,9 @@ void qt_window::initMainUI(){
 
     setLayout(mainLayout);
 
-    refreshMainWindow();
+
+    mainWindowDisplayPage(currentMainPage);
+
 }
 
 
@@ -166,8 +151,13 @@ void qt_window::mainWindowDisplayPage(int pageIndex){
     for (int i = 0; i < 10; ++i) {
         int monitoringIndex = (pageIndex == 1) ? i + 1 : i + 11;
 
+        // ✅ CSV에서 불러온 값 적용
+        loadSettingsFromCSV();                                                                  // ✅ CSV 데이터 로드
+        qDebug() << settings;
+        QString descriptionText = settings.value(monitoringIndex).value("Description", "");     // ✅ 필드
+        
         QTableWidgetItem* itemNo = new QTableWidgetItem(QString::number(monitoringIndex));
-        QTableWidgetItem* description = new QTableWidgetItem(settings.value(monitoringIndex).value("description", ""));
+        QTableWidgetItem* description = new QTableWidgetItem(descriptionText);
 
         // ✅ 폰트 적용 (한 번만 설정)
         itemNo->setFont(cellFont);
@@ -178,17 +168,17 @@ void qt_window::mainWindowDisplayPage(int pageIndex){
         description->setTextAlignment(Qt::AlignCenter);
 
         // ✅ 모니터링 버튼 추가
-        QPushButton* monitorButton = new QPushButton("Monitoring" + QString::number(monitoringIndex));
-        monitorButton->setStyleSheet("QPushButton {"
-            "font-size: 18px; font - family: '맑은 고딕'; font-weight: Thin;"
-            "background-color: #F0F0F0;"  // Windows 기본 버튼 색
-            "border: 2px solid darkgray;"
-            "border-radius: 10px;"
-            "padding: 10px;"
-            "}"
-            "QPushButton:hover { background-color: #E0E0E0; }"
-            "QPushButton:pressed { background-color: #C8C8C8; }"
-        );
+        QPushButton* monitorButton = new QPushButton("monitoring" + QString::number(monitoringIndex));
+        monitorButton->setFixedSize(250, 40);
+        applyButtonStyle(monitorButton);
+        // ✅ 버튼을 감싸는 위젯과 레이아웃 추가
+        QWidget* monitoringContainer = new QWidget();
+        QHBoxLayout* monitoringlayout = new QHBoxLayout(monitoringContainer);
+        monitoringlayout->addWidget(monitorButton);
+        monitoringlayout->setAlignment(Qt::AlignCenter);  // ✅ 아래위 + 좌우 모두 가운데 정렬
+        monitoringlayout->setContentsMargins(0, 0, 0, 0); // ✅ 불필요한 여백 제거
+        monitoringContainer->setLayout(monitoringlayout);
+
 
         // ✅ 버튼 클릭 시 Monitoring 창 열기
         connect(monitorButton, &QPushButton::clicked, this, [this, monitoringIndex]() {
@@ -197,21 +187,8 @@ void qt_window::mainWindowDisplayPage(int pageIndex){
 
         mainTableWidget->setItem(i, 0, itemNo);
         mainTableWidget->setItem(i, 1, description);
-        mainTableWidget->setCellWidget(i, 2, monitorButton);
+        mainTableWidget->setCellWidget(i, 2, monitoringContainer);
     }
-}
-
-// ✅ main 갱신 함수
-void qt_window::refreshMainWindow() {
-    qDebug() << "🔄 siteSettingWindow가 닫힘 - Main Window 업데이트";
-
-    // ✅ CSV 다시 불러오기
-    loadSettingsFromCSV();
-    qDebug() << "🔄 siteSettingWindow가 닫힘 - Main Window 업데이트2";
-
-    // ✅ 현재 페이지의 데이터를 다시 표시
-    mainWindowDisplayPage(currentMainPage);
-    qDebug() << "🔄 siteSettingWindow가 닫힘 - Main Window 업데이트3";
 }
 
 
@@ -264,7 +241,7 @@ void qt_window::openSiteSettingWindow(){
         siteSettingTableWidget->setHorizontalHeaderLabels({ "No", "Description", "통신설정", "통신 상태", "비고" });
 
         // ✅ 헤더 스타일 설정
-        QFont headerFont("맑은 고딕", 22, QFont::Bold);
+        QFont headerFont("맑은 고딕", 18, QFont::Bold);
         siteSettingTableWidget->horizontalHeader()->setFont(headerFont);
         siteSettingTableWidget->horizontalHeader()->setFixedHeight(55);
         siteSettingTableWidget->horizontalHeader()->setStyleSheet("QHeaderView::section {"
@@ -299,37 +276,23 @@ void qt_window::openSiteSettingWindow(){
 
         // ✅ Main 버튼 (좌측)
         QPushButton* mainButton = new QPushButton("Main");
-        mainButton->setFixedSize(125, 75);
+        mainButton->setFixedSize(150, 50);
         mainButton->setFont(QFont("맑은 고딕", 20, QFont::Normal));
-        mainButton->setStyleSheet("QPushButton {"
-            "background-color: #EFF4F9;"
-            "border: 2px solid darkgray;"
-            "border-radius: 10px;"
-            "padding: 10px;"
-            "}"
-            "QPushButton:hover { background-color: #E0E0E0; }"
-            "QPushButton:pressed { background-color: #C8C8C8; }");
+        applyButtonStyle(mainButton);
         bottomLayout->addWidget(mainButton);
         connect(mainButton, &QPushButton::clicked, this, [=]() {
             if (siteSettingWindow) {
                 siteSettingWindow->close();
-                refreshMainWindow();
+                mainWindowDisplayPage(currentMainPage);
                 qDebug() << "✅ Main 버튼 클릭 - Setup Window 닫힘";
             }
         });
 
         // ✅ Save 버튼 (좌측)
         QPushButton* saveButton = new QPushButton("Save");
-        saveButton->setFixedSize(125, 75);
+        saveButton->setFixedSize(150, 50);
         saveButton->setFont(QFont("맑은 고딕", 20, QFont::Normal));
-        saveButton->setStyleSheet("QPushButton {"
-            "background-color: #EFF4F9;"
-            "border: 2px solid darkgray;"
-            "border-radius: 10px;"
-            "padding: 10px;"
-            "}"
-            "QPushButton:hover { background-color: #E0E0E0; }"
-            "QPushButton:pressed { background-color: #C8C8C8; }");
+        applyButtonStyle(saveButton);
         bottomLayout->addWidget(saveButton);
         connect(saveButton, &QPushButton::clicked, this, &qt_window::siteSettingWindowSave);
 
@@ -337,21 +300,12 @@ void qt_window::openSiteSettingWindow(){
         bottomLayout->addSpacerItem(new QSpacerItem(40, 10, QSizePolicy::Expanding, QSizePolicy::Minimum));
 
         // ✅ 페이지 변경 버튼 (중앙)
-        QString pageButtonStyle = "QPushButton {"
-            "font-size: 30px; font-family: '맑은 고딕'; font-weight: normal;"
-            "background-color: #F0F0F0;"
-            "border: 2px solid darkgray;"
-            "border-radius: 10px;"
-            "padding: 10px;"
-            "} "
-            "QPushButton:hover { background-color: #E0E0E0; }"
-            "QPushButton:pressed { background-color: #C8C8C8; }";
         QPushButton* page1Button = new QPushButton("1");
         QPushButton* page2Button = new QPushButton("2");
-        page1Button->setFixedSize(100, 75);
-        page2Button->setFixedSize(100, 75);
-        page1Button->setStyleSheet(pageButtonStyle);
-        page2Button->setStyleSheet(pageButtonStyle);
+        page1Button->setFixedSize(70, 50);
+        page2Button->setFixedSize(70, 50);
+        applyButtonStyle(page1Button);
+        applyButtonStyle(page2Button);
         bottomLayout->addWidget(page1Button);
         bottomLayout->addWidget(page2Button);
 
@@ -394,10 +348,15 @@ void qt_window::siteSettingWindowDisplayPage(int pageIndex){
     for (int i = 0; i < 10; ++i) {
         int monitoringIndex = (pageIndex == 1) ? i + 1 : i + 11;
 
+        // ✅ CSV에서 불러온 값 적용 (필드명 정확하게 확인)
+        loadSettingsFromCSV();                                                                  // ✅ CSV 데이터 로드
+        QString descriptionText = settings.value(monitoringIndex).value("Description", "");     // ✅ 필드
+        QString notesText = settings.value(monitoringIndex).value("Notes", "");                 // ✅ 필드
+
         QTableWidgetItem* itemNo = new QTableWidgetItem(QString::number(monitoringIndex));
-        QTableWidgetItem* description = new QTableWidgetItem(settings.value(monitoringIndex).value("description", ""));
+        QTableWidgetItem* description = new QTableWidgetItem(descriptionText);
         QTableWidgetItem* commState = new QTableWidgetItem(QString("Value %1").arg(monitoringIndex + 20));
-        QTableWidgetItem* notes = new QTableWidgetItem(settings.value(monitoringIndex).value("notes", ""));
+        QTableWidgetItem* notes = new QTableWidgetItem(notesText);
 
         // ✅ 폰트 적용 (메인 페이지와 동일)
         itemNo->setFont(cellFont);
@@ -417,18 +376,7 @@ void qt_window::siteSettingWindowDisplayPage(int pageIndex){
 
         // ✅ "통신 설정" 버튼 추가 (메인 윈도우의 Monitoring 버튼과 동일한 스타일)
         QPushButton* commButton = new QPushButton("통신 설정" + QString::number(monitoringIndex));
-
-        commButton->setStyleSheet("QPushButton {"
-            "font-size: 18px; font - family: '맑은 고딕'; font-weight: Thin;"
-            "background-color: #F0F0F0;"
-            "border: 2px solid darkgray;"
-            "border-radius: 10px;"
-            "padding: 5px;"
-            "} "
-            "QPushButton:hover { background-color: #E0E0E0; }"
-            "QPushButton:pressed { background-color: #C8C8C8; }"
-        );
-
+        applyButtonStyle(commButton);  // ✅ 기존 스타일 적용
         // ✅ 버튼 클릭 시 "통신 설정" 팝업 창 열기
         connect(commButton, &QPushButton::clicked, this, [this, monitoringIndex]() {
             openCommSettingsWindow(monitoringIndex);
@@ -444,10 +392,10 @@ void qt_window::siteSettingWindowDisplayPage(int pageIndex){
     }
 }
 
-// ✅ "현장 설정" save 함수
+// ✅ "현장 설정" 페이지 SAVE 버튼 함수
 void qt_window::siteSettingWindowSave() {
     for (int i = 0; i < 10; ++i) {
-        int monitoringIndex = (currentSiteSettingpPage == 1) ? i + 1 : i + 11;  // ✅ 현재 페이지에 따라 행 번호 변경
+        int monitoringIndex = (currentSiteSettingpPage == 1) ? i + 1 : i + 11;
 
         QTableWidgetItem* descriptionItem = siteSettingTableWidget->item(i, 1);
         QTableWidgetItem* notesItem = siteSettingTableWidget->item(i, 4);
@@ -455,16 +403,14 @@ void qt_window::siteSettingWindowSave() {
         QString description = descriptionItem ? descriptionItem->text() : "";
         QString notes = notesItem ? notesItem->text() : "";
 
-        settings[monitoringIndex]["description"] = description;
-        settings[monitoringIndex]["notes"] = notes;
+        // ✅ settings 업데이트 시 필드명 일치
+        settings[monitoringIndex]["Description"] = description;
+        settings[monitoringIndex]["Notes"] = notes;
     }
 
     saveSettingsToCSV();
-    qDebug() << "✅ Setup Window 설정이 저장되었습니다.";
+    qDebug() << "✅ siteSettingWindow 설정이 저장되었습니다.";
 }
-
-
-
 
 
 // ✅ "통신 설정" 창 생성 함수
@@ -484,7 +430,7 @@ void qt_window::openCommSettingsWindow(int monitoringIndex){
     QVBoxLayout* groupLayout = new QVBoxLayout(modbusGroup);
 
     // ✅ CSV에서 기존 설정 불러오기
-    QMap<QString, QString> rowData = settings.value(monitoringIndex, {});
+    loadSettingsFromCSV();  // ✅ CSV 데이터 로드
 
     // ✅ Modbus ID 입력 필드
     QLabel* modbusIdLabel = new QLabel("Modbus ID:");
@@ -492,7 +438,7 @@ void qt_window::openCommSettingsWindow(int monitoringIndex){
     QLineEdit* modbusIdInput = new QLineEdit();
     modbusIdInput->setFont(font);
     modbusIdInput->setPlaceholderText("예: 1");
-    modbusIdInput->setText(rowData.value("modbus_id", ""));
+    modbusIdInput->setText(settings[monitoringIndex].value("Modbus ID", ""));
 
     // ✅ IP 주소 입력 필드
     QLabel* ipLabel = new QLabel("IP 주소:");
@@ -500,7 +446,7 @@ void qt_window::openCommSettingsWindow(int monitoringIndex){
     QLineEdit* ipInput = new QLineEdit();
     ipInput->setFont(font);
     ipInput->setPlaceholderText("예: 192.168.0.1");
-    ipInput->setText(rowData.value("ip", ""));
+    ipInput->setText(settings[monitoringIndex].value("IP", ""));
 
     // ✅ 포트 번호 입력 필드
     QLabel* portLabel = new QLabel("포트 번호:");
@@ -508,7 +454,7 @@ void qt_window::openCommSettingsWindow(int monitoringIndex){
     QLineEdit* portInput = new QLineEdit();
     portInput->setFont(font);
     portInput->setPlaceholderText("예: 502");
-    portInput->setText(rowData.value("port", ""));
+    portInput->setText(settings[monitoringIndex].value("Port", ""));
 
     // ✅ 그룹 레이아웃에 위젯 추가
     groupLayout->addWidget(modbusIdLabel);
@@ -525,11 +471,12 @@ void qt_window::openCommSettingsWindow(int monitoringIndex){
     // ✅ 저장 버튼
     QPushButton* saveButton = new QPushButton("저장");
     saveButton->setFont(font);
-    saveButton->setFixedSize(160, 80);
+    saveButton->setFixedSize(150, 50);
+    applyButtonStyle(saveButton);  // ✅ 기존 스타일 적용
     connect(saveButton, &QPushButton::clicked, commSettingsDialog, [=]() {
-        settings[monitoringIndex]["modbus_id"] = modbusIdInput->text();
-        settings[monitoringIndex]["ip"] = ipInput->text();
-        settings[monitoringIndex]["port"] = portInput->text();
+        settings[monitoringIndex]["Modbus ID"] = modbusIdInput->text();
+        settings[monitoringIndex]["IP"] = ipInput->text();
+        settings[monitoringIndex]["Port"] = portInput->text();
         saveSettingsToCSV();
         commSettingsDialog->close();
         });
@@ -537,7 +484,8 @@ void qt_window::openCommSettingsWindow(int monitoringIndex){
     // ✅ 닫기 버튼
     QPushButton* closeButton = new QPushButton("닫기");
     closeButton->setFont(font);
-    closeButton->setFixedSize(160, 80);
+    closeButton->setFixedSize(150, 50);
+    applyButtonStyle(closeButton);  // ✅ 기존 스타일 적용
     connect(closeButton, &QPushButton::clicked, commSettingsDialog, &QWidget::close);
 
     buttonLayout->addWidget(saveButton);
@@ -550,106 +498,22 @@ void qt_window::openCommSettingsWindow(int monitoringIndex){
     commSettingsDialog->show();
 }
 
+
+
+
 // ✅ CSV 설정 불러오기 함수 
 void qt_window::loadSettingsFromCSV() {
-    settings.clear();  // 기존 데이터를 지움
-
-    QFile file("config.csv");
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        qDebug() << "❌ 설정 파일을 열 수 없습니다.";
-        return;
-    }
-
-    QTextStream in(&file);
-    bool firstLine = true;
-
-    while (!in.atEnd()) {
-        QString line = in.readLine();
-        if (firstLine) {
-            firstLine = false;
-            continue;  // ✅ 첫 번째 줄(헤더) 건너뜀
-        }
-
-        QStringList fields = line.split(",");
-
-        if (fields.size() != 6) {  // ✅ 형식 검사 (No, Modbus ID, IP, Port, Description, Notes)
-            qDebug() << "⚠️ 잘못된 CSV 형식: " << line;
-            continue;
-        }
-
-        int monitoringIndex = fields[0].toInt();
-        QMap<QString, QString> rowData;
-        rowData["description"] = fields[1].trimmed();
-        rowData["modbus_id"] = fields[2].trimmed();
-        rowData["ip"] = fields[3].trimmed();
-        rowData["port"] = fields[4].trimmed();
-        rowData["notes"] = fields[5].trimmed();
-
-        settings[monitoringIndex] = rowData;
-
-        // ✅ CSV에서 읽은 데이터 확인 (디버깅)
-        qDebug() << "📌 CSV 로드 - Row:" << monitoringIndex
-            << "| Description:" << rowData["description"]
-            << "| Modbus ID:" << rowData["modbus_id"]
-            << "| IP:" << rowData["ip"]
-            << "| Port:" << rowData["port"]
-            << "| Notes:" << rowData["notes"];
-    }
-
-    file.close();
-    qDebug() << "✅ CSV 설정을 불러왔습니다. 총 " << settings.size() << "개의 설정 로드됨.";
+    settings = CSVReader::readAllSettings();
+    qDebug() << "✅ CSVReader 사용하여 설정을 불러왔습니다.";
 }
 
 // ✅ CSV 설정 저장 함수 
 void qt_window::saveSettingsToCSV() {
-    QFile file("config.csv");
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        qDebug() << "❌ 설정 파일을 저장할 수 없습니다.";
-        return;
-    }
-
-    QTextStream out(&file);
-
-    // ✅ CSV 헤더 추가
-    out << "No,Description,Modbus ID,IP,Port,Notes\n";
-
-    if (settings.isEmpty()) {
-        qDebug() << "⚠️ 저장할 설정 데이터가 없습니다.";
-        file.close();
-        return;
-    }
-
-    qDebug() << "📌 현재 settings 데이터 크기:" << settings.size();
-
-    for (auto it = settings.begin(); it != settings.end(); ++it) {
-        int monitoringIndex = it.key();
-        const QMap<QString, QString>& rowData = it.value();
-
-        QString description = rowData.value("description", "");
-        QString modbusId = rowData.value("modbus_id", "");
-        QString ip = rowData.value("ip", "");
-        QString port = rowData.value("port", "");
-        QString notes = rowData.value("notes", "");
-
-        // ✅ 저장되는 값 디버깅 출력
-        qDebug() << "📌 저장 데이터 - No:" << monitoringIndex
-            << "| Description:" << description
-            << "| Modbus ID:" << modbusId
-            << "| IP:" << ip
-            << "| Port:" << port
-            << "| notes:" << notes;
-
-        out << monitoringIndex << ","
-            << description << ","
-            << modbusId << ","
-            << ip << ","
-            << port << ","
-            << notes << "\n";
-    }
-
-    file.close();
-    qDebug() << "✅ 설정이 CSV 파일에 저장되었습니다.";
+    CSVReader::writeAllSettings(settings);
+    qDebug() << "✅ CSVReader 사용하여 설정을 저장했습니다.";
 }
+
+
 
 
 

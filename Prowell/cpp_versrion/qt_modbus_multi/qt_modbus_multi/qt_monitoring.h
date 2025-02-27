@@ -3,6 +3,7 @@
 
 #include "qt_graph.h" // ✅ GraphWidget 포함
 
+#include <QDebug>
 #include <QMainWindow>
 #include <QPushButton>
 #include <QLabel>

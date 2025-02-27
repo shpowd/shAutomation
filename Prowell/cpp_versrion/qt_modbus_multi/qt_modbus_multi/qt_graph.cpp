@@ -1,4 +1,5 @@
 ﻿#include "qt_graph.h"
+#include "qt_window.h"
 
 
 // ✅ Graph 창 생성 함수
@@ -28,34 +29,6 @@ GraphWidget::~GraphWidget() {
 
 }
 
-// ✅ 공통 버튼 스타일 및 그림자 효과 함수
-void applyShadowEffect(QWidget* widget) {
-    QGraphicsDropShadowEffect* shadowEffect = new QGraphicsDropShadowEffect(widget);
-    shadowEffect->setBlurRadius(10.0);        // 그림자의 흐림 정도
-    shadowEffect->setXOffset(3.0);            // X축 방향 이동
-    shadowEffect->setYOffset(3.0);            // Y축 방향 이동
-    shadowEffect->setColor(QColor(0, 0, 0, 100)); // 검은색 반투명 그림자
-    widget->setGraphicsEffect(shadowEffect);
-}
-void applyButtonStyle(QPushButton* button) {
-    button->setStyleSheet(
-        "QPushButton {"
-        "    background-color: #ADB9CA;"  // 알람과 동일한 배경색
-        "    border-radius: 10px;"        // 둥근 모서리
-        "    color: white;"               // 흰색 텍스트
-        "    border: 1px solid #d0d0d0;"  // 테두리
-        "    font-size: 14px;"            // 글자 크기
-        "    padding: 10px;"              // 버튼 내 여백
-        "}"
-        "QPushButton:hover {"
-        "    background-color: #95A5C3;"  // 마우스 오버 시 밝은 파란색
-        "}"
-        "QPushButton:pressed {"
-        "    background-color: #7A92AE;"  // 클릭 시 더 어두운 색
-        "}"
-    );
-    applyShadowEffect(button); // ✅ 그림자 효과 추가
-}
 
 
 // ✅ GraphUI 생성 함수
@@ -177,7 +150,7 @@ void GraphWidget::initGraphUI() {
         alarmLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         alarmLabel->setAlignment(Qt::AlignCenter);
         alarmLabel->setStyleSheet("background-color: #ADB9CA; border: 1px solid #d0d0d0; border-radius: 22px; color: white; font-size: 14px; padding: 5px;");
-        applyShadowEffect(alarmLabel); 
+        applyShadowEffect(alarmLabel);
         arlamBoxLayout->addWidget(alarmLabel);
     }
     rightLayout->addLayout(arlamBoxLayout);
