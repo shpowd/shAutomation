@@ -65,6 +65,7 @@ public:
     explicit qt_window(QWidget* parent = nullptr);
     ~qt_window();
 
+
 private:
     // UI 요소 정의
     void initMainUI();                      // UI 구성 메서드
@@ -96,19 +97,31 @@ private:
     QMap<int, QPointer<MonitoringWindow>> monitoringWindows; // 여러 개의 Monitoring 창을 관리할 맵
 
 
-
+        // "Graph" 창
+    QTimer* graphUpdateTimer; // ✅ 그래프 업데이트 타이머 추가
+    void updateGraphWidgets();
 
     // Modbus TCP 클라이언트 및 타이머
     QTimer* pollingTimer;  // ✅ 2초 주기로 실행되는 타이머
-    void periodicCommunication(); // ✅ 2초 주기 통신 함수 선언
+    QVector<QVector<QPair<QDateTime, QVector<quint16>>>> comValues; // ✅ 시간별 데이터 저장
+
+
+
+    int maxComValuesSize = 100; // ✅ 기본값 100, 동적으로 변경 가능
+    int logCounter = 0; // ✅ 카운팅용
+    int logInterval = 10; // ✅ 기본값 10, 동적으로 변경 가능
+
+    void logSave(int clientIndex, const QVector<quint16>& values, const QDateTime& timestamp); // ✅ CSV 로그 저장 함수
+
+    void connectToSlave(int index); // ✅ Modbus 연결
+    void disconnectFromSlave(int index); // ✅ Modbus 연결 해제
+    void readFromSlave(int index); // ✅ 데이터 읽기
+    void updateStatus(int index, QModbusDevice::State state); // ✅ 상태 업데이트 
+
+
     QVector<QModbusTcpClient*> clients;
-    QVector<QTimer*> pollTimers;
-    QVector<QLineEdit*> ipInputs;
-    QVector<QLineEdit*> portInputs;
-    QVector<QPushButton*> connectButtons;
-    QVector<QPushButton*> disconnectButtons;
-    QVector<QVector<QLabel*>> dataDisplays; // 14개 Holding Register 값을 저장하는 2D 벡터
-    QVector<QLabel*> statusDisplays;
+
+
 
 
 private slots:
@@ -116,6 +129,7 @@ private slots:
     // UI 관련 슬롯
         // "Main" 창
     void mainWindowDisplayPage(int mainPageIndex);                  // 페이지 전환 함수
+    void periodicCommunication(); // ✅ 비동기 Modbus 통신
 
     // "현장 설정" 창
     void openSiteSettingWindow();                                   // Main -> siteSetupWindow 슬롯
@@ -131,17 +145,13 @@ private slots:
 
 
 
-    // Modbus 통신 관련 슬롯
-    void connectToSlave(int index);
-    void disconnectFromSlave(int index);
-    void readFromSlave(int index);
-    void updateStatus(int index, QModbusDevice::State state);
 
 
 signals:
 
 
 protected:
+    void showEvent(QShowEvent* event) override; // ✅ UI 로드 후 타이머 시작
 
 
 };

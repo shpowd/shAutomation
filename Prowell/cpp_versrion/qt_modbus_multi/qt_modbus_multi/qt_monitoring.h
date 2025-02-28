@@ -23,6 +23,8 @@ class MonitoringWindow : public QMainWindow {
 public:
     explicit MonitoringWindow(int monitoringIndex, const QMap<int, QMap<QString, QString>>& settings, QWidget* parent = nullptr);
     ~MonitoringWindow();
+    const QMap<int, QPointer<GraphWidget>>& getGraphWindows() const; // ✅ getter 함수 선언
+    int getMonitoringIndex() const;
 
 private:
     void initMonitoringUI(); // UI 구성 메서드

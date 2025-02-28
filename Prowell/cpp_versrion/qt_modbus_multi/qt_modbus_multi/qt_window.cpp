@@ -3,7 +3,6 @@
 
 
 
-
 // ✅ main 창 생성 함수
 qt_window::qt_window(QWidget* parent)
     : QWidget(parent), siteSettingWindow(nullptr) {
@@ -15,36 +14,55 @@ qt_window::qt_window(QWidget* parent)
 
     initMainUI();                       // ✅ UI 초기화
 
-    // ✅ 2초 주기로 실행되는 타이머 설정
-    pollingTimer = new QTimer(this);
-    connect(pollingTimer, &QTimer::timeout, this, &qt_window::periodicCommunication);
-    pollingTimer->start(2000);
-
+    // ✅ "Usage" 맵을 CSV 데이터에서 업데이트
     loadSettingsFromCSV();
     usage.clear();
     for (auto it = settings.begin(); it != settings.end(); ++it) {
         usage[it.key()] = it.value().value("Usage", "0"); // 기본값 "0"
     }
+    qDebug() << "🔍 usage 맵 업데이트 완료: " << usage;
 
+    // ✅ Modbus 클라이언트 및 UI 벡터 초기화
+    clients.resize(NUM_SLAVES, nullptr);
+    comValues.resize(NUM_SLAVES); // ✅ 전체 클라이언트 개수만큼 벡터 크기 설정
+    //dataDisplays.resize(NUM_SLAVES, QVector<QLabel*>(NUM_REGISTERS, nullptr));
+    //statusDisplays.resize(NUM_SLAVES, nullptr);
 
+    // ✅ Graph 업데이트 타이머 추가
+    graphUpdateTimer = new QTimer(this);
+    connect(graphUpdateTimer, &QTimer::timeout, this, &qt_window::updateGraphWidgets);
+    graphUpdateTimer->start(100); // ✅ 2초마다 갱신
+
+    // ✅ 2초마다 실행되는 비동기 타이머 설정
+    pollingTimer = new QTimer(this);
+    connect(pollingTimer, &QTimer::timeout, this, [this]() {
+        QTimer::singleShot(0, this, &qt_window::periodicCommunication); // ✅ 비동기 실행
+        });
+
+}
+
+// ✅ showEvent()에서 UI가 완전히 로드된 후 타이머 시작
+void qt_window::showEvent(QShowEvent* event) {
+    QWidget::showEvent(event); // 부모 클래스 이벤트 호출
+    if (pollingTimer) {
+        qDebug() << "⏳ 타이머 시작";
+        pollingTimer->start(2000); // ✅ UI가 로드된 후 타이머 시작
+    }
 }
 
 // ✅ main 창 소멸자
 qt_window::~qt_window() {
     monitoringWindows.clear();  // 
-
-
     for (auto client : clients) {
         if (client) {
             client->disconnectDevice();
             delete client;
         }
     }
-    for (auto timer : pollTimers) {
-        if (timer) {
-            timer->stop();
-            delete timer;
-        }
+    if (pollingTimer) {
+        pollingTimer->stop(); 
+        delete pollingTimer;
+        pollingTimer = nullptr;
     }
 }
 
@@ -375,7 +393,7 @@ void qt_window::siteSettingWindowDisplayPage(int pageIndex){
 
         QTableWidgetItem* itemNo = new QTableWidgetItem(QString::number(monitoringIndex));
         QTableWidgetItem* description = new QTableWidgetItem(descriptionText);
-        QTableWidgetItem* commState = new QTableWidgetItem(QString("Value %1").arg(monitoringIndex + 20));
+        QTableWidgetItem* commState = new QTableWidgetItem("-");
         QTableWidgetItem* notes = new QTableWidgetItem(notesText);
 
         // ✅ "사용 여부" 체크박스 추가 (QCheckBox 유지)
@@ -445,11 +463,14 @@ void qt_window::siteSettingWindowSave() {
         QString description = descriptionItem ? descriptionItem->text() : "";
         QString notes = notesItem ? notesItem->text() : "";
         QString usageValue = (checkBox && checkBox->isChecked()) ? "1" : "0";  // ✅ 체크 여부 확인
+
         // ✅ settings 업데이트 시 필드명 일치
         settings[monitoringIndex]["Description"] = description;
         settings[monitoringIndex]["Usage"] = usageValue;
-        qDebug() << settings;
         settings[monitoringIndex]["Notes"] = notes;
+
+        // ✅ usage 맵 업데이트 추가
+        usage[monitoringIndex] = usageValue;
     }
 
     saveSettingsToCSV();
@@ -642,75 +663,97 @@ void qt_window::saveSettingsToCSV() {
 //    setupWindow->show();
 //}
 
-//// ✅ 주기적으로 실행될 통신 함수
-void qt_window::periodicCommunication() {
-    for (int i = 0; i < NUM_SLAVES; ++i) {
-        int monitoringIndex = i + 1;  // ✅ monitoringIndex 계산
-        QString checkUsage = usage.value(monitoringIndex, "0");
 
-        if (checkUsage == "1") {  // ✅ Usage가 1인 경우에만 처리
-            if (!clients[i]) {
-                connectToSlave(i);  // ✅ Modbus 연결 함수 호출
+// ✅ 주기적으로 실행될 통신 함수 (비동기 실행)
+void qt_window::periodicCommunication() {
+    qDebug() << "⏳ periodicCommunication 실행됨"; // ✅ 디버깅 로그 추가
+
+    for (int clientIndex = 0; clientIndex < NUM_SLAVES; ++clientIndex) { // ✅ 인덱스 0부터 시작
+        int monitoringIndex = clientIndex + 1; // ✅ monitoringIndex는 1부터 시작
+
+        if (usage.value(monitoringIndex, "0") == "1") { // ✅ Usage가 "1"인 경우만 통신 수행
+            qDebug() << "📡 사용중인 장치: " << monitoringIndex; // ✅ 사용중인 장치 확인
+
+            // ✅ 벡터 접근 시 크기 체크
+            if (clientIndex >= clients.size()) {
+                qDebug() << "❌ clients 인덱스 초과: " << clientIndex;
+                continue;
             }
-            else if (clients[i]->state() == QModbusDevice::UnconnectedState) {
-                clients[i]->connectDevice();
+
+            if (!clients[clientIndex]) {  // ✅ Null 체크 추가
+                clients[clientIndex] = new QModbusTcpClient(this);
+            }
+
+            if (clients[clientIndex]->state() == QModbusDevice::UnconnectedState) {
+                qDebug() << "🔗 장치 " << monitoringIndex << " 연결 시도";
+                connectToSlave(clientIndex); // ✅ clientIndex 사용
+            }
+            else {
+                qDebug() << "📨 장치 " << monitoringIndex << " 데이터 읽기";
+                readFromSlave(clientIndex); // ✅ clientIndex 사용
             }
         }
         else {
-            if (clients[i] && clients[i]->state() == QModbusDevice::ConnectedState) {
-                disconnectFromSlave(i);  // ✅ Usage가 0이면 연결 해제
+            if (clients[clientIndex] && clients[clientIndex]->state() == QModbusDevice::ConnectedState) {
+                qDebug() << "❌ 장치 " << monitoringIndex << " 연결 해제";
+                disconnectFromSlave(clientIndex); // ✅ clientIndex 사용
             }
         }
     }
 }
+
 
 
 
 
 // Modbus 연결
-void qt_window::connectToSlave(int index)
-{
-    if (index < 0 || index >= NUM_SLAVES) return;
+void qt_window::connectToSlave(int clientIndex) {
+    if (clientIndex < 0 || clientIndex >= NUM_SLAVES) return; // ✅ clientIndex 범위 검증
 
-    int monitoringIndex = index + 1;
+    int monitoringIndex = clientIndex + 1; // ✅ monitoringIndex 1부터 시작
+
+    // ✅ 현재 상태 확인
+    if (clients[clientIndex]) {
+        QModbusDevice::State currentState = clients[clientIndex]->state();
+
+        // ✅ 연결이 진행 중이거나 이미 연결된 경우, 다시 연결하지 않음
+        if (currentState != QModbusDevice::UnconnectedState) {
+            return; // ✅ 불필요한 재연결 방지
+        }
+    }
+
     QString ip = settings.value(monitoringIndex).value("IP", "127.0.0.1");
     int port = settings.value(monitoringIndex).value("Port", "502").toInt();
 
-    if (!clients[index]) {
-        clients[index] = new QModbusTcpClient(this);
+    // ✅ 기존 클라이언트 객체가 있으면 삭제 (연결 실패한 경우 대비)
+    if (clients[clientIndex]) {
+        clients[clientIndex]->disconnectDevice();
+        delete clients[clientIndex];
+        clients[clientIndex] = nullptr;
     }
+    // ✅ 새로운 Modbus TCP 클라이언트 객체 생성
+    clients[clientIndex] = new QModbusTcpClient(this);
 
-    clients[index]->setConnectionParameter(QModbusDevice::NetworkAddressParameter, ip);
-    clients[index]->setConnectionParameter(QModbusDevice::NetworkPortParameter, port);
+    clients[clientIndex]->setConnectionParameter(QModbusDevice::NetworkAddressParameter, ip);
+    clients[clientIndex]->setConnectionParameter(QModbusDevice::NetworkPortParameter, port);
 
-    connect(clients[index], &QModbusTcpClient::stateChanged, this, [this, index](QModbusDevice::State state) {
-        updateStatus(index, state);
-        if (state == QModbusDevice::ConnectedState) {
-            connectButtons[index]->setEnabled(false);
-            disconnectButtons[index]->setEnabled(true);
-            if (!pollTimers[index]) {
-                pollTimers[index] = new QTimer(this);
-                connect(pollTimers[index], &QTimer::timeout, this, [this, index]() { readFromSlave(index); });
-            }
-            pollTimers[index]->start(1000);
-        }
-        else {
-            if (pollTimers[index]) {
-                pollTimers[index]->stop();
-            }
-        }
-        });
+    connect(clients[clientIndex], &QModbusTcpClient::stateChanged, this, [this, clientIndex](QModbusDevice::State state) {
+        updateStatus(clientIndex, state);
+        qDebug() << "📡 Modbus 상태 변경 (clientIndex " << clientIndex << "): " << state;
+    });
 
-    clients[index]->connectDevice();
+    clients[clientIndex]->connectDevice();
 }
 
 
-// 연결 상태 업데이트 함수
-void qt_window::updateStatus(int index, QModbusDevice::State state)
-{
-    if (index < 0 || index >= NUM_SLAVES) return;
 
-    int monitoringIndex = index + 1;
+
+// ✅ 연결 상태 업데이트 함수
+void qt_window::updateStatus(int clientIndex, QModbusDevice::State state) {
+    if (clientIndex < 0 || clientIndex >= NUM_SLAVES) return; // ✅ clientIndex 범위 검증
+
+    int monitoringIndex = clientIndex + 1; // ✅ monitoringIndex 변환 (1부터 시작)
+
     QString statusText;
     QString style;
 
@@ -733,53 +776,154 @@ void qt_window::updateStatus(int index, QModbusDevice::State state)
         break;
     }
 
-    //if (statusDisplays.contains(monitoringIndex)) {
-    //    statusDisplays[monitoringIndex]->setText(statusText);
-    //    statusDisplays[monitoringIndex]->setStyleSheet(style);
-    //}
-}
+    // ✅ 현장 설정 창이 열려 있을 때 "통신 상태" 업데이트
+    if (siteSettingWindow && siteSettingTableWidget) {
+        for (int i = 0; i < 10; ++i) { // ✅ 현재 보이는 10개 행만 갱신
+            int rowMonitoringIndex = (currentSiteSettingpPage == 1) ? i + 1 : i + 11;
 
-// Modbus 연결 해제
-void qt_window::disconnectFromSlave(int index)
-{
-    if (index < 0 || index >= NUM_SLAVES) return;
-
-    int monitoringIndex = index + 1;
-
-    if (clients[index]) {
-        clients[index]->disconnectDevice();
-        connectButtons[index]->setEnabled(true);
-        disconnectButtons[index]->setEnabled(false);
-        updateStatus(index, QModbusDevice::UnconnectedState);
+            if (rowMonitoringIndex == monitoringIndex) { // ✅ 일치하는 경우만 업데이트
+                QTableWidgetItem* statusItem = siteSettingTableWidget->item(i, 4);
+                if (!statusItem) {
+                    statusItem = new QTableWidgetItem();
+                    siteSettingTableWidget->setItem(i, 4, statusItem);
+                }
+                statusItem->setText(statusText); // ✅ 상태 업데이트
+                break; // ✅ 더 이상 반복할 필요 없음
+            }
+        }
     }
 
-    //settings[monitoringIndex]["Connected"] = "0";  // 연결 해제 상태 반영
+    qDebug() << "🔄 상태 업데이트 (Client Index: " << clientIndex << ", Monitoring Index: " << monitoringIndex << "): " << statusText;
 }
 
-// 데이터 읽기
-void qt_window::readFromSlave(int index)
-{
-    if (index < 0 || index >= NUM_SLAVES) return;
-    if (clients[index]->state() != QModbusDevice::ConnectedState) return;
+// ✅ Modbus 연결 해제 함수
+void qt_window::disconnectFromSlave(int clientIndex) {
+    if (clientIndex < 0 || clientIndex >= NUM_SLAVES) return; // ✅ clientIndex 범위 검증
 
-    int monitoringIndex = index + 1;
+    int monitoringIndex = clientIndex + 1; // ✅ monitoringIndex 1부터 시작
+
+    if (clientIndex >= clients.size() || !clients[clientIndex]) return;
+
+    clients[clientIndex]->disconnectDevice();
+    delete clients[clientIndex];
+    clients[clientIndex] = nullptr;
+    updateStatus(monitoringIndex, QModbusDevice::UnconnectedState);
+    qDebug() << "🔌 Modbus 연결 해제됨 (Index " << monitoringIndex << ")";
+}
+
+
+// 데이터 읽기
+void qt_window::readFromSlave(int clientIndex) {
+    if (clientIndex < 0 || clientIndex >= NUM_SLAVES) return; // ✅ clientIndex 범위 검증
+
+    int monitoringIndex = clientIndex + 1; // ✅ monitoringIndex 1부터 시작
+
+    if (clientIndex >= clients.size() || !clients[clientIndex] || clients[clientIndex]->state() != QModbusDevice::ConnectedState) return;
 
     QModbusDataUnit request(QModbusDataUnit::HoldingRegisters, 1000, NUM_REGISTERS);
-    QModbusReply* reply = clients[index]->sendReadRequest(request, 1);
+    QModbusReply* reply = clients[clientIndex]->sendReadRequest(request, 1);
 
     if (reply) {
-        connect(reply, &QModbusReply::finished, this, [this, reply, index, monitoringIndex]() {
+        connect(reply, &QModbusReply::finished, this, [this, reply, clientIndex]() {
             if (reply->error() == QModbusDevice::NoError) {
                 auto values = reply->result().values();
-                QStringList dataList;
-                for (int j = 0; j < values.size() && j < NUM_REGISTERS; ++j) {
-                    QString data = QString::number(values[j]);
-                    dataDisplays[index][j]->setText(data);
-                    dataList.append(data);
+                QDateTime currentTime = QDateTime::currentDateTime();
+
+                // ✅ comValues에 데이터 저장
+                comValues[clientIndex].append(qMakePair(currentTime, values)); // ✅ 올바른 `.append()` 사용
+
+                // ✅ comValues 크기 제한
+                if (comValues[clientIndex].size() > maxComValuesSize) {
+                    comValues[clientIndex].removeFirst();
                 }
-                //settings[monitoringIndex]["LastData"] = dataList.join(",");  // 최신 데이터 저장
+
+                // ✅ logInterval마다 CSV 저장
+                logCounter++;
+                if (logCounter % logInterval == 0) {
+                    //logSave(clientIndex, values, currentTime); 
+                }
+
+                qDebug() << "📊 데이터 업데이트 (Client Index: " << clientIndex << ")"
+                    << "Timestamp:" << currentTime.toString(Qt::ISODate)
+                    << "Values:" << values;
             }
             reply->deleteLater();
-            });
+        });
+    }
+}
+
+
+
+// ✅ 그래프 업데이트 함수
+void qt_window::updateGraphWidgets() {
+    if (monitoringWindows.isEmpty()) return; // ✅ 모니터링 창이 없으면 실행 안 함
+
+    for (auto& monitoringWindow : monitoringWindows) {
+        if (!monitoringWindow.isNull()) {
+            const auto& graphWidgets = monitoringWindow->getGraphWindows();
+            if (graphWidgets.isEmpty()) continue; // ✅ 그래프 창이 없으면 실행 안 함 (monitoringWindows와 동일한 방식)
+
+            int clientIndex = monitoringWindow->getMonitoringIndex() - 1;
+
+            if (clientIndex < 0 || clientIndex >= comValues.size()) {
+                qDebug() << "⚠️ 유효하지 않은 clientIndex: " << clientIndex << " (comValues 크기: " << comValues.size() << ")";
+                continue; // ❌ 잘못된 인덱스일 경우 실행하지 않음
+            }
+
+            if (comValues[clientIndex].isEmpty()) {
+                qDebug() << "⚠️ comValues[" << clientIndex << "] 데이터 없음";
+                continue;
+            }
+
+            qDebug() << "📊 그래프 업데이트 준비 (Client Index: " << clientIndex << ")";
+            qDebug() << "   📌 기록 개수: " << comValues[clientIndex].size();
+
+            // ✅ 그래프 윈도우가 열려 있는 경우, comValues[clientIndex] 자체를 전달
+            for (auto& graphWindow : graphWidgets) {
+                if (!graphWindow.isNull()) {
+                    qDebug() << "📈 그래프 업데이트 시작: " << clientIndex;
+                    graphWindow->updateGraphData(comValues[clientIndex]);  // ✅ 데이터 전체 전달
+                    qDebug() << "📊 그래프 데이터 업데이트 완료 (Client Index: " << clientIndex
+                        << ", 데이터 개수: " << comValues[clientIndex].size() << ")";
+                }
+                else {
+                    qDebug() << "⚠️ graphWindow가 null 상태";
+                }
+            }
+
+        }
+    }
+}
+
+
+void qt_window::logSave(int clientIndex, const QVector<quint16>& values, const QDateTime& timestamp) {
+    QString filePath = "modbus_log.csv"; // ✅ CSV 파일 이름
+    QFile file(filePath);
+    bool fileExists = file.exists();
+
+    if (file.open(QIODevice::Append | QIODevice::Text)) {
+        QTextStream out(&file);
+
+        // ✅ 파일이 처음 생성될 경우 헤더 추가
+        if (!fileExists) {
+            out << "Timestamp,Client Index";
+            for (int i = 0; i < values.size(); ++i) {
+                out << ",Register " << i;
+            }
+            out << "\n";
+        }
+
+        // ✅ 데이터 추가
+        out << timestamp.toString(Qt::ISODate) << "," << clientIndex;
+        for (quint16 value : values) {
+            out << "," << value;
+        }
+        out << "\n";
+
+        file.close();
+        qDebug() << "✅ CSV 로그 저장 완료: " << filePath;
+    }
+    else {
+        qWarning() << "❌ CSV 파일 열기 실패: " << filePath;
     }
 }

@@ -88,16 +88,14 @@ void GraphWidget::initGraphUI() {
         applyButtonStyle(button);
 
         connect(button, &QPushButton::clicked, this, [this, i, buttonTexts]() {
-            currentChartIndex = i; // 선택된 차트 인덱스 업데이트
+            currentButtonIndex = i; // 선택된 차트 인덱스 업데이트
             updateButtonStyles(); // 버튼 스타일 업데이트
             
             QString graphTitle = buttonTexts[i];                                                // 줄바꿈(\n)을 공백으로 대체한 텍스트로 차트 타이틀 설정
             graphTitle.replace("\n", " ");                                                      // 줄바꿈을 공백으로 대체
             setWindowTitle(QString("모터%1 %2 예측 그래프").arg(graphIndex).arg(graphTitle));     // ✅ 타이틀을 "모터X 전류(S) 예측 그래프" 형식으로 변경
 
-            //chart->axes(Qt::Vertical).first()->setTitleText(yAxisLabels[i]);// Y축 레이블 업데이트
-            updateData(); // 선택된 데이터로 시리즈 업데이트
-            });
+        });
 
         buttonLayout->addWidget(button);
         chartButtons.append(button);
@@ -268,13 +266,12 @@ void GraphWidget::initGraphUI() {
 
 }
 
-
 // ✅ Graph 창 하단 버튼 스타일 함수
 void GraphWidget::updateButtonStyles()
 {
     for (int i = 0; i < chartButtons.size(); ++i) {
         QPushButton* button = chartButtons[i];
-        if (i == currentChartIndex) {
+        if (i == currentButtonIndex) {
             // 선택된 버튼 스타일
             button->setStyleSheet(
                 "QPushButton {"
@@ -301,7 +298,6 @@ void GraphWidget::updateButtonStyles()
         }
     }
 }
-
 
 // ✅ 그래프 설정 창 생성 함수
 void GraphWidget::openGraphSettings() {
@@ -397,7 +393,6 @@ void GraphWidget::openGraphSettings() {
         // 설정값 적용
         axisY->setRange(yAxisMinInput->text().toInt(), yAxisMaxInput->text().toInt());
 
-        update(); // 그래프 업데이트
         settingsDialog.accept();
         });
 
@@ -413,76 +408,55 @@ void GraphWidget::openGraphSettings() {
 
 
 
-void GraphWidget::addDataPoints(qint64 timestamp, const QVector<quint16>& values) {
-    // 실제값 처리
-    data.append(qMakePair(timestamp, values.mid(0, 10))); // 0~9번 어드레스 (실제값)
-
-    // 예측값 처리
-    predictionData.append(qMakePair(timestamp, values.mid(11, 9))); // 11~19번 어드레스 (예측값)
-
-    // 오래된 데이터 제거
-    //if (data.size() > maxDataSize) data.removeFirst();
-    //if (predictionData.size() > maxDataSize) predictionData.removeFirst();
-    // 오래된 데이터 제거 (X축 범위를 기준으로)
-    QDateTime minTime = axisX->min();
-    data.erase(std::remove_if(data.begin(), data.end(),
-        [&](const QPair<qint64, QVector<quint16>>& entry) {
-            return QDateTime::fromMSecsSinceEpoch(entry.first) < minTime;
-        }),
-        data.end());
-    predictionData.erase(std::remove_if(predictionData.begin(), predictionData.end(),
-        [&](const QPair<qint64, QVector<quint16>>& entry) {
-            return QDateTime::fromMSecsSinceEpoch(entry.first) < minTime;
-        }),
-        predictionData.end());
 
 
-    if (currentChartIndex >= 0 && currentChartIndex < 10) {
-        updateData();
+void GraphWidget::updateData(const QVector<QPair<QDateTime, QVector<quint16>>>& data) {
+    if (currentButtonIndex == -1) {
+        qDebug() << "No button selected, skipping updateData.";
+        return;
     }
-    else {
-        qDebug() << "Invalid chart index for current data range.";
-    }
-}
 
-
-void GraphWidget::updateData() {
     series->clear();
     predictionSeries->clear();
 
-    // 실제값 시리즈 업데이트
+    // 각 데이터 엔트리 처리 (버튼 인덱스에 따라 실제/예측값 인덱스 결정)
     for (const auto& entry : data) {
-        qint64 timestamp = entry.first;
+        qint64 ts = entry.first.toMSecsSinceEpoch();
         const QVector<quint16>& values = entry.second;
-        if (currentChartIndex < values.size()) {
-            series->append(timestamp, values[currentChartIndex+1]);
+
+        if (values.size() < 14 || values[0] != graphIndex)
+            continue;
+        if (values.size() < 14) {
+            qDebug() << "error: data size > 14" << values.size();
+            continue;
         }
-    }
 
-    // 예측값 시리즈 업데이트
-    for (const auto& entry : predictionData) {
-        qint64 timestamp = entry.first;
-        QDateTime adjustedTime = QDateTime::fromMSecsSinceEpoch(timestamp);
+        int actualIndex = currentButtonIndex + 1;  // 버튼 0 → 실제값 인덱스 1
+        qDebug() << "button" << currentButtonIndex;
+                if (actualIndex < values.size()) {
+            series->append(ts, values[actualIndex]);
+        }
 
-        // X축 범위에 따라 예측값의 타임스탬프 계산
+        int predIndex = currentButtonIndex + 7;  // 버튼 0 → 예측값 인덱스 7
+        QDateTime adjustedTime = entry.first;
         switch (rangeType) {
-        case 0: adjustedTime = adjustedTime.addSecs(60); break;       // 1분 뒤
-        case 1: adjustedTime = adjustedTime.addSecs(3600); break;    // 1시간 뒤
-        case 2: adjustedTime = adjustedTime.addSecs(24 * 3600); break; // 1일 뒤
-        case 3: adjustedTime = adjustedTime.addMonths(1); break;      // 1달 뒤
+        case 0: adjustedTime = adjustedTime.addSecs(9); break;
+        case 1: adjustedTime = adjustedTime.addSecs(9*60); break;
+        case 2: adjustedTime = adjustedTime.addSecs(9*60*24); break;
+        case 3: adjustedTime = adjustedTime.addSecs(9*60*24*7); break;
+        case 4: adjustedTime = adjustedTime.addSecs(9*60*24*7); break;
+        default: break;
         }
-
-        const QVector<quint16>& values = entry.second;
-        if (currentChartIndex < values.size()) {
-            predictionSeries->append(adjustedTime.toMSecsSinceEpoch(), values[currentChartIndex]); // QDateTime을 다시 밀리초로 변환하여 예측값 추가
+        if (predIndex < values.size()) {
+            predictionSeries->append(adjustedTime.toMSecsSinceEpoch(), values[predIndex]);
         }
     }
-
-
-
-    updateXAxisRange();     // X축 범위 업데이트
-    updateYAxisRange();     // Y축 범위 업데이트
 }
+
+//void GraphWidget::setCurrentButtonIndex(int index) {
+//    currentButtonIndex = index;
+//    updateButtonStyles();
+//}
 
 
 void GraphWidget::setRangeType(int type) {
@@ -503,28 +477,28 @@ void GraphWidget::updateXAxisRange() {
 
     switch (rangeType) {
     case 0: // 1분 단위
-        minTime = now.addSecs(-50);
-        maxTime = now.addSecs(10);
+        minTime = now.addSecs(-51);
+        maxTime = now.addSecs(9);
         format = "hh:mm:ss";
         break;
     case 1: // 1시간 단위
-        minTime = now.addSecs(-50 * 60);
-        maxTime = now.addSecs(10 * 60);
+        minTime = now.addSecs(-51 * 60);
+        maxTime = now.addSecs(9 * 60);
         format = "hh:mm";
         break;
     case 2: // 1일 단위
-        minTime = now.addSecs(-20 * 60 *60);
-        maxTime = now.addSecs(4 * 60 * 60);
+        minTime = now.addSecs(-51 * 60 * 24);
+        maxTime = now.addSecs(9 * 60 * 24);
         format = "dd hh:mm";
         break;
     case 3: // 1주 단위
-        minTime = now.addDays(-5);
-        maxTime = now.addDays(1);
+        minTime = now.addSecs(-51 * 60 * 24 * 7);
+        maxTime = now.addSecs(9 * 60 * 24 * 7);
         format = "MM-dd hh:mm";
         break;
     case 4: // 1달 단위
-        minTime = now.addDays(-25);
-        maxTime = now.addDays(5);
+        minTime = now.addSecs(-51 * 60 * 24 * 30);
+        maxTime = now.addSecs(9 * 60 * 24 * 30);
         format = "MM-dd hh:mm";
         break;
     default:
@@ -579,9 +553,20 @@ void GraphWidget::updateYAxisRange() {
     qDebug() << "Updated Y Axis Range: min =" << minY - margin << ", max =" << maxY + margin;
 }
 
-void GraphWidget::setCurrentChartIndex(int index) {
-    currentChartIndex = index;
-    updateButtonStyles();
-    updateData();
-}
 
+
+
+
+// ✅ 최적화된 그래프 데이터 업데이트
+void GraphWidget::updateGraphData(const QVector<QPair<QDateTime, QVector<quint16>>>& data) {
+    if (data.isEmpty()) return; // 빈 데이터이면 리턴
+    series->clear(); // 기존 데이터 삭제
+    predictionSeries->clear(); // 기존 예측 데이터 삭제
+
+    updateData(data);
+
+    updateXAxisRange();  // X축 범위 업데이트
+    updateYAxisRange();  // Y축 범위 업데이트
+
+
+}

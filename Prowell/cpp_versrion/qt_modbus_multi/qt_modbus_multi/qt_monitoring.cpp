@@ -262,3 +262,12 @@ void MonitoringWindow::openGraphWindow(int graphIndex) {
     });
 
 }
+
+
+int MonitoringWindow::getMonitoringIndex() const {
+    return monitoringIndex;
+}
+
+const QMap<int, QPointer<GraphWidget>>& MonitoringWindow::getGraphWindows() const {
+    return graphWindows;
+}

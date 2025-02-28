@@ -41,20 +41,14 @@ static constexpr auto qt_meta_stringdata_ZN9qt_windowE = QtMocHelpers::stringDat
     "mainWindowDisplayPage",
     "",
     "mainPageIndex",
+    "periodicCommunication",
     "openSiteSettingWindow",
     "siteSettingWindowDisplayPage",
     "siteSettingpageIndex",
     "siteSettingWindowSave",
     "openCommSettingsWindow",
     "monitoringIndex",
-    "openMonitoringWindow",
-    "connectToSlave",
-    "index",
-    "disconnectFromSlave",
-    "readFromSlave",
-    "updateStatus",
-    "QModbusDevice::State",
-    "state"
+    "openMonitoringWindow"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -66,7 +60,7 @@ Q_CONSTINIT static const uint qt_meta_data_ZN9qt_windowE[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-      10,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -74,28 +68,22 @@ Q_CONSTINIT static const uint qt_meta_data_ZN9qt_windowE[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,   74,    2, 0x08,    1 /* Private */,
-       4,    0,   77,    2, 0x08,    3 /* Private */,
-       5,    1,   78,    2, 0x08,    4 /* Private */,
-       7,    0,   81,    2, 0x08,    6 /* Private */,
-       8,    1,   82,    2, 0x08,    7 /* Private */,
-      10,    1,   85,    2, 0x08,    9 /* Private */,
-      11,    1,   88,    2, 0x08,   11 /* Private */,
-      13,    1,   91,    2, 0x08,   13 /* Private */,
-      14,    1,   94,    2, 0x08,   15 /* Private */,
-      15,    2,   97,    2, 0x08,   17 /* Private */,
+       1,    1,   56,    2, 0x08,    1 /* Private */,
+       4,    0,   59,    2, 0x08,    3 /* Private */,
+       5,    0,   60,    2, 0x08,    4 /* Private */,
+       6,    1,   61,    2, 0x08,    5 /* Private */,
+       8,    0,   64,    2, 0x08,    7 /* Private */,
+       9,    1,   65,    2, 0x08,    8 /* Private */,
+      11,    1,   68,    2, 0x08,   10 /* Private */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Int,    3,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,    6,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,    9,
-    QMetaType::Void, QMetaType::Int,    9,
-    QMetaType::Void, QMetaType::Int,   12,
-    QMetaType::Void, QMetaType::Int,   12,
-    QMetaType::Void, QMetaType::Int,   12,
-    QMetaType::Void, QMetaType::Int, 0x80000000 | 16,   12,   17,
+    QMetaType::Void, QMetaType::Int,    7,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   10,
+    QMetaType::Void, QMetaType::Int,   10,
 
        0        // eod
 };
@@ -112,6 +100,8 @@ Q_CONSTINIT const QMetaObject qt_window::staticMetaObject = { {
         // method 'mainWindowDisplayPage'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        // method 'periodicCommunication'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'openSiteSettingWindow'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'siteSettingWindowDisplayPage'
@@ -124,20 +114,7 @@ Q_CONSTINIT const QMetaObject qt_window::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<int, std::false_type>,
         // method 'openMonitoringWindow'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<int, std::false_type>,
-        // method 'connectToSlave'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<int, std::false_type>,
-        // method 'disconnectFromSlave'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<int, std::false_type>,
-        // method 'readFromSlave'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<int, std::false_type>,
-        // method 'updateStatus'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<int, std::false_type>,
-        QtPrivate::TypeAndForceComplete<QModbusDevice::State, std::false_type>
+        QtPrivate::TypeAndForceComplete<int, std::false_type>
     >,
     nullptr
 } };
@@ -148,15 +125,12 @@ void qt_window::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: _t->mainWindowDisplayPage((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 1: _t->openSiteSettingWindow(); break;
-        case 2: _t->siteSettingWindowDisplayPage((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 3: _t->siteSettingWindowSave(); break;
-        case 4: _t->openCommSettingsWindow((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 5: _t->openMonitoringWindow((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 6: _t->connectToSlave((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 7: _t->disconnectFromSlave((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 8: _t->readFromSlave((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 9: _t->updateStatus((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QModbusDevice::State>>(_a[2]))); break;
+        case 1: _t->periodicCommunication(); break;
+        case 2: _t->openSiteSettingWindow(); break;
+        case 3: _t->siteSettingWindowDisplayPage((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 4: _t->siteSettingWindowSave(); break;
+        case 5: _t->openCommSettingsWindow((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 6: _t->openMonitoringWindow((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
         default: ;
         }
     }
@@ -181,14 +155,14 @@ int qt_window::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 10)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 10;
+        _id -= 7;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 10)
+        if (_id < 7)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 10;
+        _id -= 7;
     }
     return _id;
 }
