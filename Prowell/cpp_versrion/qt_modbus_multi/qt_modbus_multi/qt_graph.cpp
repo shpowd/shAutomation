@@ -322,7 +322,7 @@ void GraphWidget::openGraphSettings() {
     QHBoxLayout* xAxisOptionsLayout = new QHBoxLayout;
     QButtonGroup* xAxisButtonGroup = new QButtonGroup(&settingsDialog);
 
-    QStringList xAxisOptions = { "1분", "1시간", "1일", "1주", "1달" };
+    QStringList xAxisOptions = { "1시간", "1일", "1주", "1달" };
     QList<QRadioButton*> xAxisButtons;
 
     for (int i = 0; i < xAxisOptions.size(); ++i) {
@@ -373,6 +373,18 @@ void GraphWidget::openGraphSettings() {
     yMaxLayout->addWidget(yMaxLabel);
     yMaxLayout->addWidget(yAxisMaxInput);
 
+    yAxisMinInput->setEnabled(! autoYAxisUpdate);
+    yAxisMaxInput->setEnabled(! autoYAxisUpdate);
+
+    //▶ 자동 업데이트 체크박스
+    QCheckBox* autoYCheckBox = new QCheckBox("자동", yAxisFrame);
+    autoYCheckBox->setChecked(autoYAxisUpdate); // 기본은 자동 체크됨
+    connect(autoYCheckBox, &QCheckBox::toggled, this, [=](bool checked) {
+        yAxisMinInput->setEnabled(!checked);
+        yAxisMaxInput->setEnabled(!checked);
+        });
+
+    yAxisMinMaxLayout->addWidget(autoYCheckBox);
     yAxisMinMaxLayout->addLayout(yMinLayout);
     yAxisMinMaxLayout->addLayout(yMaxLayout);
 
@@ -390,8 +402,15 @@ void GraphWidget::openGraphSettings() {
         int rangeType = xAxisButtonGroup->checkedId();
         setRangeType(rangeType);
 
-        // 설정값 적용
-        axisY->setRange(yAxisMinInput->text().toInt(), yAxisMaxInput->text().toInt());
+        // y축 설정값 적용
+        if (autoYCheckBox->isChecked()) {
+            autoYAxisUpdate = true;
+            updateYAxisRange();
+        }
+        else {
+            autoYAxisUpdate = false;
+            axisY->setRange(yAxisMinInput->text().toInt(), yAxisMaxInput->text().toInt());
+        }
 
         settingsDialog.accept();
         });
@@ -410,48 +429,7 @@ void GraphWidget::openGraphSettings() {
 
 
 
-void GraphWidget::updateData(const QVector<QPair<QDateTime, QVector<quint16>>>& data) {
-    if (currentButtonIndex == -1) {
-        qDebug() << "No button selected, skipping updateData.";
-        return;
-    }
 
-    series->clear();
-    predictionSeries->clear();
-
-    // 각 데이터 엔트리 처리 (버튼 인덱스에 따라 실제/예측값 인덱스 결정)
-    for (const auto& entry : data) {
-        qint64 ts = entry.first.toMSecsSinceEpoch();
-        const QVector<quint16>& values = entry.second;
-
-        if (values.size() < 14 || values[0] != graphIndex)
-            continue;
-        if (values.size() < 14) {
-            qDebug() << "error: data size > 14" << values.size();
-            continue;
-        }
-
-        int actualIndex = currentButtonIndex + 1;  // 버튼 0 → 실제값 인덱스 1
-        qDebug() << "button" << currentButtonIndex;
-                if (actualIndex < values.size()) {
-            series->append(ts, values[actualIndex]);
-        }
-
-        int predIndex = currentButtonIndex + 7;  // 버튼 0 → 예측값 인덱스 7
-        QDateTime adjustedTime = entry.first;
-        switch (rangeType) {
-        case 0: adjustedTime = adjustedTime.addSecs(9); break;
-        case 1: adjustedTime = adjustedTime.addSecs(9*60); break;
-        case 2: adjustedTime = adjustedTime.addSecs(9*60*24); break;
-        case 3: adjustedTime = adjustedTime.addSecs(9*60*24*7); break;
-        case 4: adjustedTime = adjustedTime.addSecs(9*60*24*7); break;
-        default: break;
-        }
-        if (predIndex < values.size()) {
-            predictionSeries->append(adjustedTime.toMSecsSinceEpoch(), values[predIndex]);
-        }
-    }
-}
 
 //void GraphWidget::setCurrentButtonIndex(int index) {
 //    currentButtonIndex = index;
@@ -469,6 +447,66 @@ void GraphWidget::setRangeType(int type) {
 }
 
 
+
+
+
+// ✅ 그래프 데이터 업데이트(from window->updateGraphWidget)
+void GraphWidget::updateGraphData(const QVector<QPair<QDateTime, QVector<quint16>>>& data) {
+    if (data.isEmpty()) return; // 빈 데이터이면 리턴
+    series->clear(); // 기존 데이터 삭제
+    predictionSeries->clear(); // 기존 예측 데이터 삭제
+
+    updateGraph(data);
+    updateXAxisRange();  // X축 범위 업데이트
+    if (autoYAxisUpdate) updateYAxisRange();  // Y축 범위 업데이트
+}
+
+
+// ✅ 그래프 갱신
+void GraphWidget::updateGraph(const QVector<QPair<QDateTime, QVector<quint16>>>& data) {
+    if (currentButtonIndex == -1) {
+        qDebug() << "No button selected, skipping updateData.";
+        return;
+    }
+
+    series->clear();
+    predictionSeries->clear();
+
+    // 각 데이터 엔트리 처리 (버튼 인덱스에 따라 실제/예측값 인덱스 결정)
+    for (const auto& entry : data) {
+        qint64 ts = entry.first.toMSecsSinceEpoch();
+        const QVector<quint16>& values = entry.second;
+
+        if (values.size() < 14 || values[0] != graphIndex) continue;
+        if (values.size() < 14) {
+            qDebug() << "error: data size > 14" << values.size();
+            continue;
+        }
+
+        int actualIndex = currentButtonIndex + 1;  // 버튼 0 → 실제값 인덱스 1
+        qDebug() << "button" << currentButtonIndex;
+        if (actualIndex < values.size()) {
+            series->append(ts, values[actualIndex]);
+        }
+
+        int predIndex = currentButtonIndex + 7;  // 버튼 0 → 예측값 인덱스 7
+        QDateTime adjustedTime = entry.first;
+        switch (rangeType) {
+        case 0: adjustedTime = adjustedTime.addSecs(9); break;
+        case 1: adjustedTime = adjustedTime.addSecs(9 * 60); break;
+        case 2: adjustedTime = adjustedTime.addSecs(9 * 60 * 24); break;
+        case 3: adjustedTime = adjustedTime.addSecs(9 * 60 * 24 * 7); break;
+        case 4: adjustedTime = adjustedTime.addSecs(9 * 60 * 24 * 7); break;
+        default: break;
+        }
+        if (predIndex < values.size()) {
+            predictionSeries->append(adjustedTime.toMSecsSinceEpoch(), values[predIndex]);
+        }
+    }
+}
+
+
+// ✅ 그래프 x축 갱신
 void GraphWidget::updateXAxisRange() {
     QDateTime now = QDateTime::currentDateTime();
     QDateTime minTime, maxTime;
@@ -476,27 +514,22 @@ void GraphWidget::updateXAxisRange() {
     QString format;
 
     switch (rangeType) {
-    case 0: // 1분 단위
-        minTime = now.addSecs(-51);
-        maxTime = now.addSecs(9);
-        format = "hh:mm:ss";
-        break;
-    case 1: // 1시간 단위
+    case 0: // 1시간 단위
         minTime = now.addSecs(-51 * 60);
         maxTime = now.addSecs(9 * 60);
-        format = "hh:mm";
+        format = "MM-dd hh:mm";
         break;
-    case 2: // 1일 단위
+    case 1: // 1일 단위
         minTime = now.addSecs(-51 * 60 * 24);
         maxTime = now.addSecs(9 * 60 * 24);
-        format = "dd hh:mm";
+        format = "MM-dd hh:mm";
         break;
-    case 3: // 1주 단위
+    case 2: // 1주 단위
         minTime = now.addSecs(-51 * 60 * 24 * 7);
         maxTime = now.addSecs(9 * 60 * 24 * 7);
         format = "MM-dd hh:mm";
         break;
-    case 4: // 1달 단위
+    case 3: // 1달 단위
         minTime = now.addSecs(-51 * 60 * 24 * 30);
         maxTime = now.addSecs(9 * 60 * 24 * 30);
         format = "MM-dd hh:mm";
@@ -526,6 +559,7 @@ void GraphWidget::updateXAxisRange() {
 }
 
 
+// ✅ 그래프 y축 갱신
 void GraphWidget::updateYAxisRange() {
     // 최소값과 최대값을 계산
     qreal minY = std::numeric_limits<qreal>::max();
@@ -543,30 +577,21 @@ void GraphWidget::updateYAxisRange() {
         maxY = std::max(maxY, point.y());
     }
 
-    // 여유 범위 추가
-    qreal margin = (maxY - minY) * 0.1;
-    if (margin == 0) margin = 1; // 여유 범위가 0이면 기본값 설정
+    // 데이터가 없거나 모든 값이 동일할 때 기본 범위를 설정
+    if (minY == std::numeric_limits<qreal>::max() || maxY == std::numeric_limits<qreal>::min() || minY == maxY) {
+        minY = -1;
+        maxY = 1;
+    }
+    else {
+        // 여유 범위 추가
+        qreal margin = (maxY - minY) * 0.1;
+        if (margin == 0) margin = 1; // 여유 범위가 0이면 기본값 설정
+        minY -= margin;
+        maxY += margin;
+    }
 
     // Y축 범위 설정
-    axisY->setRange(minY - margin, maxY + margin);
-
-    qDebug() << "Updated Y Axis Range: min =" << minY - margin << ", max =" << maxY + margin;
+    axisY->setRange(minY, maxY);
+    qDebug() << "Updated Y Axis Range: min =" << minY << ", max =" << maxY;;
 }
 
-
-
-
-
-// ✅ 최적화된 그래프 데이터 업데이트
-void GraphWidget::updateGraphData(const QVector<QPair<QDateTime, QVector<quint16>>>& data) {
-    if (data.isEmpty()) return; // 빈 데이터이면 리턴
-    series->clear(); // 기존 데이터 삭제
-    predictionSeries->clear(); // 기존 예측 데이터 삭제
-
-    updateData(data);
-
-    updateXAxisRange();  // X축 범위 업데이트
-    updateYAxisRange();  // Y축 범위 업데이트
-
-
-}

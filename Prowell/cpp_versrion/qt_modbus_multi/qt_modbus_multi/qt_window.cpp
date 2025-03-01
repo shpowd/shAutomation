@@ -25,13 +25,13 @@ qt_window::qt_window(QWidget* parent)
     // ✅ Modbus 클라이언트 및 UI 벡터 초기화
     clients.resize(NUM_SLAVES, nullptr);
     comValues.resize(NUM_SLAVES); // ✅ 전체 클라이언트 개수만큼 벡터 크기 설정
-    //dataDisplays.resize(NUM_SLAVES, QVector<QLabel*>(NUM_REGISTERS, nullptr));
-    //statusDisplays.resize(NUM_SLAVES, nullptr);
+    logValues.resize(NUM_SLAVES); // ✅ 전체 클라이언트 개수만큼 벡터 크기 설정
+
 
     // ✅ Graph 업데이트 타이머 추가
     graphUpdateTimer = new QTimer(this);
     connect(graphUpdateTimer, &QTimer::timeout, this, &qt_window::updateGraphWidgets);
-    graphUpdateTimer->start(100); // ✅ 2초마다 갱신
+    graphUpdateTimer->start(graphFreq); // ✅ 2초마다 갱신
 
     // ✅ 2초마다 실행되는 비동기 타이머 설정
     pollingTimer = new QTimer(this);
@@ -46,7 +46,7 @@ void qt_window::showEvent(QShowEvent* event) {
     QWidget::showEvent(event); // 부모 클래스 이벤트 호출
     if (pollingTimer) {
         qDebug() << "⏳ 타이머 시작";
-        pollingTimer->start(2000); // ✅ UI가 로드된 후 타이머 시작
+        pollingTimer->start(pollingFreq); // ✅ UI가 로드된 후 타이머 시작
     }
 }
 
@@ -80,20 +80,40 @@ void qt_window::initMainUI(){
 
     // 중앙 테이블
     mainTableWidget = new QTableWidget(10, 3, this);
-    mainTableWidget->setHorizontalHeaderLabels({ "No", "Description", "Monitoring" });
+    mainTableWidget->setHorizontalHeaderLabels({ "No", "Description", "monitoring" });
+
 
         // 헤더 스타일 설정
     QFont headerFont("맑은 고딕", 18, QFont::Bold);
     mainTableWidget->horizontalHeader()->setFont(headerFont);
-    mainTableWidget->horizontalHeader()->setFixedHeight(55);
-    mainTableWidget->horizontalHeader()->setStyleSheet("QHeaderView::section {"
-        "background-color: #EFF4F9;"
-        "padding: 5px;"
+    mainTableWidget->horizontalHeader()->setFixedHeight(60);
+    mainTableWidget->horizontalHeader()->setStyleSheet(
+        "QHeaderView::section {"
+        "   border-top: 2px solid black;"  // ✅ 상단 테두리
+        "   border-bottom: 2px solid black;"  // ✅ 하단 테두리
+        "   border-left: 1px solid black;"  // ✅ 좌측 테두리 추가
+        "   border-right: 1px solid black;"  // ✅ 우측 테두리는 1px로 조정 (이중 테두리 방지)"
+        "   background-color: #F0F0F0;"
+        "   padding: 5px;"
         "}");
-
-        // 테이블 셀 스타일 설정 (헤더보다 글자 크기가 약간 작음)
-    mainTableWidget->setStyleSheet("QTableWidget::item {"
+    mainTableWidget->setAlternatingRowColors(true);    // ✅ 번갈아가며 배경색을 적용하도록 설정
+    mainTableWidget->setStyleSheet(
+        "QTableWidget {"
+        "   border: 1px solid black;"
+        "   gridline-color: black;"
+        "   background-color: #C0C0C0;"  // 기본 배경색
+        "} "
+        "QTableWidget::item {"
+        "   padding: 5px;"
+        "} "
+        "QTableWidget::item:alternate {"
+        "   background-color: #F0F0F0;"  // ✅ 짝수 행 배경색 설정
+        "}"
+        "QTableWidget::item:first-column {"
+        "   border-left: 1px solid black;"  // ✅ 첫 번째 컬럼 좌측에 테두리 추가
         "}");
+    mainTableWidget->setShowGrid(true); // ✅ `showGrid(true)` 설정
+    mainTableWidget->setFrameShape(QFrame::NoFrame);  // 기본 프레임 제거
 
     // 열 크기 조정 (자동 조정되도록 설정)
     mainTableWidget->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents); // "No" 열은 내용에 맞춤
@@ -103,7 +123,7 @@ void qt_window::initMainUI(){
 
     // 행 크기 조정
     mainTableWidget->verticalHeader()->setVisible(false);
-    mainTableWidget->verticalHeader()->setDefaultSectionSize(55); // 각 행(셀)의 높이 증가
+    mainTableWidget->verticalHeader()->setDefaultSectionSize(56); // 각 행(셀)의 높이 증가
 
     mainTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers); // 수정 불가
     mainTableWidget->setSelectionMode(QAbstractItemView::NoSelection);   // 선택 불가
@@ -124,6 +144,8 @@ void qt_window::initMainUI(){
     openSiteSettingButton = new QPushButton("현장 설정");
     openSiteSettingButton->setFixedSize(150, 60); // 버튼 크기
     applyButtonStyle(openSiteSettingButton);  // ✅ 스타일 적용
+    QString currentStyle = openSiteSettingButton->styleSheet();  // 기존 스타일 가져오기
+    openSiteSettingButton->setStyleSheet(currentStyle + "QPushButton { font-size: 22px; }");
     settingsButtonLayout->addWidget(openSiteSettingButton); 
     bottomLayout->addLayout(settingsButtonLayout);
     connect(openSiteSettingButton, &QPushButton::clicked, this, &qt_window::openSiteSettingWindow);
@@ -261,6 +283,7 @@ void qt_window::openSiteSettingWindow(){
         siteSettingWindow = new QWidget;
         siteSettingWindow->setWindowTitle("현장 설정");
         siteSettingWindow->resize(1024, 768);
+        siteSettingWindow->setWindowIcon(QIcon("./src/icon.png"));
 
 
         // ✅ 기본 레이아웃 (qt_window와 동일)
@@ -274,17 +297,40 @@ void qt_window::openSiteSettingWindow(){
         // ✅ 헤더 스타일 설정
         QFont headerFont("맑은 고딕", 18, QFont::Bold);
         siteSettingTableWidget->horizontalHeader()->setFont(headerFont);
-        siteSettingTableWidget->horizontalHeader()->setFixedHeight(55);
-        siteSettingTableWidget->horizontalHeader()->setStyleSheet("QHeaderView::section {"
-            "background-color: #EFF4F9;"
-            "padding: 5px;"
+        siteSettingTableWidget->horizontalHeader()->setFixedHeight(60);
+        siteSettingTableWidget->horizontalHeader()->setStyleSheet(
+            "QHeaderView::section {"
+            "   border-top: 2px solid black;"  // ✅ 상단 테두리
+            "   border-bottom: 2px solid black;"  // ✅ 하단 테두리
+            "   border-left: 1px solid black;"  // ✅ 좌측 테두리 추가
+            "   border-right: 1px solid black;"  // ✅ 우측 테두리는 1px로 조정 (이중 테두리 방지)"
+            "   background-color: #F0F0F0;"
+            "   padding: 5px;"
             "}");
+        siteSettingTableWidget->setAlternatingRowColors(true);    // ✅ 번갈아가며 배경색을 적용하도록 설정
+        siteSettingTableWidget->setStyleSheet(
+            "QTableWidget {"
+            "   border: 1px solid black;"
+            "   gridline-color: black;"
+            "   background-color: #C0C0C0;"  // 기본 배경색
+            "} "
+            "QTableWidget::item {"
+            "   padding: 5px;"
+            "} "
+            "QTableWidget::item:alternate {"
+            "   background-color: #F0F0F0;"  // ✅ 짝수 행 배경색 설정
+            "}"
+            "QTableWidget::item:first-column {"
+            "   border-left: 1px solid black;"  // ✅ 첫 번째 컬럼 좌측에 테두리 추가
+            "}");
+        siteSettingTableWidget->setShowGrid(true); // ✅ `showGrid(true)` 설정
+        siteSettingTableWidget->setFrameShape(QFrame::NoFrame);  // 기본 프레임 제거
 
-        // ✅ 테이블 셀 스타일 설정
-        siteSettingTableWidget->setStyleSheet("QTableWidget::item {"
-            "font-size: 18px;"
-            "padding: 5px;"
-            "}");
+        siteSettingTableWidget->setAlternatingRowColors(true);
+        QPalette pal = siteSettingTableWidget->palette();
+        pal.setColor(QPalette::Base, QColor("#C0C0C0"));
+        pal.setColor(QPalette::AlternateBase, QColor("#F0F0F0"));
+        siteSettingTableWidget->setPalette(pal);
 
         // ✅ 열 크기 조정
         siteSettingTableWidget->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
@@ -295,7 +341,7 @@ void qt_window::openSiteSettingWindow(){
         siteSettingTableWidget->horizontalHeader()->setSectionResizeMode(5, QHeaderView::Stretch);
 
         siteSettingTableWidget->verticalHeader()->setVisible(false);
-        siteSettingTableWidget->verticalHeader()->setDefaultSectionSize(55);
+        siteSettingTableWidget->verticalHeader()->setDefaultSectionSize(56);
         mainLayout->addWidget(siteSettingTableWidget);
 
 
@@ -312,6 +358,8 @@ void qt_window::openSiteSettingWindow(){
         mainButton->setFixedSize(150, 60);
         mainButton->setFont(QFont("맑은 고딕", 20, QFont::Normal));
         applyButtonStyle(mainButton);
+        QString currentStyle = mainButton->styleSheet();  // 기존 스타일 가져오기
+        mainButton->setStyleSheet(currentStyle + "QPushButton { font-size: 22px; }");
         bottomLayout->addWidget(mainButton);
         connect(mainButton, &QPushButton::clicked, this, [=]() {
             if (siteSettingWindow) {
@@ -326,6 +374,8 @@ void qt_window::openSiteSettingWindow(){
         saveButton->setFixedSize(150, 60);
         saveButton->setFont(QFont("맑은 고딕", 20, QFont::Normal));
         applyButtonStyle(saveButton);
+        currentStyle = saveButton->styleSheet();  // 기존 스타일 가져오기
+        saveButton->setStyleSheet(currentStyle + "QPushButton { font-size: 22px; }");
         bottomLayout->addWidget(saveButton);
         connect(saveButton, &QPushButton::clicked, this, &qt_window::siteSettingWindowSave);
 
@@ -431,7 +481,7 @@ void qt_window::siteSettingWindowDisplayPage(int pageIndex){
         commState->setFlags(Qt::ItemIsEnabled);
 
         // ✅ "통신 설정" 버튼 추가 (메인 윈도우의 Monitoring 버튼과 동일한 스타일)
-        QPushButton* commButton = new QPushButton("통신 설정" + QString::number(monitoringIndex));
+        QPushButton* commButton = new QPushButton("통신 설정");
         applyButtonStyle(commButton);
         // ✅ 버튼 클릭 시 "통신 설정" 팝업 창 열기
         connect(commButton, &QPushButton::clicked, this, [this, monitoringIndex]() {
@@ -566,7 +616,6 @@ void qt_window::openCommSettingsWindow(int monitoringIndex){
 
 
 
-
 // ✅ CSV 설정 불러오기 함수 
 void qt_window::loadSettingsFromCSV() {
     settings = CSVReader::readAllSettings();
@@ -583,91 +632,11 @@ void qt_window::saveSettingsToCSV() {
 
 
 
-
-
-//이전 modbus 접속 설정 
-//void qt_window::openSetupWindow()
-//{
-//    if (!setupWindow) {
-//        setupWindow = new QWidget;
-//        setupWindow->setWindowTitle("Setup Window");
-//
-//        QHBoxLayout* mainLayout = new QHBoxLayout(setupWindow);
-//        QVBoxLayout* leftColumn = new QVBoxLayout;
-//        QVBoxLayout* rightColumn = new QVBoxLayout;
-//
-//        clients.resize(NUM_SLAVES);
-//        pollTimers.resize(NUM_SLAVES);
-//        dataDisplays.resize(NUM_SLAVES);
-//
-//        for (int i = 0; i < NUM_SLAVES; ++i) {
-//            QVBoxLayout* slaveLayout = new QVBoxLayout;
-//
-//            QHBoxLayout* controlRow = new QHBoxLayout;
-//            QLabel* slaveLabel = new QLabel(QString("Slave %1:").arg(i + 1));
-//            controlRow->addWidget(slaveLabel);
-//
-//            QLineEdit* ipField = new QLineEdit("127.0.0.1");
-//            ipInputs.append(ipField);
-//            controlRow->addWidget(ipField);
-//
-//            QLineEdit* portField = new QLineEdit(QString::number(1502 + i));
-//            portInputs.append(portField);
-//            controlRow->addWidget(portField);
-//
-//            QPushButton* connectBtn = new QPushButton("Connect");
-//            connectButtons.append(connectBtn);
-//            controlRow->addWidget(connectBtn);
-//
-//            QPushButton* disconnectBtn = new QPushButton("Disconnect");
-//            disconnectButtons.append(disconnectBtn);
-//            controlRow->addWidget(disconnectBtn);
-//            disconnectBtn->setEnabled(false);
-//
-//            connect(connectBtn, &QPushButton::clicked, this, [this, i]() { connectToSlave(i); });
-//            connect(disconnectBtn, &QPushButton::clicked, this, [this, i]() { disconnectFromSlave(i); });
-//
-//            QHBoxLayout* dataRow = new QHBoxLayout;
-//            for (int j = 0; j < NUM_REGISTERS; ++j) {
-//                QLabel* dataLabel = new QLabel("No Data");
-//                dataLabel->setFixedWidth(40);
-//                dataLabel->setAlignment(Qt::AlignCenter);
-//                dataLabel->setStyleSheet("border: 1px solid gray; padding: 2px; background-color: white;");
-//                dataDisplays[i].append(dataLabel);
-//                dataRow->addWidget(dataLabel);
-//            }
-//
-//            QLabel* statusLabel = new QLabel("Disconnected");
-//            statusLabel->setFixedHeight(20);
-//            statusLabel->setAlignment(Qt::AlignCenter);
-//            statusLabel->setStyleSheet("border: 1px solid gray; padding: 2px; background-color: lightgray;");
-//            statusDisplays.append(statusLabel);
-//
-//            slaveLayout->addLayout(controlRow);
-//            slaveLayout->addLayout(dataRow);
-//            slaveLayout->addWidget(statusLabel);
-//
-//            if (i < 8) {
-//                leftColumn->addLayout(slaveLayout);
-//            }
-//            else {
-//                rightColumn->addLayout(slaveLayout);
-//            }
-//        }
-//
-//        mainLayout->addLayout(leftColumn);
-//        mainLayout->addLayout(rightColumn);
-//        setupWindow->setLayout(mainLayout);
-//    }
-//
-//    setupWindow->show();
-//}
-
-
+// 통신 함수
 // ✅ 주기적으로 실행될 통신 함수 (비동기 실행)
 void qt_window::periodicCommunication() {
     qDebug() << "⏳ periodicCommunication 실행됨"; // ✅ 디버깅 로그 추가
-
+    loadSettingsFromCSV();
     for (int clientIndex = 0; clientIndex < NUM_SLAVES; ++clientIndex) { // ✅ 인덱스 0부터 시작
         int monitoringIndex = clientIndex + 1; // ✅ monitoringIndex는 1부터 시작
 
@@ -690,8 +659,9 @@ void qt_window::periodicCommunication() {
             }
             else {
                 qDebug() << "📨 장치 " << monitoringIndex << " 데이터 읽기";
-                readFromSlave(clientIndex); // ✅ clientIndex 사용
+                readFromSlave(clientIndex);             // ✅ clientIndex 사용
             }
+
         }
         else {
             if (clients[clientIndex] && clients[clientIndex]->state() == QModbusDevice::ConnectedState) {
@@ -700,13 +670,10 @@ void qt_window::periodicCommunication() {
             }
         }
     }
+
 }
 
-
-
-
-
-// Modbus 연결
+// ✅ Modbus 연결 함수
 void qt_window::connectToSlave(int clientIndex) {
     if (clientIndex < 0 || clientIndex >= NUM_SLAVES) return; // ✅ clientIndex 범위 검증
 
@@ -737,6 +704,7 @@ void qt_window::connectToSlave(int clientIndex) {
     clients[clientIndex]->setConnectionParameter(QModbusDevice::NetworkAddressParameter, ip);
     clients[clientIndex]->setConnectionParameter(QModbusDevice::NetworkPortParameter, port);
 
+
     connect(clients[clientIndex], &QModbusTcpClient::stateChanged, this, [this, clientIndex](QModbusDevice::State state) {
         updateStatus(clientIndex, state);
         qDebug() << "📡 Modbus 상태 변경 (clientIndex " << clientIndex << "): " << state;
@@ -744,9 +712,6 @@ void qt_window::connectToSlave(int clientIndex) {
 
     clients[clientIndex]->connectDevice();
 }
-
-
-
 
 // ✅ 연결 상태 업데이트 함수
 void qt_window::updateStatus(int clientIndex, QModbusDevice::State state) {
@@ -811,41 +776,56 @@ void qt_window::disconnectFromSlave(int clientIndex) {
     qDebug() << "🔌 Modbus 연결 해제됨 (Index " << monitoringIndex << ")";
 }
 
-
-// 데이터 읽기
+// ✅ 데이터 읽기 & log 데이터 저장
 void qt_window::readFromSlave(int clientIndex) {
     if (clientIndex < 0 || clientIndex >= NUM_SLAVES) return; // ✅ clientIndex 범위 검증
-
-    int monitoringIndex = clientIndex + 1; // ✅ monitoringIndex 1부터 시작
-
     if (clientIndex >= clients.size() || !clients[clientIndex] || clients[clientIndex]->state() != QModbusDevice::ConnectedState) return;
 
+    int monitoringIndex = clientIndex + 1; // ✅ monitoringIndex 1부터 시작
+    int modbusID = settings.value(monitoringIndex).value("Modbus ID", "1").toInt(); // ✅ Modbus ID 추가
+    maxComValuesSize = settings.value(monitoringIndex).value("CSVRate", "1").toInt()/10;
+    logSaveInterval = maxComValuesSize;
+
     QModbusDataUnit request(QModbusDataUnit::HoldingRegisters, 1000, NUM_REGISTERS);
-    QModbusReply* reply = clients[clientIndex]->sendReadRequest(request, 1);
+    QModbusReply* reply = clients[clientIndex]->sendReadRequest(request, modbusID);    
+    if (!reply) {
+        qWarning() << "❌ Modbus 읽기 요청 실패 (clientIndex:" << clientIndex << ")";
+        return;
+    }
 
     if (reply) {
-        connect(reply, &QModbusReply::finished, this, [this, reply, clientIndex]() {
+        connect(reply, &QModbusReply::finished, this, [this, reply, clientIndex, monitoringIndex]() {
             if (reply->error() == QModbusDevice::NoError) {
                 auto values = reply->result().values();
                 QDateTime currentTime = QDateTime::currentDateTime();
 
-                // ✅ comValues에 데이터 저장
+                // ✅ comValues에 그래프 데이터 저장
                 comValues[clientIndex].append(qMakePair(currentTime, values)); // ✅ 올바른 `.append()` 사용
 
                 // ✅ comValues 크기 제한
                 if (comValues[clientIndex].size() > maxComValuesSize) {
                     comValues[clientIndex].removeFirst();
                 }
-
-                // ✅ logInterval마다 CSV 저장
-                logCounter++;
-                if (logCounter % logInterval == 0) {
-                    //logSave(clientIndex, values, currentTime); 
-                }
-
                 qDebug() << "📊 데이터 업데이트 (Client Index: " << clientIndex << ")"
                     << "Timestamp:" << currentTime.toString(Qt::ISODate)
                     << "Values:" << values;
+
+                // ✅ logInterval 마다 logValues에 저장
+                if (logInterval >0 && logCounter % logInterval == 0) {
+                    logValues[clientIndex].append({ QDateTime::currentDateTime(), values });
+                    qDebug() << "📊 log 데이터 저장";
+                }
+
+
+                // ✅ logSaveInterval 마다 CSV에 저장
+                if (logSaveInterval>0 && logCounter % logSaveInterval == 0) {
+                    CSVReader::writeAllCSVlog(logValues[clientIndex], monitoringIndex);
+                    logValues[clientIndex].clear();  // 해당 monitoringIndex의 데이터만 초기화
+                    qDebug() << "📊 log CSV 저장";
+                }
+
+                logCounter++;
+
             }
             reply->deleteLater();
         });
@@ -854,7 +834,8 @@ void qt_window::readFromSlave(int clientIndex) {
 
 
 
-// ✅ 그래프 업데이트 함수
+
+// 그래프 업데이트 함수
 void qt_window::updateGraphWidgets() {
     if (monitoringWindows.isEmpty()) return; // ✅ 모니터링 창이 없으면 실행 안 함
 
@@ -896,6 +877,10 @@ void qt_window::updateGraphWidgets() {
 }
 
 
+
+
+// 로그 저장 함수
+// ✅ CSV log 저장 함수
 void qt_window::logSave(int clientIndex, const QVector<quint16>& values, const QDateTime& timestamp) {
     QString filePath = "modbus_log.csv"; // ✅ CSV 파일 이름
     QFile file(filePath);

@@ -95,7 +95,7 @@ void MonitoringWindow::initMonitoringUI() {
         "border: 2px solid darkgray;"
         "border-radius: 10px;"
         "padding: 20px;"
-        "font-size: 24px;"
+        "font-size: 35px;"
         "} "
         "QPushButton:hover { background-color: #2E75B6; }"
         "QPushButton:pressed { background-color: #FFA500; }";
@@ -130,18 +130,22 @@ void MonitoringWindow::initMonitoringUI() {
     QHBoxLayout* bottomLayout = new QHBoxLayout;
 
     // ✅ Main 버튼 (좌측)
-    QPushButton* mainButton = new QPushButton("Main");
-    mainButton->setFixedSize(150, 50);
+    QPushButton* mainButton = new QPushButton("main");
+    mainButton->setFixedSize(150, 60);
     mainButton->setFont(QFont("맑은 고딕", 20, QFont::Normal));
     applyButtonStyle(mainButton);
+    QString currentStyle = mainButton->styleSheet();  // 기존 스타일 가져오기
+    mainButton->setStyleSheet(currentStyle + "QPushButton { font-size: 22px; }");
     connect(mainButton, &QPushButton::clicked, this, &QMainWindow::close);
     bottomLayout->addWidget(mainButton);
 
     // ✅ CSV 설정 버튼 (좌측)
     QPushButton* csvButton = new QPushButton("CSV 설정");
-    csvButton->setFixedSize(150, 50);
+    csvButton->setFixedSize(150, 60);
     csvButton->setFont(QFont("맑은 고딕", 20, QFont::Normal));
     applyButtonStyle(csvButton);
+    currentStyle = csvButton->styleSheet();  // 기존 스타일 가져오기
+    csvButton->setStyleSheet(currentStyle + "QPushButton { font-size: 22px; }");
     connect(csvButton, &QPushButton::clicked, this, &MonitoringWindow::openCSVSettingDialog);
     bottomLayout->addWidget(csvButton);
 
@@ -180,7 +184,7 @@ void MonitoringWindow::openCSVSettingDialog() {
 
     // ✅ CSV 설정용 라디오 버튼 생성 (순서 유지)
     QList<QPair<QString, int>> csvOptions = {
-        {"1일", 1}, {"1주일", 7}, {"1달", 30}, {"3개월", 90}
+        {"1일", 60*60*24}, {"1주일", 60*60*24*7}, {"1달", 60*60*24*7*30}, {"3개월", 60*60*24*7*30*3}
     };
 
     QList<QRadioButton*> csvButtons;

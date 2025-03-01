@@ -25,8 +25,8 @@
 #include <QGraphicsDropShadowEffect>
 
 
-constexpr int NUM_REGISTERS = 14;  // 14개의 Holding Register 값
-constexpr int NUM_SLAVES = 20;     // 16개의 Modbus 슬레이브 장치
+static const int NUM_REGISTERS = 14;
+static const int NUM_SLAVES = 20;
 
 // ✅ 공통 버튼 스타일 및 그림자 효과 함수
 inline void applyShadowEffect(QWidget* widget) {
@@ -98,20 +98,21 @@ private:
 
 
         // "Graph" 창
-    QTimer* graphUpdateTimer; // ✅ 그래프 업데이트 타이머 추가
+    int graphFreq = 10000;    // ✅ 10초 주기
+    QTimer* graphUpdateTimer;   // ✅ 그래프 업데이트 타이머
     void updateGraphWidgets();
 
+
     // Modbus TCP 클라이언트 및 타이머
-    QTimer* pollingTimer;  // ✅ 2초 주기로 실행되는 타이머
-    QVector<QVector<QPair<QDateTime, QVector<quint16>>>> comValues; // ✅ 시간별 데이터 저장
+    int pollingFreq = 10000;  // ✅ 10초 주기
+    QTimer* pollingTimer;  // ✅ 데이터 폴링 타이머
+    QVector<QVector<QPair<QDateTime, QVector<quint16>>>> comValues; // ✅ 시간별 그래프 데이터 저장
+    QVector<QVector<QPair<QDateTime, QVector<quint16>>>> logValues; // ✅ 시간별 로그 데이터 저장
 
-
-
-    int maxComValuesSize = 100; // ✅ 기본값 100, 동적으로 변경 가능
-    int logCounter = 0; // ✅ 카운팅용
-    int logInterval = 10; // ✅ 기본값 10, 동적으로 변경 가능
-
-    void logSave(int clientIndex, const QVector<quint16>& values, const QDateTime& timestamp); // ✅ CSV 로그 저장 함수
+    int maxComValuesSize = 8640; // ✅ 기본값 1일/10초, 동적으로 변경 가능 60*60*24/10;
+    int logSaveInterval = 8640;  // ✅ 기본값 1일/10초, 동적으로 변경 가능 60*60*24/10;
+    int logCounter = 0;                 // ✅ 카운팅용
+    int logInterval = 10;               // ✅ 기본값 10, 동적으로 변경 가능
 
     void connectToSlave(int index); // ✅ Modbus 연결
     void disconnectFromSlave(int index); // ✅ Modbus 연결 해제
@@ -121,6 +122,10 @@ private:
 
     QVector<QModbusTcpClient*> clients;
 
+    // CSV log저장
+    QTimer* csvLogTimer;
+    void logSave(int clientIndex, const QVector<quint16>& values, const QDateTime& timestamp); // ✅ CSV 로그 저장 함수
+    //void updateCSVLogTimerInterval();        // CSV 저장 주기에 맞춰 타이머 간격을 업데이트하는 함수
 
 
 
@@ -129,7 +134,7 @@ private slots:
     // UI 관련 슬롯
         // "Main" 창
     void mainWindowDisplayPage(int mainPageIndex);                  // 페이지 전환 함수
-    void periodicCommunication(); // ✅ 비동기 Modbus 통신
+    void periodicCommunication(); // 비동기 Modbus 통신
 
     // "현장 설정" 창
     void openSiteSettingWindow();                                   // Main -> siteSetupWindow 슬롯
@@ -141,9 +146,10 @@ private slots:
 
 
     // "Monitoring" 창
-    void openMonitoringWindow(int monitoringIndex); // ✅ Monitoring 창을 여는 함수
+    void openMonitoringWindow(int monitoringIndex); // Monitoring 창을 여는 함수
 
-
+    // CSV log 저장
+    //void onCSVLogTimeout(); //CSV 로그 타이머가 timeout 시 호출됨
 
 
 
