@@ -33,14 +33,14 @@ namespace QT_NAMESPACE {
 }
 #endif
 
-int QT_RCC_MANGLE_NAMESPACE(qInitResources_Predictive_Graph)();
-int QT_RCC_MANGLE_NAMESPACE(qInitResources_Predictive_Graph)()
+int QT_RCC_MANGLE_NAMESPACE(qInitResources_qt_modbus_multi)();
+int QT_RCC_MANGLE_NAMESPACE(qInitResources_qt_modbus_multi)()
 {
     return 1;
 }
 
-int QT_RCC_MANGLE_NAMESPACE(qCleanupResources_Predictive_Graph)();
-int QT_RCC_MANGLE_NAMESPACE(qCleanupResources_Predictive_Graph)()
+int QT_RCC_MANGLE_NAMESPACE(qCleanupResources_qt_modbus_multi)();
+int QT_RCC_MANGLE_NAMESPACE(qCleanupResources_qt_modbus_multi)()
 {
     return 1;
 }
@@ -52,8 +52,8 @@ int QT_RCC_MANGLE_NAMESPACE(qCleanupResources_Predictive_Graph)()
 
 namespace {
    struct initializer {
-       initializer() { QT_RCC_MANGLE_NAMESPACE(qInitResources_Predictive_Graph)(); }
-       ~initializer() { QT_RCC_MANGLE_NAMESPACE(qCleanupResources_Predictive_Graph)(); }
+       initializer() { QT_RCC_MANGLE_NAMESPACE(qInitResources_qt_modbus_multi)(); }
+       ~initializer() { QT_RCC_MANGLE_NAMESPACE(qCleanupResources_qt_modbus_multi)(); }
    } dummy;
 }
 

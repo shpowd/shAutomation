@@ -1,0 +1,41 @@
+﻿   Qt/MSBuild: 3.3.1.1
+   Qt: 6.8.1
+  main.cpp
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x79 that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x7a that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x7e that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x80 that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x87 that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x88 that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x89 that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x8a that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x8c that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x8e that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x10e that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x10f that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x113 that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x114 that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x115 that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x116 that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x118 that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x119 that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x11e that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x11f that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x121 that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x122 that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x123 that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x124 that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1a6 that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1a8 that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1a9 that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1ab that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1ac that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1b0 that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1b1 that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1b9 that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1ba that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1bc that is illegal in the current source character set (codepage 65001).
+C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1bf that is illegal in the current source character set (codepage 65001).
+  qt_quick_test.vcxproj -> C:\Users\admin\Desktop\code\git_code\shAutomation\qt_test\qt_quick_test\x64\Debug\qt_quick_test.exe
+  'pwsh.exe'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
+  배치 파일이 아닙니다.

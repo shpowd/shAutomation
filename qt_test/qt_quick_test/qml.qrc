@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/qt/qml/qt_quick_test">
+        <file>main.qml</file>
+    </qresource>
+</RCC>
