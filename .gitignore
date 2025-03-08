@@ -1,0 +1,13 @@
+# Visual Studio 관련 파일/폴더 무시
+.vs/
+*.user
+*.suo
+*.vcxproj.user
+*.vcxproj.filters
+
+# 빌드 폴더(디버그/릴리즈) 무시
+Debug/
+Release/
+x64/
+x86/
+ARM/
